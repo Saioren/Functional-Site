@@ -1,0 +1,20 @@
+.red {
+ &:hover {
+    color: rgb(241, 110, 110);
+ }
+}
+.blue {
+    &:hover {
+        color: rgb(86, 173, 255);
+     }
+}
+.green {
+    &:hover {
+        color: rgb(40, 255, 194);
+     }
+}
+.purple {
+    &:hover {
+        color: rgb(168, 92, 255);
+     }
+}

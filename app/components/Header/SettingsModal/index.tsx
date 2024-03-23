@@ -1,6 +1,8 @@
 import React from "react";
 import { linkSettings } from "@/lib/data";
-import Link from "next/link";
+import { languages } from "@/lib/data";
+import classes from "./index.module.scss";
+import { motion } from "framer-motion";
 
 type SettingsModalProps = {
   activeSetting: string;
@@ -10,23 +12,98 @@ type SettingsModalProps = {
 export default function SettingsModal({ activeSetting }: SettingsModalProps) {
   console.log(activeSetting);
   return (
-    <div className="rounded-md flex flex-col gap-3 -z-10 mr-10">
-      {activeSetting === "Links" &&
-        linkSettings.map((link, index) => (
-          <Link key={index} href={link.href}>
-            <h3>{link.name}</h3>
-          </Link>
-        ))}
-      {activeSetting === "About" && (
+    <div className="rounded-md flex gap-3 -z-10 pr-10">
+      {activeSetting === "Links" && (
         <div>
-          <p>
-            I'm a 22 year old developer who favors Typescript & Next.js,
-            React.js, SCSS, Node.js and much more. I want lightning fast
-            connectivity, ultra-safe data security, and fresh, crisp animations.
-            Hence why I use the following!
-          </p>
+          <motion.h3
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4"
+          >
+            - You can find me on -
+          </motion.h3>
+          <div className="flex gap-5 justify-center">
+            {linkSettings.map((link, index) => (
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  delay: 0.1 * index,
+                }}
+              >
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mb-3 w-full flex justify-center gap-2 items-center hover:scale-110 active:scale-105 transition hover:bg-grey-150"
+                  key={index}
+                  href={link.href}
+                >
+                  {link.icon}
+                </a>
+              </motion.div>
+            ))}
+          </div>
         </div>
       )}
+      {activeSetting === "About" && (
+        <div className="max-w-[25rem] w-full text-center">
+          <motion.div
+            initial={{
+              y: -50,
+              opacity: 0,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+            }}
+          >
+            <h3 className="mb-4">Hello! I am Evan!</h3>
+            <p className="flex justify-center mb-8">
+              I'm a 22 year old developer who uses the following languages and
+              frameworks to develop websites:
+            </p>
+          </motion.div>
+          <div className="flex flex-wrap gap-2 justify-center">
+            {languages.map((language, index) => (
+              <motion.div
+                initial={{
+                  y: -50,
+                  opacity: 0,
+                }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+                }}
+                transition={{ delay: 0.1 * index }}
+              >
+                <a
+                  key={index}
+                  className={`flex items-center bg-gray-300/50 dark:bg-gray-800/50 py-2 px-3 rounded-full hover:scale-110 active:scale-105 transition gap-1 text-sm cursor-pointer ${
+                    typeof language.name === "string" &&
+                    classes[language.name.toLowerCase()]
+                  }`}
+                >
+                  <h4>{language.name}</h4>
+                  {typeof language.icon === "string" ? (
+                    <React.Fragment>
+                      <img
+                        src={language.icon}
+                        alt={`${language.name} icon`}
+                        width={16}
+                        height={16}
+                      />
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>{language.icon}</React.Fragment>
+                  )}
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
+      {activeSetting === "Settings" && <div></div>}
+      {activeSetting === "Help" && <div></div>}
     </div>
   );
 }

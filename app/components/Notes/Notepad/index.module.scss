@@ -1,0 +1,63 @@
+/* index.module.scss */
+.lightNotepad {
+    border-radius: 0 0 10px 10px;
+  }
+
+  .darkNotepad {
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .lightHeader {
+    background-color: #333;
+    border-radius: 5px 5px 0 0;
+  }
+  
+  .lightPaper {
+    background: repeating-linear-gradient(
+    to bottom,
+    #f1ede9,
+    #f1ede9 31px,
+    #94acd4 31px,
+    #94acd4 32px
+  );
+    font-size: 22px;
+    font-family: 'Patrick Hand', cursive;
+  }
+  
+  .lightPaper:before {
+    content: '';
+    position: absolute;
+    bottom: 0 ;
+    top: 0;
+    width: 60px;
+    border-right: 2px solid #d44147;
+    left: 0;
+  }
+
+  .darkHeader {
+    background-color: #060505;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .darkPaper {
+    background: repeating-linear-gradient(
+    to bottom,
+    #212122, 
+    #151313 32px,
+    #333333 32px, 
+    #333333 33px
+  );
+    font-size: 22px;
+    font-family: 'Patrick Hand', cursive;
+  }
+  
+  .darkPaper:before {
+    content: '';
+    position: absolute;
+    bottom: 0 ;
+    top: 0;
+    width: 60px;
+    border-right: 2px solid #00ff9d;
+    left: 0;
+  }
+  

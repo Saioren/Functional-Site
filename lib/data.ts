@@ -11,16 +11,12 @@ export const links = [
         hash: '/timetable',
     },
     {
-        name: 'Skills',
-        hash: '#skills',
+        name: 'Notes',
+        hash: '/notes',
     },
     {
-        name: 'Projects',
-        hash: '#projects',
-    },
-    {
-        name: 'Experience',
-        hash: '#experience',
+        name: 'Calendar',
+        hash: '/calendar',
     },
 ]
 
@@ -67,3 +63,23 @@ export const components = [
         darkTeaser: '/darkTimetable.JPG'
     },
 ]
+
+export const linkSettings = [
+        {
+            name: 'test',
+            href: 'google.com',
+        },
+        {
+            name: 'test',
+            href: 'google.com',
+        },
+        {
+            name: 'test',
+            href: 'google.com',
+        },
+        {
+            name: 'test',
+            href: 'google.com',
+        },
+    ]
+

@@ -15,21 +15,32 @@ import classes from "./index.module.scss";
 export default function Header() {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
-  const { menu, setMenu, settings, setSettings } = useHeaderProviderContext();
+  const {
+    menu,
+    setMenu,
+    settings,
+    setSettings,
+    activeSetting,
+    setActiveSetting,
+    settingClicked,
+    setSettingClicked,
+  } = useHeaderProviderContext();
 
   const handleModal: () => void = () => {
     if (!menu) {
       setMenu(true);
+      setSettings(true);
     } else {
       setMenu(false);
       setSettings(false);
+      setSettingClicked(false);
     }
   };
 
-  const handleSettings = () => {
-    if (!settings) {
-      setSettings(true);
-    } else if (settings) {
+  const handleSettings = (setting: string) => {
+    if (settings) {
+      setActiveSetting(setting);
+      setSettingClicked(true);
     }
   };
 
@@ -90,30 +101,28 @@ export default function Header() {
               opacity: 1,
             }}
             exit={{ opacity: 0 }}
-            className={`${
-              settings ? "w-[25rem]" : ""
-            } rounded-md absolute top-[5.5rem] right-[1rem] p-[2rem] dark:bg-gray-700/75 bg-gray-100/65 backdrop-blur-sm shadow-lg`}
+            className={`flex rounded-md absolute top-[5.5rem] right-[1rem] p-[2rem] dark:bg-gray-700/75 bg-gray-100/65 backdrop-blur-sm shadow-lg`}
           >
-            {settings && (
-              <SettingsModal /*settings={settings} setSettings={setSettings}*/
+            {settingClicked && (
+              <SettingsModal
+                activeSetting={activeSetting}
+                setActiveSetting={setActiveSetting}
               />
             )}
-            {menuItems.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-row-reverse items-center rounded-md font-semibold w-100% mb-5 last:mb-0"
-              >
+            <div className="flex flex-col gap-3 items-center rounded-md font-semibold w-100% mb-5 last:mb-0">
+              {menuItems.map((item, index) => (
                 <div
+                  key={index}
                   className={`cursor-pointer w-100% flex flex-row-reverse items-center gap-1 transition ${
                     classes[item.color]
                   } hover:scale-110 active:scale-105`}
-                  onClick={handleSettings}
+                  onClick={() => handleSettings(item.name)}
                 >
                   <span>{item.name}</span>
                   {item.icon}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -11,6 +11,10 @@ type HeaderContextType = {
   setMenu: React.Dispatch<React.SetStateAction<boolean>>;
   settings: boolean;
   setSettings: React.Dispatch<React.SetStateAction<boolean>>;
+  activeSetting: string;
+  setActiveSetting: React.Dispatch<React.SetStateAction<string>>;
+  settingClicked: boolean;
+  setSettingClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const HeaderContext = createContext<HeaderContextType | null>(null);
@@ -20,7 +24,8 @@ export default function HeaderProvider({
 }: HeaderContextProviderProps) {
   const [menu, setMenu] = useState(false);
   const [settings, setSettings] = useState(false);
-  const [switchSetting, setSwitchSetting] = useState("");
+  const [settingClicked, setSettingClicked] = useState(false);
+  const [activeSetting, setActiveSetting] = useState("");
 
   return (
     <HeaderContext.Provider
@@ -29,6 +34,10 @@ export default function HeaderProvider({
         setMenu,
         setSettings,
         settings,
+        activeSetting,
+        setActiveSetting,
+        setSettingClicked,
+        settingClicked,
       }}
     >
       {children}

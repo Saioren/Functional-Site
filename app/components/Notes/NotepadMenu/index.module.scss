@@ -1,0 +1,34 @@
+.lightNotepad {
+    border-radius: 5px;
+    box-shadow: 2px 2px 12px rgba($color: black, $alpha: 0.5);
+  }
+
+  .darkNotepad {
+    border-radius: 5px;
+    box-shadow: 2px 2px 12px rgba($color: black, $alpha: 0.5);
+  }
+  
+  .lightHeader {
+    background-color: #333;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .darkHeader {
+    background-color: #060505;
+    border-radius: 5px;
+  }
+
+  .darkPaper {
+    background: rgb(13,17,31);
+background: linear-gradient(120deg, rgba(13,17,31,1) 0%, rgba(28,28,42,1) 51%, rgba(25,25,43,1) 100%);
+    font-size: 22px;
+    font-family: 'Patrick Hand', cursive;
+  }
+  
+  .lightWrap {
+    background: rgb(255,238,249);
+background: linear-gradient(90deg, rgba(242,236,255,1) 0%, rgba(255,238,249,1) 100%);
+  }
+
+  

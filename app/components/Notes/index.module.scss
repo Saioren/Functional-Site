@@ -1,0 +1,24 @@
+.notePadInner {
+  transition: transform 0.5s; /* Adjust the duration as needed */
+  transform-style: preserve-3d;
+}
+
+.isFlipped {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.cardFaceFront {
+  z-index: 2;
+  height: calc(80vh - 24px);
+}
+
+.cardFaceBack {
+  transform: rotateY(180deg);
+  z-index: 1; 
+  height: calc(80vh - 24px); 
+}

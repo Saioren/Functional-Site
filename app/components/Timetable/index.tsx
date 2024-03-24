@@ -46,13 +46,13 @@ export default function Timetable() {
             }}
             className="flex justify-between w-full max-w-[32rem] "
           >
-            <button className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md px-5 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900">
+            <button className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md sm:px-5 sm:py-3 px-4 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900">
               Clock in
             </button>
-            <button className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md px-5 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900">
+            <button className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md sm:px-5 sm:py-3 px-4 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900">
               Pause
             </button>
-            <button className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md px-5 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900">
+            <button className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md sm:px-5 sm:py-3 px-4 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900">
               Clock out
             </button>
           </motion.div>

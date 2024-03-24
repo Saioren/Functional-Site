@@ -16,7 +16,7 @@ export default function Hero() {
       transition={{
         delay: 0.1,
       }}
-      className="flex flex-col justify-center items-center mb-10"
+      className="flex flex-col justify-center text-center items-center mb-10"
     >
       <p className="mb-3">Welcome to</p>
       <h1 className="text-3xl mb-3">

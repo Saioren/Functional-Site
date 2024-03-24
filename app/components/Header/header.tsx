@@ -101,7 +101,7 @@ export default function Header() {
               opacity: 1,
             }}
             exit={{ opacity: 0 }}
-            className={`flex rounded-md absolute top-[5.5rem] right-[1rem] ml-[1rem] p-[2rem] dark:bg-gray-700/75 bg-gray-100/50 backdrop-blur-sm shadow-lg`}
+            className={`flex rounded-md absolute top-[5.5rem] right-[1rem] ml-[1rem] p-[2rem] dark:bg-gray-700/75 border border-black/5 bg-gray-100/60 backdrop-blur-sm shadow-lg`}
           >
             {settingClicked && (
               <SettingsModal

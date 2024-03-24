@@ -50,20 +50,23 @@ export const components = [
     {
         header: 'Timetable',
         description: 'Keep track of your work hours!',
-        lightTeaser: '/lightTimetable.JPG',
-        darkTeaser: '/darkTimetable.JPG'
+        lightTeaser: '/lightTimetable.png',
+        darkTeaser: '/darkTimetable.png',
+        href: '/timetable'
     },
     {
-        header: 'Timetable',
-        description: 'Keep track of your work hours!',
-        lightTeaser: '/lightTimetable.JPG',
-        darkTeaser: '/darkTimetable.JPG'
+        header: 'Notepad',
+        description: 'Write down your thoughts!',
+        lightTeaser: '/lightNotepad.png',
+        darkTeaser: '/darkNotepad.png',
+        href: '/notes'
     },
     {
-        header: 'Timetable',
-        description: 'Keep track of your work hours!',
-        lightTeaser: '/lightTimetable.JPG',
-        darkTeaser: '/darkTimetable.JPG'
+        header: 'Calendar',
+        description: 'Jot down meetings and more!',
+        lightTeaser: '/lightTimetable.png',
+        darkTeaser: '/darkTimetable.png',
+        href: '/calendar'
     },
 ]
 

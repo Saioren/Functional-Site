@@ -10,7 +10,6 @@ type SettingsModalProps = {
 };
 
 export default function SettingsModal({ activeSetting }: SettingsModalProps) {
-  console.log(activeSetting);
   return (
     <div className="rounded-md flex gap-3 -z-10 pr-10">
       {activeSetting === "Links" && (
@@ -78,7 +77,7 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
               >
                 <a
                   key={index}
-                  className={`flex items-center bg-gray-300/50 dark:bg-gray-800/50 py-2 px-3 rounded-full hover:scale-110 active:scale-105 transition gap-1 text-sm cursor-pointer ${
+                  className={`flex items-center bg-gray-300/70 dark:bg-gray-800/60 py-2 px-3 rounded-full hover:scale-110 active:scale-105 transition gap-1 text-sm cursor-pointer ${
                     typeof language.name === "string" &&
                     classes[language.name.toLowerCase()]
                   }`}

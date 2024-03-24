@@ -11,20 +11,18 @@
     }
 }
 
-.active {
-    .line1 {
-        rotate: -45deg;
-        transform: translateY(5px);
-    }
-    .line2 {    
-        rotate: 45deg;
-        transform: translateY(-5px);
-    }
-}
+.active1 {
+    transform: translateY(5px);
+    rotate: -45deg;
+  }
+  
+  .active2 {
+    transform: translateY(-5px);
+    rotate: 45deg;
+  }
+  
 
 .line1, .line2 {
-    opacity: unset;
-  transform: unset;
   transition: all 300ms;
   transform-origin: center;
   stroke-width: 2px;

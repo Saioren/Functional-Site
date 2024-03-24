@@ -8,11 +8,7 @@ type HamburgerIconProps = {
 
 export const HamburgerIcon = ({ menu, handleModal }: HamburgerIconProps) => {
   return (
-    <div
-      className={`${classes.hamburgerWrap} ${
-        menu ? classes.active : ""
-      } hover:scale-105 transition`}
-    >
+    <div className={`hover:scale-105 transition`}>
       <button
         className={`${classes.handleModal} stroke-gray-900 dark:stroke-white `}
         onClick={() => handleModal()}
@@ -25,14 +21,18 @@ export const HamburgerIcon = ({ menu, handleModal }: HamburgerIconProps) => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            className={classes.line1}
+            className={`${classes.line1} ${classes.hamburgerWrap} ${
+              menu ? classes.active1 : ""
+            } `}
             d="M2 7H22"
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
-            className={classes.line2}
+            className={`${classes.line2} ${classes.hamburgerWrap} ${
+              menu ? classes.active2 : ""
+            } `}
             d="M2 17H22"
             strokeWidth="3"
             strokeLinecap="round"

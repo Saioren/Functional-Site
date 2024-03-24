@@ -19,9 +19,9 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
             animate={{ opacity: 1, y: 0 }}
             className="mb-4"
           >
-            - You can find me on -
+            You can find me on:
           </motion.h3>
-          <div className="flex gap-5 justify-center">
+          <div className="flex flex-wrap gap-5 justify-center">
             {linkSettings.map((link, index) => (
               <motion.div
                 initial={{ y: 50, opacity: 0 }}
@@ -29,12 +29,12 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
                 transition={{
                   delay: 0.1 * index,
                 }}
+                key={index}
               >
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mb-3 w-full flex justify-center gap-2 items-center hover:scale-110 active:scale-105 transition hover:bg-grey-150"
-                  key={index}
                   href={link.href}
                 >
                   {link.icon}
@@ -74,9 +74,9 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
                   opacity: 1,
                 }}
                 transition={{ delay: 0.1 * index }}
+                key={index}
               >
                 <a
-                  key={index}
                   className={`flex items-center bg-gray-300/70 dark:bg-gray-800/60 py-2 px-3 rounded-full hover:scale-110 active:scale-105 transition gap-1 text-sm cursor-pointer ${
                     typeof language.name === "string" &&
                     classes[language.name.toLowerCase()]

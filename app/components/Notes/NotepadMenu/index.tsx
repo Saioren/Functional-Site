@@ -3,6 +3,7 @@ import { FaAngleRight } from "react-icons/fa";
 import { NotepadProps } from "../types";
 import classes from "./index.module.scss";
 import { useTheme } from "@/context/ThemeContext";
+import { RiSearch2Line } from "react-icons/ri";
 
 export default function NotepadMenu({ handleNoteSwap }: NotepadProps) {
   const { theme } = useTheme();
@@ -26,7 +27,15 @@ export default function NotepadMenu({ handleNoteSwap }: NotepadProps) {
           className={`${
             theme == "dark" ? classes.darkWrap : classes.lightWrap
           } absolute top-0 left-0 w-full h-full `}
-        ></div>
+        >
+          <section className="p-[1rem] flex items-center gap-2 bg-green-300">
+            <RiSearch2Line className="absolute left-6" />
+            <input
+              className="pl-[2rem] rounded-full px-[1rem] py-[0.5rem] outline-none"
+              placeholder="Search notes"
+            ></input>
+          </section>
+        </div>
       </div>
     </div>
   );

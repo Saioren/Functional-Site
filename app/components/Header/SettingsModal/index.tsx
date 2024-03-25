@@ -77,10 +77,12 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
                 key={index}
               >
                 <a
-                  className={`flex items-center bg-gray-300/70 dark:bg-gray-800/60 py-2 px-3 rounded-full hover:scale-110 active:scale-105 transition gap-1 text-sm cursor-pointer ${
-                    typeof language.name === "string" &&
-                    classes[language.name.toLowerCase()]
-                  }`}
+                  className={`flex items-center bg-gray-300/70 dark:bg-gray-800/60 py-2 px-3 rounded-full hover:scale-110 active:scale-105 transition gap-1 text-sm cursor-pointer 
+                  ${classes[language.color]}
+                  `}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`${language.href}`}
                 >
                   <h4>{language.name}</h4>
                   {typeof language.icon === "string" ? (

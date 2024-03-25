@@ -96,46 +96,68 @@ export const linkSettings = [
         {
             name: 'Javascript',
             icon:  React.createElement(DiJavascript),
+            href: 'https://www.javascript.com/',
+            color: '',
         },
         {
             name: 'CSS',
             icon:  React.createElement(DiCss3),
+            href: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
+            color: 'blue',
         },
         {
             name: 'HTML',
             icon:  React.createElement(DiHtml5),
+            href: 'https://www.w3schools.com/html/html_intro.asp',
+            color: 'orange',
         },
         {
             name: 'Typescript',
             icon:  'typescript-icon.svg',
+            href: 'https://www.typescriptlang.org/',
+            color: 'blue',
         },
         {
             name: 'React',
             icon:  React.createElement(DiReact, {size: 20}),
+            href: 'https://react.dev/',
+            color: 'teal',
         },
         {
             name: 'Next.JS',
             icon:  'next-js.svg',
+            href: 'https://nextjs.org/',
+            color: 'black',
         },
         {
             name: 'Sass',
             icon:  React.createElement(DiSass, {size: 20}),
+            href: 'https://sass-lang.com/',
+            color: 'red',
         },
         {
             name: 'Node.JS',
             icon:  React.createElement(DiNodejsSmall, {size: 20}),
+            href: 'https://nodejs.org/en',
+            color: 'green',
         },
         {
             name: 'Tailwind',
             icon:  'tailwind-css.svg',
+            href: 'https://tailwindcss.com/',
+            color: 'lightBlue',
         },
         {
             name: 'Framer Motion',
             icon:  'framer-motion.svg',
+            href: 'https://www.framer.com/motion/',
+            color: 'magenta',
         },
         {
             name: 'MongoDB',
             icon:   React.createElement(DiMongodb),
+            href: 'https://www.mongodb.com/',
+            color: 'orange',
         },
     ]
 

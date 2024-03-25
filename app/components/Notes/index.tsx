@@ -29,12 +29,15 @@ export default function NotesComponent() {
           <section
             className={`${classes.cardFaceFront} ${classes.cardFace} max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0`}
           >
-            <Notepad handleNoteSwap={handleNoteSwap} />
+            <Notepad openNotes={openNotes} handleNoteSwap={handleNoteSwap} />
           </section>
           <section
             className={`max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0 ${classes.cardFaceBack} ${classes.cardFace}`}
           >
-            <NotepadMenu handleNoteSwap={handleNoteSwap} />
+            <NotepadMenu
+              openNotes={openNotes}
+              handleNoteSwap={handleNoteSwap}
+            />
           </section>
         </div>
       </motion.div>

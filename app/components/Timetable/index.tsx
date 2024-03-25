@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Stopwatch from "./Stopwatch";
 import { motion } from "framer-motion";
 
 export default function Timetable() {
-  const weeklyHours = 0;
+  const [weeklyHours, setWeeklyHours] = useState(0);
   return (
     <div className="p-[2rem] justify-center items-center">
       <section className="flex flex-col relative w-full">
@@ -28,35 +28,13 @@ export default function Timetable() {
         </motion.section>
         <section>
           <div>
-            <Stopwatch />
+            <Stopwatch
+              weeklyHours={weeklyHours}
+              setWeeklyHours={setWeeklyHours}
+            />
           </div>
         </section>
-        <section className="flex justify-center">
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 50,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: 0.2,
-            }}
-            className="flex justify-between w-full max-w-[32rem] "
-          >
-            <button className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md sm:px-5 sm:py-3 px-4 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900">
-              Clock in
-            </button>
-            <button className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md sm:px-5 sm:py-3 px-4 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900">
-              Pause
-            </button>
-            <button className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md sm:px-5 sm:py-3 px-4 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900">
-              Clock out
-            </button>
-          </motion.div>
-        </section>
+
         <motion.div
           initial={{
             opacity: 0,

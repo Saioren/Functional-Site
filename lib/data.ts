@@ -1,5 +1,6 @@
 import React from "react"
 import { AiOutlineLink, AiOutlineQuestionCircle, AiOutlineSetting, AiOutlineUser } from "react-icons/ai"
+import { BsBook, BsClipboard2, BsClock, BsEnvelope, BsFillCalendar2DayFill, BsHouseFill } from "react-icons/bs"
 import { DiCss3, DiGithubBadge, DiHtml5, DiJavascript, DiMongodb, DiNodejsSmall, DiReact, DiSass } from "react-icons/di"
 import { FaFacebook, FaLinkedinIn } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
@@ -8,22 +9,36 @@ export const links = [
     {
         name: 'Home',
         hash: '/',
+        icon: React.createElement(BsHouseFill),
     },
     {
         name: 'Timetable',
         hash: '/timetable',
+        icon: React.createElement(BsClock),
     },
     {
         name: 'Notes',
         hash: '/notes',
+        icon: React.createElement(BsClipboard2),
     },
     {
         name: 'Calendar',
         hash: '/calendar',
+        icon: React.createElement(BsFillCalendar2DayFill),
+    },
+    {
+        name: 'Email',
+        hash: '/email',
+        icon: React.createElement(BsEnvelope),
     },
 ]
 
 export const menuItems = [
+    {
+        name: 'Pages',
+        icon: React.createElement(BsBook),
+        color: 'orange',
+    },
     {
         name: 'Links',
         icon: React.createElement(AiOutlineLink),
@@ -67,6 +82,13 @@ export const components = [
         lightTeaser: '/lightTimetable.png',
         darkTeaser: '/darkTimetable.png',
         href: '/calendar'
+    },
+    {
+        header: 'Email',
+        description: 'Send and recieve emails!',
+        lightTeaser: '/lightTimetable.png',
+        darkTeaser: '/darkTimetable.png',
+        href: '/email',
     },
 ]
 

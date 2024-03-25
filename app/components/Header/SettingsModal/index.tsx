@@ -1,5 +1,5 @@
 import React from "react";
-import { linkSettings } from "@/lib/data";
+import { linkSettings, links } from "@/lib/data";
 import { languages } from "@/lib/data";
 import classes from "./index.module.scss";
 import { motion } from "framer-motion";
@@ -105,6 +105,25 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
       )}
       {activeSetting === "Settings" && <div></div>}
       {activeSetting === "Help" && <div></div>}
+      {activeSetting === "Pages" && (
+        <div className="flex flex-col gap-3">
+          {links.map((link, index) => (
+            <motion.div
+              initial={{ y: 25, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1 * index }}
+            >
+              <a
+                className="flex gap-1 items-center hover:scale-110 active:scale-105 transition"
+                href={link.hash}
+              >
+                {link.icon}
+                {link.name}
+              </a>
+            </motion.div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

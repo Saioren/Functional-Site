@@ -18,7 +18,7 @@ export default function TeaserImage(props: TeaserImageProps) {
   const { header, description, darkTeaser, lightTeaser, href } = props;
   return (
     <Link href={href}>
-      <div className="flex justify-center w-full mb-10">
+      <div className="rounded-sm w-full">
         <article className="flex flex-col bg-gray-100 group border max-w-[30rem] border-black/15 rounded-lg overflow-hidden relative h-[20rem] sm:h-[15rem] w-[100%] hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20 shadow-lg">
           <div className=" px-[1rem] pt-[2rem] pb-[1rem] sm:max-w-[50%] flex flex-col text-center sm:h-full sm:group-even:ml-[14rem]">
             <h2 className="text-2xl font-semibold">{header}</h2>

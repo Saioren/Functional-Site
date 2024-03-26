@@ -5,93 +5,28 @@ import classes from "./index.module.scss";
 import { useTheme } from "@/context/ThemeContext";
 import { RiSearch2Line } from "react-icons/ri";
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 
 export default function NotepadMenu({
   handleNoteSwap,
   openNotes,
+  topics,
 }: NotepadProps) {
   const { theme } = useTheme();
 
-  const notesObject = [
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-    {
-      body: "This is a note that I wrote!",
-      title: "First Note",
-      date: "3/25/24",
-      time: "3:18 PM",
-    },
-  ];
   return (
     <div
       className={`${
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
       } flex border dark:border-white/5 border-black/10 overflow-hidden flex-col max-w-[50rem] w-full`}
     >
+      {topics.map((t) => (
+        <>
+          <h1>{t.title}</h1>
+          <h2>{t.body}</h2>
+          <Link href={`/editNote/${t._id}`}></Link>
+        </>
+      ))}
       <FaAngleRight
         onClick={handleNoteSwap}
         className="cursor-pointer absolute top-[1.45rem] right-[1rem] text-black dark:text-white w-8 h-8 hover:scale-125 active:scale-110 transition z-10"
@@ -119,8 +54,8 @@ export default function NotepadMenu({
             </div>
           </section>
           <section className=" p-[1rem] pt-[6rem] flex justify-center flex-wrap gap-8">
-            {openNotes
-              ? notesObject.map((note, index) => (
+            {/*openNotes
+              ? notepad.map((note, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 25 }}
@@ -152,7 +87,7 @@ export default function NotepadMenu({
                       </div>
                     </div>
                   </div>
-                ))}
+                ))*/}
           </section>
         </div>
       </div>

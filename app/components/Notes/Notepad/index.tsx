@@ -9,14 +9,18 @@ import toast, { Toaster } from "react-hot-toast";
 export default function Notepad({ handleNoteSwap, setError }: NotepadProps) {
   const { theme } = useTheme();
   const [save, setSave] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [form, setForm] = useState({});
 
   const [noteContent, setNoteContent] = useState("");
+  const [titleContent, setTitleContent] = useState("");
 
   const handleContentChange = (event) => {
     setNoteContent(event.target.innerText);
   };
 
-  function initSaveNote() {
+  function initSaveNote(event) {
+    event.preventDefault();
     if (noteContent === "") {
       if (theme === "dark") {
         toast.error("Note cannot be empty!", {

@@ -4,11 +4,11 @@ import { useTheme } from "@/context/ThemeContext";
 import { FaAngleRight, FaPaperPlane } from "react-icons/fa";
 import { NotepadProps } from "../types";
 import { AnimatePresence, motion } from "framer-motion";
+import toast, { Toaster } from "react-hot-toast";
 
-export default function Notepad({ handleNoteSwap }: NotepadProps) {
+export default function Notepad({ handleNoteSwap, setError }: NotepadProps) {
   const { theme } = useTheme();
   const [save, setSave] = useState(false);
-  const [error, setError] = useState(false);
 
   const [noteContent, setNoteContent] = useState("");
 
@@ -18,7 +18,17 @@ export default function Notepad({ handleNoteSwap }: NotepadProps) {
 
   function initSaveNote() {
     if (noteContent === "") {
-      setError(true);
+      if (theme === "dark") {
+        toast.error("Note cannot be empty!", {
+          style: {
+            background: "#1D1D26",
+            color: "#fff",
+          },
+        });
+      } else {
+        toast.error("Note cannot be empty!");
+      }
+
       return;
     } else {
       setError(false);
@@ -27,10 +37,11 @@ export default function Notepad({ handleNoteSwap }: NotepadProps) {
   }
 
   function handleSaveNote() {
-    //localStorage.setItem('noteContent', 'noteContent')
+    localStorage.setItem("savedNote", "noteContent");
   }
+
   return (
-    <div
+    <form
       className={`${
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
       } shadow-md overflow-hidden w-full flex flex-col`}
@@ -59,7 +70,7 @@ export default function Notepad({ handleNoteSwap }: NotepadProps) {
       <div className="group absolute bottom-2 right-2 rounded-full">
         <button
           onClick={initSaveNote}
-          className="flex items-center gap-2 bg-gray-800 py-3 px-4 rounded-full group-hover:scale-110 group-active:scale-105 transition"
+          className="flex items-center bg-slate-200/60 backdrop-blur-sm shadow-md border border-black/10 dark:border-white/10 gap-2 dark:bg-gray-800/80 py-3 px-4 rounded-full group-hover:scale-110 group-active:scale-105 transition"
         >
           Submit
           <FaPaperPlane className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
@@ -98,8 +109,7 @@ export default function Notepad({ handleNoteSwap }: NotepadProps) {
           </div>
         )}
       </AnimatePresence>
-      {error && <div>Error! Note cannot be empty!</div>}
       {/* Optional: You can store or use the noteContent state variable elsewhere in your component */}
-    </div>
+    </form>
   );
 }

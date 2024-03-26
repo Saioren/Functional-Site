@@ -5,8 +5,10 @@ import Notepad from "./Notepad";
 import NotepadMenu from "./NotepadMenu";
 import classes from "./index.module.scss";
 import { motion } from "framer-motion";
+import { Toaster } from "react-hot-toast";
 
 export default function NotesComponent() {
+  const [error, setError] = useState(false);
   const [openNotes, setOpenNotes] = useState(false);
   function handleNoteSwap() {
     if (!openNotes) {
@@ -17,6 +19,14 @@ export default function NotesComponent() {
   }
   return (
     <main className="p-[2rem]">
+      {error && (
+        <div>
+          <Toaster position="top-center" />
+        </div>
+      )}
+      <div className="absolute -top-[5rem]">
+        <Toaster position="top-center" />
+      </div>
       <motion.div
         initial={{ opacity: 0, y: -60 }}
         animate={{ opacity: 1, y: 0 }}
@@ -29,12 +39,17 @@ export default function NotesComponent() {
           <section
             className={`${classes.cardFaceFront} ${classes.cardFace} max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0`}
           >
-            <Notepad openNotes={openNotes} handleNoteSwap={handleNoteSwap} />
+            <Notepad
+              setError={setError}
+              openNotes={openNotes}
+              handleNoteSwap={handleNoteSwap}
+            />
           </section>
           <section
             className={`max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0 ${classes.cardFaceBack} ${classes.cardFace}`}
           >
             <NotepadMenu
+              setError={setError}
               openNotes={openNotes}
               handleNoteSwap={handleNoteSwap}
             />

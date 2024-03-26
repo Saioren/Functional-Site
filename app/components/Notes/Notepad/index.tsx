@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import classes from "./index.module.scss";
 import { useTheme } from "@/context/ThemeContext";
 import { FaAngleRight, FaPaperPlane } from "react-icons/fa";
-import { NotepadProps } from "../types";
 import { AnimatePresence, motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
+
+type NotepadProps = {
+  handleNoteSwap?: () => void;
+  openNotes: boolean;
+  setErrorState?: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export default function Notepad({
   handleNoteSwap,
@@ -38,7 +43,7 @@ export default function Notepad({
 
       return;
     } else {
-      setError(false);
+      setErrorState(false);
       setSave(true);
     }
   }

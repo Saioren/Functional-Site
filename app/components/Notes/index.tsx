@@ -38,12 +38,6 @@ const NotesComponent = () => {
 
   return (
     <main className="p-[2rem]">
-      {notes.map((note) => (
-        <div key={note._id}>
-          <h1>{note.title}</h1>
-          <h2>{note.body}</h2>
-        </div>
-      ))}
       {errorState && (
         <div>
           <Toaster position="top-center" />
@@ -74,6 +68,7 @@ const NotesComponent = () => {
             className={`max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0 ${classes.cardFaceBack} ${classes.cardFace}`}
           >
             <NotepadMenu
+              notes={notes}
               setErrorState={setErrorState}
               openNotes={openNotes}
               handleNoteSwap={handleNoteSwap}

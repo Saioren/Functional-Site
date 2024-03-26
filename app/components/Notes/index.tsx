@@ -1,47 +1,50 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Notepad from "./Notepad";
 import NotepadMenu from "./NotepadMenu";
 import classes from "./index.module.scss";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 
-const getTopics = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/api/notes", {
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch topics");
-    }
-    return res.json();
-  } catch (error) {
-    console.log("Error loading topics: ", error);
-  }
-};
-
-export default async function NotesComponent() {
-  const { topics } = await getTopics();
-  const [error, setError] = useState(false);
+const NotesComponent = () => {
+  const [notes, setNotes] = useState([]);
+  const [errorState, setErrorState] = useState(false);
   const [openNotes, setOpenNotes] = useState(false);
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/notes", {
+          cache: "no-store",
+        });
+        if (!res.ok) {
+          throw new Error("Failed to fetch notes");
+        }
+        const data = await res.json();
+        setNotes(data.notes);
+      } catch (error) {
+        console.log("Error loading notes: ", error);
+        setErrorState(true);
+      }
+    };
+
+    fetchNotes();
+  }, []);
+
   function handleNoteSwap() {
-    if (!openNotes) {
-      setOpenNotes(true);
-    } else {
-      setOpenNotes(false);
-    }
+    setOpenNotes((prevState) => !prevState);
   }
-  console.log(topics);
+
   return (
     <main className="p-[2rem]">
-      {topics.map((topic) => (
-        <div key={topic._id}>
-          <h1>{topic.title}</h1>
-          <h2>{topic.body}</h2>
+      {notes.map((note) => (
+        <div key={note._id}>
+          <h1>{note.title}</h1>
+          <h2>{note.body}</h2>
         </div>
       ))}
-      {error && (
+      {errorState && (
         <div>
           <Toaster position="top-center" />
         </div>
@@ -62,8 +65,7 @@ export default async function NotesComponent() {
             className={`${classes.cardFaceFront} ${classes.cardFace} max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0`}
           >
             <Notepad
-              topics={topics}
-              setError={setError}
+              setErrorState={setErrorState}
               openNotes={openNotes}
               handleNoteSwap={handleNoteSwap}
             />
@@ -72,8 +74,7 @@ export default async function NotesComponent() {
             className={`max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0 ${classes.cardFaceBack} ${classes.cardFace}`}
           >
             <NotepadMenu
-              topics={topics}
-              setError={setError}
+              setErrorState={setErrorState}
               openNotes={openNotes}
               handleNoteSwap={handleNoteSwap}
             />
@@ -82,4 +83,6 @@ export default async function NotesComponent() {
       </motion.div>
     </main>
   );
-}
+};
+
+export default NotesComponent;

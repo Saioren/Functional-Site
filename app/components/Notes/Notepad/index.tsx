@@ -6,7 +6,10 @@ import { NotepadProps } from "../types";
 import { AnimatePresence, motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function Notepad({ handleNoteSwap, setError }: NotepadProps) {
+export default function Notepad({
+  handleNoteSwap,
+  setErrorState,
+}: NotepadProps) {
   const { theme } = useTheme();
   const [save, setSave] = useState(false);
   const [errors, setErrors] = useState({});

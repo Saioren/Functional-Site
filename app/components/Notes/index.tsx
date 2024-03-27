@@ -5,11 +5,11 @@ import Notepad from "./Notepad";
 import NotepadMenu from "./NotepadMenu";
 import classes from "./index.module.scss";
 import { motion } from "framer-motion";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const NotesComponent = () => {
   const [notes, setNotes] = useState([]);
-  const [errorState, setErrorState] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [openNotes, setOpenNotes] = useState(false);
 
   useEffect(() => {
@@ -23,14 +23,15 @@ const NotesComponent = () => {
         }
         const data = await res.json();
         setNotes(data.notes);
+        setLoading(false);
       } catch (error) {
         console.log("Error loading notes: ", error);
-        setErrorState(true);
+        setLoading(false);
       }
     };
 
     fetchNotes();
-  }, []);
+  }, [notes]);
 
   function handleNoteSwap() {
     setOpenNotes((prevState) => !prevState);
@@ -38,11 +39,9 @@ const NotesComponent = () => {
 
   return (
     <main className="p-[2rem]">
-      {errorState && (
-        <div>
-          <Toaster position="top-center" />
-        </div>
-      )}
+      <div>
+        <Toaster position="top-center" />
+      </div>
       <div className="absolute -top-[5rem]">
         <Toaster position="top-center" />
       </div>
@@ -59,7 +58,7 @@ const NotesComponent = () => {
             className={`${classes.cardFaceFront} ${classes.cardFace} max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0`}
           >
             <Notepad
-              setErrorState={setErrorState}
+              loading={loading}
               openNotes={openNotes}
               handleNoteSwap={handleNoteSwap}
             />
@@ -69,7 +68,7 @@ const NotesComponent = () => {
           >
             <NotepadMenu
               notes={notes}
-              setErrorState={setErrorState}
+              loading={loading}
               openNotes={openNotes}
               handleNoteSwap={handleNoteSwap}
             />

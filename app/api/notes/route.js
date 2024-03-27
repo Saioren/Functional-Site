@@ -6,7 +6,7 @@ export async function POST(request) {
     const { title, body } = await request.json();
     await connectMongoDB();
     await Note.create({ title, body });
-    return NextResponse.status(201).json({ message: 'Note created' });
+    return NextResponse.json({ message: 'Note created' }, {status: 200});
 }
 
 export async function GET() {

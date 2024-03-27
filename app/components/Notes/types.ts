@@ -10,5 +10,5 @@ export type GeneralNotepadProps = {
   notes: Note[]; // Array of Note objects
   handleNoteSwap?: () => void;
   openNotes: boolean;
-  setErrorState: React.Dispatch<React.SetStateAction<boolean>>;
+  loading: boolean;
 };

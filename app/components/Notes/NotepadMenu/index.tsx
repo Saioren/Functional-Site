@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
-import { NotepadProps } from "../types";
+import { GeneralNotepadProps } from "../types";
 import classes from "./index.module.scss";
 import { useTheme } from "@/context/ThemeContext";
 import { RiSearch2Line } from "react-icons/ri";
 import { AnimatePresence, motion } from "framer-motion";
 import IndividualNote from "./IndividualNote";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function NotepadMenu({
   handleNoteSwap,
   openNotes,
   notes,
-  setErrorState,
-}: NotepadProps) {
+  loading,
+}: GeneralNotepadProps) {
   const { theme } = useTheme();
+  const [readNote, setReadNote] = useState(false);
 
   return (
     <div
       className={`${
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
-      } flex border dark:border-white/5 border-black/10 overflow-hidden flex-col max-w-[50rem] w-full`}
+      } flex overflow-hidden flex-col max-w-[50rem] w-full`}
     >
       <FaAngleRight
         onClick={handleNoteSwap}
@@ -46,10 +48,42 @@ export default function NotepadMenu({
               </div>
             </div>
           </section>
-          <section className=" p-[1rem] pt-[6rem] flex flex-wrap gap-4">
-            {notes.map((note, index) => (
-              <IndividualNote openNotes={openNotes} note={note} index={index} />
-            ))}
+          <section className="p-[1rem] pt-[6rem]">
+            <div className="flex flex-wrap gap-4">
+              {notes &&
+                notes.map((note, index) => (
+                  <div
+                    className="flex max-w-[11.22rem] w-full"
+                    style={{ width: "calc(25% - [1rem])" }}
+                  >
+                    <IndividualNote
+                      readNote={readNote}
+                      setReadNote={setReadNote}
+                      openNotes={openNotes}
+                      note={note}
+                      index={index}
+                    />
+                  </div>
+                ))}
+              {loading && (
+                <div>
+                  <h2>Loading notes...</h2>
+                </div>
+              )}
+              {!loading && notes.length === 0 && (
+                <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full">
+                  <motion.div className="flex items-center justify-center h-full w-full">
+                    <div className="flex flex-col gap-2 text-center bg-gray-400/30 dark:bg-gray-600/60 px-[1rem] py-[2rem] rounded-md">
+                      <h2 className="text-xl">
+                        Your notes are{" "}
+                        <span className="font-semibold">empty</span>.
+                      </h2>
+                      <p>Write a note to see them displayed here!</p>
+                    </div>
+                  </motion.div>
+                </div>
+              )}
+            </div>
           </section>
         </div>
       </div>

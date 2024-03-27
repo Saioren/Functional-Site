@@ -3,33 +3,33 @@ import classes from "./index.module.scss";
 import { useTheme } from "@/context/ThemeContext";
 import { FaAngleRight, FaPaperPlane } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type NotepadProps = {
   handleNoteSwap?: () => void;
   openNotes: boolean;
-  setErrorState?: React.Dispatch<React.SetStateAction<boolean>>;
+  loading: boolean;
 };
 
-export default function Notepad({
-  handleNoteSwap,
-  setErrorState,
-}: NotepadProps) {
+export default function Notepad({ handleNoteSwap, loading }: NotepadProps) {
+  const router = useRouter();
+
   const { theme } = useTheme();
   const [save, setSave] = useState(false);
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({});
 
-  const [noteContent, setNoteContent] = useState("");
-  const [titleContent, setTitleContent] = useState("");
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
 
   const handleContentChange = (event) => {
-    setNoteContent(event.target.innerText);
+    setBody(event.target.innerText);
   };
 
   function initSaveNote(event) {
     event.preventDefault();
-    if (noteContent === "") {
+    if (body === "") {
       if (theme === "dark") {
         toast.error("Note cannot be empty!", {
           style: {
@@ -43,17 +43,67 @@ export default function Notepad({
 
       return;
     } else {
-      setErrorState(false);
       setSave(true);
     }
   }
 
-  function handleSaveNote() {
-    localStorage.setItem("savedNote", "noteContent");
+  const handleCancelNote = (e) => {
+    e.preventDefault();
+    setSave(false);
+  };
+
+  const handleSaveNote = async (e) => {
+    e.preventDefault();
+
+    if (!title || !body) {
+      toast.error("Give your note a title!");
+      return;
+    }
+
+    try {
+      toast.loading("Saving note...");
+      const res = await fetch("http://localhost:3000/api/notes", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ title, body }),
+      });
+      if (res.ok) {
+        toast.dismiss();
+        toast.success("Note saved successfully!");
+      } else {
+        throw new Error("Failed to create note");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      resetNote();
+      setTimeout(() => {
+        toast.dismiss();
+      }, 4000);
+    }
+  };
+
+  function eraseWriting() {
+    const writingSpace = document.getElementById("writingSpace");
+    if (writingSpace !== null) {
+      writingSpace.innerHTML = "";
+    } else {
+      return;
+    }
+  }
+
+  function resetNote() {
+    setSave(false);
+    setTitle("");
+    setBody("");
+    eraseWriting();
   }
 
   return (
     <form
+      onSubmit={handleSaveNote}
       className={`${
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
       } shadow-md overflow-hidden w-full flex flex-col`}
@@ -73,15 +123,18 @@ export default function Notepad({
       </div>
       {/* Content editable div with event handler */}
       <div
+        id="writingSpace"
         className={`${
           theme === "dark" ? classes.darkPaper : classes.lightPaper
         } flex-grow relative outline-none py-0 pl-[4rem] text-wrap overflow-auto w-full`}
         contentEditable={true}
         onInput={handleContentChange}
+        defaultValue={body}
       ></div>
       <div className="group absolute bottom-2 right-2 rounded-full">
         <button
           onClick={initSaveNote}
+          type="submit"
           className="flex items-center bg-slate-200/60 backdrop-blur-sm shadow-md border border-black/10 dark:border-white/10 gap-2 dark:bg-gray-800/80 py-3 px-4 rounded-full group-hover:scale-110 group-active:scale-105 transition"
         >
           Submit
@@ -96,22 +149,26 @@ export default function Notepad({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
             >
-              <div className="flex items-center justify-center flex-col p-[1rem] gap-5 bg-grey-100/10 dark:bg-gray-800/20 backdrop-blur-sm rounded-md border dark:border-white/10 shadow-lg">
+              <div className="flex items-center justify-center flex-col p-[1rem] gap-5 bg-gray-100/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-md border dark:border-white/10 shadow-lg">
                 <h2>What would you like to name your entry?</h2>
                 <input
                   className="outline-none bg-white dark:bg-gray-800 rounded-md py-2 px-3"
                   placeholder="Note title"
+                  value={title}
+                  type="text"
+                  onChange={(e) => setTitle(e.target.value)}
                 ></input>
                 <div className="flex px-4 w-full items-center justify-between">
                   <button
-                    onClick={() => setSave(false)}
-                    className="bg-transparent hover:bg-gray-800 hover:scale-110 transition active:scale-105 py-1 px-3 rounded-full"
+                    onClick={handleCancelNote}
+                    className="bg-transparent hover:bg-gray-300/60 dark-hover:bg-gray-800 hover:scale-110 transition active:scale-105 py-1 px-3 rounded-full"
                   >
                     Cancel
                   </button>
                   <button
-                    onClick={() => handleSaveNote()}
-                    className="bg-transparent hover:bg-gray-800 hover:scale-110 transition active:scale-105 py-1 px-3 rounded-full"
+                    type="submit"
+                    onClick={handleSaveNote}
+                    className="bg-transparent hover:bg-gray-300/60 dark-hover:bg-gray-800 hover:scale-110 transition active:scale-105 py-1 px-3 rounded-full"
                   >
                     Save
                   </button>

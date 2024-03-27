@@ -37,7 +37,7 @@ export default function NotepadMenu({
             theme == "dark" ? classes.darkWrap : classes.lightWrap
           } absolute top-0 left-0 w-full h-full overflow-scroll no-scrollbar`}
         >
-          <section className="z-5 p-[1rem] fixed flex items-center gap-2 dark:bg-gray-800/95 bg-gray-300/80 w-full backdrop-blur-sm">
+          <section className="z-5 p-[1rem] fixed flex items-center gap-2  w-full backdrop-blur-sm">
             <div>
               <div className="cursor-pointer hover:scale-105 transition flex items-center w-100% h-full rounded-full">
                 <RiSearch2Line className="absolute z-10 ml-3 transition" />

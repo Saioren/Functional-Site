@@ -61,7 +61,7 @@ export default function IndividualNote({
         !readNote && (
           <div
             onClick={handleNoteRead}
-            className="flex flex-col hover:scale-110 transition active:scale-105 cursor-pointer hover:bg-slate-300/80 bg-slate-300/60 w-full h-full rounded-md p-[1rem]"
+            className="flex flex-col hover:scale-110 transition active:scale-105 cursor-pointer hover:bg-slate-300/80 bg-slate-400/40 w-full h-full rounded-md p-[1rem]"
           >
             <div>
               <h2 className={`${readNote ? "" : "truncate overflow-hidden"}`}>

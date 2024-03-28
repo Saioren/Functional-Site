@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Stopwatch from "./Stopwatch";
 import { motion } from "framer-motion";
+import { useTimetableContextProvider } from "@/context/TimetableProvider";
+import TimersDisplay from "./TimersDisplay";
 
 export default function Timetable() {
-  const [weeklyHours, setWeeklyHours] = useState(0);
+  const { weeklyHours, setWeeklyHours, timers, setTimers } =
+    useTimetableContextProvider();
+
   return (
     <div className="p-[2rem] justify-center items-center">
       <section className="flex flex-col relative w-full">
@@ -28,10 +32,7 @@ export default function Timetable() {
         </motion.section>
         <section>
           <div>
-            <Stopwatch
-              weeklyHours={weeklyHours}
-              setWeeklyHours={setWeeklyHours}
-            />
+            <Stopwatch />
           </div>
         </section>
 
@@ -51,6 +52,11 @@ export default function Timetable() {
         >
           Hours worked this week: {weeklyHours}
         </motion.div>
+      </section>
+      <section>
+        {timers.map((timer, index) => (
+          <TimersDisplay timer={timer} index={index} />
+        ))}
       </section>
     </div>
   );

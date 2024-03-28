@@ -1,57 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { StopwatchProps } from "../types";
+import { useTimetableContextProvider } from "@/context/TimetableProvider";
 
-export default function Stopwatch({
-  weeklyHours,
-  setWeeklyHours,
-}: StopwatchProps) {
-  const [started, setStarted] = useState(false);
-  const [pause, setPause] = useState(true);
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    let intervalId: any;
-    if (!pause && started) {
-      intervalId = setInterval(() => {
-        setSeconds((prevSeconds) => {
-          let newSeconds = prevSeconds + 1;
-          if (newSeconds >= 60) {
-            setMinutes((prevMinutes) => {
-              let newMinutes = prevMinutes + 1;
-              if (newMinutes >= 60) {
-                setHours((prevHours) => prevHours + 1);
-                newMinutes = 0;
-              }
-              return newMinutes;
-            });
-            newSeconds = 0;
-          }
-          return newSeconds;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(intervalId);
-  }, [pause, started]);
-
-  function handleStart() {
-    setPause(false);
-    setStarted(true);
-  }
-
-  function handlePause() {
-    setPause(true);
-  }
-
-  function handleStop() {
-    setPause(false);
-    setStarted(false);
-    setMinutes(0);
-    setSeconds(0);
-    setHours(0);
-  }
+export default function Stopwatch({}) {
+  const {
+    hours,
+    minutes,
+    seconds,
+    setWeeklyHours,
+    handlePause,
+    handleStart,
+    handleSaveTimer,
+  } = useTimetableContextProvider();
 
   return (
     <section>
@@ -170,7 +130,7 @@ export default function Stopwatch({
             Pause
           </button>
           <button
-            onClick={handleStop}
+            onClick={handleSaveTimer}
             className="border transition border-black/10 dark:bg-gray-900 dark:text-white shadow-md sm:px-5 sm:py-3 px-4 py-3 rounded-full hover:scale-110 bg-gray-200  text-gray-900"
           >
             Clock out

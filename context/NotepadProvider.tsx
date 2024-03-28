@@ -157,9 +157,9 @@ export default function NotepadProvider({
       if (res.ok) {
         toast.dismiss();
         router.refresh();
-        toast.success("Note saved successfully!");
+        toast.success("Note updated successfully!");
       } else {
-        throw new Error("Failed to create note");
+        throw new Error("Failed to update note");
       }
     } catch (error) {
       console.log(error);

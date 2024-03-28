@@ -1,112 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./index.module.scss";
-import { useTheme } from "@/context/ThemeContext";
 import { FaAngleRight, FaPaperPlane } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useNotepadProviderContext } from "@/context/NotepadProvider";
+import { useTheme } from "@/context/ThemeContext";
 
-type NotepadProps = {
-  handleNoteSwap?: () => void;
-  openNotes: boolean;
-  loading: boolean;
-};
-
-export default function Notepad({ handleNoteSwap, loading }: NotepadProps) {
-  const router = useRouter();
-
+export default function Notepad({}) {
   const { theme } = useTheme();
-  const [save, setSave] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [form, setForm] = useState({});
 
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-
-  const handleContentChange = (event) => {
-    setBody(event.target.innerText);
-  };
-
-  function initSaveNote(event) {
-    event.preventDefault();
-    if (body === "") {
-      if (theme === "dark") {
-        toast.error("Note cannot be empty!", {
-          style: {
-            background: "#1D1D26",
-            color: "#fff",
-          },
-        });
-      } else {
-        toast.error("Note cannot be empty!");
-      }
-
-      return;
-    } else {
-      setSave(true);
-    }
-  }
-
-  const handleCancelNote = (e) => {
-    e.preventDefault();
-    setSave(false);
-  };
-
-  const handleSaveNote = async (e) => {
-    e.preventDefault();
-
-    if (!title || !body) {
-      toast.error("Give your note a title!");
-      return;
-    }
-
-    try {
-      toast.loading("Saving note...");
-      const res = await fetch("http://localhost:3000/api/notes", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ title, body }),
-      });
-      if (res.ok) {
-        toast.dismiss();
-        toast.success("Note saved successfully!");
-      } else {
-        throw new Error("Failed to create note");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      resetNote();
-      setTimeout(() => {
-        toast.dismiss();
-      }, 4000);
-    }
-  };
-
-  function eraseWriting() {
-    const writingSpace = document.getElementById("writingSpace");
-    if (writingSpace !== null) {
-      writingSpace.innerHTML = "";
-    } else {
-      return;
-    }
-  }
-
-  function resetNote() {
-    setSave(false);
-    setTitle("");
-    setBody("");
-    eraseWriting();
-  }
+  const {
+    handleNoteSwap,
+    handleContentChange,
+    setTitle,
+    initSaveNote,
+    handleSaveNote,
+    handleCancelNote,
+    save,
+  } = useNotepadProviderContext();
 
   return (
     <form
-      onSubmit={handleSaveNote}
+      onSubmit={() => handleSaveNote}
       className={`${
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
-      } shadow-md overflow-hidden w-full flex flex-col`}
+      } overflow-hidden w-full flex flex-col`}
       style={{ maxHeight: "calc(100vh - 2rem)" }}
     >
       <div
@@ -129,13 +46,12 @@ export default function Notepad({ handleNoteSwap, loading }: NotepadProps) {
         } flex-grow relative outline-none py-0 pl-[4rem] text-wrap overflow-auto w-full`}
         contentEditable={true}
         onInput={handleContentChange}
-        defaultValue={body}
       ></div>
       <div className="group absolute bottom-2 right-2 rounded-full">
         <button
-          onClick={initSaveNote}
+          onClick={(e) => initSaveNote(e)}
           type="submit"
-          className="flex items-center bg-slate-200/60 backdrop-blur-sm shadow-md border border-black/10 dark:border-white/10 gap-2 dark:bg-gray-800/80 py-3 px-4 rounded-full group-hover:scale-110 group-active:scale-105 transition"
+          className="flex items-center bg-white backdrop-blur-sm shadow-md border border-black/10 dark:border-white/10 gap-2 dark:bg-gray-800/80 py-3 px-4 rounded-full group-hover:scale-110 group-active:scale-105 transition"
         >
           Submit
           <FaPaperPlane className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
@@ -154,7 +70,6 @@ export default function Notepad({ handleNoteSwap, loading }: NotepadProps) {
                 <input
                   className="outline-none bg-white dark:bg-gray-800 rounded-md py-2 px-3"
                   placeholder="Note title"
-                  value={title}
                   type="text"
                   onChange={(e) => setTitle(e.target.value)}
                 ></input>

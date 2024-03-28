@@ -3,6 +3,7 @@ import { linkSettings, links } from "@/lib/data";
 import { languages } from "@/lib/data";
 import classes from "./index.module.scss";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 type SettingsModalProps = {
   activeSetting: string;
@@ -77,7 +78,7 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
                 key={index}
               >
                 <a
-                  className={`flex items-center bg-gray-300/70 dark:bg-gray-800/60 py-2 px-3 rounded-full hover:scale-110 active:scale-105 transition gap-1 text-sm cursor-pointer 
+                  className={`flex items-center bg-slate-300/40 dark:bg-gray-800/60 py-2 px-3 rounded-full hover:scale-110 active:scale-105 transition gap-1 text-sm cursor-pointer 
                   ${classes[language.color]}
                   `}
                   target="_blank"
@@ -113,13 +114,13 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 * index }}
             >
-              <a
+              <Link
                 className="flex gap-1 items-center hover:scale-110 active:scale-105 transition"
                 href={link.hash}
               >
                 {link.icon}
                 {link.name}
-              </a>
+              </Link>
             </motion.div>
           ))}
         </div>

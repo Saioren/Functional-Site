@@ -1,25 +1,53 @@
+"use client";
+
 import React, { useState } from "react";
-import { Note } from "../../types";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import ReadNote from "./ReadNote";
+import { Note, useNotepadProviderContext } from "@/context/NotepadProvider";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface IndividualNoteProps {
   note: Note;
   index: number;
-  openNotes: boolean;
-  setReadNote: React.Dispatch<React.SetStateAction<boolean>>;
-  readNote: boolean;
 }
 
-export default function IndividualNote({
-  note,
-  index,
-  openNotes,
-  setReadNote,
-  readNote,
-}: IndividualNoteProps) {
+export default function IndividualNote({ note, index }: IndividualNoteProps) {
+  const router = useRouter();
+  const { openNotes, readNote, setOpenNotes, setInitRemove, setReadNote } =
+    useNotepadProviderContext();
+
   const [clickedNoteId, setClickedNoteId] = useState("");
+
+  const removeNote = async () => {
+    toast.loading("Deleting note...");
+    const res = await fetch(
+      `http://localhost:3000/api/notes?id=${clickedNoteId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (res.ok) {
+      toast.dismiss();
+      setInitRemove(false);
+      handleNoteRead();
+      router.refresh();
+      toast.success("Note deleted.");
+      setTimeout(() => {
+        toast.dismiss();
+      }, 4000);
+    }
+  };
+
+  const handleNoteRead = () => {
+    if (!readNote) {
+      setClickedNoteId(note._id);
+      setReadNote(true);
+    } else {
+      setClickedNoteId("");
+      setReadNote(false);
+    }
+  };
 
   const createdAtDate = new Date(note.createdAt);
   const createdAtDateString = createdAtDate.toLocaleDateString();
@@ -37,14 +65,11 @@ export default function IndividualNote({
     hour12: false,
   });
 
-  function handleNoteRead() {
-    if (!readNote) {
-      setClickedNoteId(note._id);
-      setReadNote(true);
-    } else {
-      setClickedNoteId("");
-      setReadNote(false);
-    }
+  {
+    console.log("clickedNoteId:", clickedNoteId);
+  }
+  {
+    console.log("note._id:", note._id);
   }
 
   return openNotes ? (
@@ -56,12 +81,16 @@ export default function IndividualNote({
       className={`flex w-full`}
     >
       {clickedNoteId === note._id ? (
-        <ReadNote handleNoteRead={handleNoteRead} note={note} />
+        <ReadNote
+          removeNote={removeNote}
+          handleNoteRead={handleNoteRead}
+          note={note}
+        />
       ) : (
         !readNote && (
           <div
             onClick={handleNoteRead}
-            className="flex flex-col hover:scale-110 transition active:scale-105 cursor-pointer hover:bg-slate-300/80 bg-slate-400/40 w-full h-full rounded-md p-[1rem]"
+            className="flex flex-col hover:scale-110 transition active:scale-105 cursor-pointer bg-white backdrop-blur-sm dark:bg-slate-400/40  w-full h-full rounded-md p-[1rem] shadow-md"
           >
             <div>
               <h2 className={`${readNote ? "" : "truncate overflow-hidden"}`}>
@@ -80,20 +109,21 @@ export default function IndividualNote({
       )}
     </motion.div>
   ) : (
-    <div key={note._id} className={`flex w-full`}>
-      <div className="flex flex-col hover:scale-110 transition active:scale-105 cursor-pointer hover:bg-slate-300/80 bg-slate-300/60 w-full h-full rounded-md p-[1rem]">
-        <div>
-          <h2 className={`${readNote ? "" : "truncate overflow-hidden"}`}>
-            {note.title}
-          </h2>
-          <p className={`${readNote ? "" : "truncate overflow-hidden"}`}>
-            {note.body}
-          </p>
-        </div>
-        <div className="flex justify-between gap-4">
-          <h3>{createdAtDateString}</h3>
-          <h4>{createdAtTimeString}</h4>
-        </div>
+    <div
+      onClick={handleNoteRead}
+      className="flex flex-col hover:scale-110 transition active:scale-105 cursor-pointer bg-white backdrop-blur-sm dark:bg-slate-400/40  w-full h-full rounded-md p-[1rem] shadow-md"
+    >
+      <div>
+        <h2 className={`${readNote ? "" : "truncate overflow-hidden"}`}>
+          {note.title}
+        </h2>
+        <p className={`${readNote ? "" : "truncate overflow-hidden"}`}>
+          {note.body}
+        </p>
+      </div>
+      <div className="flex justify-between gap-4">
+        <h3>{createdAtDateString}</h3>
+        <h4>{createdAtTimeString}</h4>
       </div>
     </div>
   );

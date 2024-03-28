@@ -1,18 +1,22 @@
-import React, { useState } from "react";
-import { Note } from "../../../types";
+import React from "react";
 import { BsXLg } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
+import { Note, useNotepadProviderContext } from "@/context/NotepadProvider";
 
 type ReadNoteProps = {
   note: Note;
   handleNoteRead: () => void;
+  removeNote: () => void;
 };
 
-export default function ReadNote({ note, handleNoteRead }: ReadNoteProps) {
-  const router = useRouter();
+export default function ReadNote({
+  note,
+  handleNoteRead,
+  removeNote,
+}: ReadNoteProps) {
+  const { setOpenNotes, initRemove, setInitRemove } =
+    useNotepadProviderContext();
   const createdAtDate = new Date(note.createdAt);
   const createdAtDateString = createdAtDate.toLocaleDateString();
   const createdAtTimeString = createdAtDate.toLocaleTimeString("en-US", {
@@ -29,28 +33,14 @@ export default function ReadNote({ note, handleNoteRead }: ReadNoteProps) {
     hour12: false,
   });
 
-  const removeNote = async () => {
-    toast.loading("Deleting note...");
-    const res = await fetch(`http://localhost:3000/api/notes?id=${note._id}`, {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      toast.dismiss();
-      setInitRemove(false);
-      handleNoteRead();
-      router.refresh();
-      toast.success("Note deleted.");
-      setTimeout(() => {
-        toast.dismiss();
-      }, 4000);
-    }
-  };
-
-  const [initRemove, setInitRemove] = useState(false);
+  function handleEdit() {
+    setOpenNotes(false);
+    handleNoteRead();
+  }
 
   return (
     <div className="absolute z-10 w-full h-full top-0 bottom-0 left-0 right-0 bg-gray-150">
-      <div className=" border-none flex justify-between gap-4 dark:bg-gray-800 bg-slate-300 w-full py-[1rem] px-[2rem] items-center">
+      <div className=" border-none flex justify-between gap-4 w-full py-[1rem] px-[2rem] items-center">
         <motion.div
           initial={{ opacity: 0, x: -25 }}
           animate={{ opacity: 1, x: 0 }}
@@ -94,6 +84,7 @@ export default function ReadNote({ note, handleNoteRead }: ReadNoteProps) {
       >
         <div className="flex justify-between w-full px-[2rem] py-[1rem]">
           <FaEdit
+            onClick={handleEdit}
             className="cursor-pointer hover:scale-110 active:scale-105 transition"
             size={24}
           />

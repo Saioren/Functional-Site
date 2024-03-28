@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaAngleRight } from "react-icons/fa";
-import { GeneralNotepadProps } from "../types";
 import classes from "./index.module.scss";
-import { useTheme } from "@/context/ThemeContext";
 import { RiSearch2Line } from "react-icons/ri";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import IndividualNote from "./IndividualNote";
-import toast, { Toaster } from "react-hot-toast";
+import { Note, useNotepadProviderContext } from "@/context/NotepadProvider";
+import { useTheme } from "@/context/ThemeContext";
+import { useRouter } from "next/router";
 
-export default function NotepadMenu({
-  handleNoteSwap,
-  openNotes,
-  notes,
-  loading,
-}: GeneralNotepadProps) {
+export default function NotepadMenu({}) {
   const { theme } = useTheme();
-  const [readNote, setReadNote] = useState(false);
+
+  const {
+    notes,
+    loading,
+    readNote,
+    openNotes,
+    setOpenNotes,
+    setReadNote,
+    handleNoteSwap,
+  } = useNotepadProviderContext();
 
   return (
     <div
@@ -23,10 +27,12 @@ export default function NotepadMenu({
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
       } flex overflow-hidden flex-col max-w-[50rem] w-full`}
     >
-      <FaAngleRight
-        onClick={handleNoteSwap}
-        className="cursor-pointer absolute top-[1.45rem] right-[1rem] text-black dark:text-white w-8 h-8 hover:scale-125 active:scale-110 transition z-10"
-      />
+      {!readNote && (
+        <FaAngleRight
+          onClick={handleNoteSwap}
+          className="cursor-pointer absolute top-[1.45rem] right-[1rem] text-black dark:text-white w-8 h-8 hover:scale-125 active:scale-110 transition z-10"
+        />
+      )}
       <div
         className={`${
           theme === "dark" ? classes.darkPaper : classes.lightPaper
@@ -37,39 +43,32 @@ export default function NotepadMenu({
             theme == "dark" ? classes.darkWrap : classes.lightWrap
           } absolute top-0 left-0 w-full h-full overflow-scroll no-scrollbar`}
         >
-          <section className="z-5 p-[1rem] fixed flex items-center gap-2  w-full backdrop-blur-sm">
-            <div>
-              <div className="cursor-pointer hover:scale-105 transition flex items-center w-100% h-full rounded-full">
-                <RiSearch2Line className="absolute z-10 ml-3 transition" />
-                <input
-                  className="pl-[2rem] transition rounded-full px-[1rem] py-[0.5rem] outline-none dark:bg-gray-700"
-                  placeholder="Search notes"
-                ></input>
+          {!readNote && (
+            <section className="z-5 p-[1rem] fixed flex items-center gap-2  w-full backdrop-blur-sm">
+              <div>
+                <div className="cursor-pointer hover:scale-105 transition flex items-center w-100% h-full rounded-full">
+                  <RiSearch2Line className="absolute z-10 ml-3 transition" />
+                  <input
+                    className="pl-[2rem] transition rounded-full px-[1rem] py-[0.5rem] outline-none dark:bg-gray-700 shadow-md"
+                    placeholder="Search notes"
+                  ></input>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
           <section className="p-[1rem] pt-[6rem]">
             <div className="flex flex-wrap gap-4">
               {notes &&
-                notes.map((note, index) => (
+                notes.map((note: Note, index: number) => (
                   <div
                     className="flex max-w-[11.22rem] w-full"
                     style={{ width: "calc(25% - [1rem])" }}
+                    key={note._id}
                   >
-                    <IndividualNote
-                      readNote={readNote}
-                      setReadNote={setReadNote}
-                      openNotes={openNotes}
-                      note={note}
-                      index={index}
-                    />
+                    <IndividualNote note={note} index={index} />
                   </div>
                 ))}
-              {loading && (
-                <div>
-                  <h2>Loading notes...</h2>
-                </div>
-              )}
+
               {!loading && notes.length === 0 && (
                 <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full">
                   <motion.div className="flex items-center justify-center h-full w-full">

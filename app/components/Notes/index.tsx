@@ -1,41 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Notepad from "./Notepad";
 import NotepadMenu from "./NotepadMenu";
 import classes from "./index.module.scss";
 import { motion } from "framer-motion";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import { useNotepadProviderContext } from "@/context/NotepadProvider";
+import { useTheme } from "@/context/ThemeContext";
+import { useRouter } from "next/navigation";
 
 const NotesComponent = () => {
-  const [notes, setNotes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [openNotes, setOpenNotes] = useState(false);
+  const { theme } = useTheme();
+  const router = useRouter();
 
-  useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/notes", {
-          cache: "no-store",
-        });
-        if (!res.ok) {
-          throw new Error("Failed to fetch notes");
-        }
-        const data = await res.json();
-        setNotes(data.notes);
-        setLoading(false);
-      } catch (error) {
-        console.log("Error loading notes: ", error);
-        setLoading(false);
-      }
-    };
-
-    fetchNotes();
-  }, [notes]);
-
-  function handleNoteSwap() {
-    setOpenNotes((prevState) => !prevState);
-  }
+  const { notes, loading, openNotes, setOpenNotes, handleNoteSwap } =
+    useNotepadProviderContext();
 
   return (
     <main className="p-[2rem]">
@@ -57,21 +37,12 @@ const NotesComponent = () => {
           <section
             className={`${classes.cardFaceFront} ${classes.cardFace} max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0`}
           >
-            <Notepad
-              loading={loading}
-              openNotes={openNotes}
-              handleNoteSwap={handleNoteSwap}
-            />
+            <Notepad />
           </section>
           <section
             className={`max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0 ${classes.cardFaceBack} ${classes.cardFace}`}
           >
-            <NotepadMenu
-              notes={notes}
-              loading={loading}
-              openNotes={openNotes}
-              handleNoteSwap={handleNoteSwap}
-            />
+            <NotepadMenu />
           </section>
         </div>
       </motion.div>

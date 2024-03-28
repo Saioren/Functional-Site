@@ -15,8 +15,13 @@ export default function ReadNote({
   handleNoteRead,
   removeNote,
 }: ReadNoteProps) {
-  const { setOpenNotes, initRemove, setInitRemove } =
-    useNotepadProviderContext();
+  const {
+    setOpenNotes,
+    setNoteSwitch,
+    setUpdateNote,
+    initRemove,
+    setInitRemove,
+  } = useNotepadProviderContext();
   const createdAtDate = new Date(note.createdAt);
   const createdAtDateString = createdAtDate.toLocaleDateString();
   const createdAtTimeString = createdAtDate.toLocaleTimeString("en-US", {
@@ -35,7 +40,11 @@ export default function ReadNote({
 
   function handleEdit() {
     setOpenNotes(false);
-    handleNoteRead();
+    setUpdateNote(true);
+    setTimeout(() => {
+      handleNoteRead();
+      setNoteSwitch(false);
+    }, 1000);
   }
 
   return (

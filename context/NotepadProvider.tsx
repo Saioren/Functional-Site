@@ -23,10 +23,15 @@ type NotepadContextType = {
   openNotes: boolean;
   readNote: boolean;
   initRemove: boolean;
+  updateNote: boolean;
   save: boolean;
   errors: Record<string, any>;
   form: Record<string, any>;
+  noteSwitch: boolean;
+  cancelUpdateNote: boolean;
+  setCancelUpdateNote: React.Dispatch<React.SetStateAction<boolean>>;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
+  setUpdateNote: React.Dispatch<React.SetStateAction<boolean>>;
   setBody: React.Dispatch<React.SetStateAction<string>>;
   setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,6 +39,7 @@ type NotepadContextType = {
   setReadNote: React.Dispatch<React.SetStateAction<boolean>>;
   setInitRemove: React.Dispatch<React.SetStateAction<boolean>>;
   setSave: React.Dispatch<React.SetStateAction<boolean>>;
+  setNoteSwitch: React.Dispatch<React.SetStateAction<boolean>>;
   setErrors: React.Dispatch<React.SetStateAction<Record<string, any>>>;
   setForm: React.Dispatch<React.SetStateAction<Record<string, any>>>;
   handleContentChange: (event: React.ChangeEvent<HTMLDivElement>) => void;
@@ -46,7 +52,13 @@ type NotepadContextType = {
   handleNoteSwap: () => void;
   eraseWriting: () => void;
   resetNote: () => void;
+  initCancelUpdate: () => void;
   initSaveNote: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  handleUpdateNote: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
+  initUpdateNote: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  handleCancelUpdateNote: () => void;
 };
 
 const defaultNotepadContext: NotepadContextType = {
@@ -55,16 +67,22 @@ const defaultNotepadContext: NotepadContextType = {
   openNotes: false,
   readNote: false,
   initRemove: false,
+  noteSwitch: false,
   save: false,
+  updateNote: false,
   errors: {},
   form: {},
+  cancelUpdateNote: false,
+  setCancelUpdateNote: () => {},
   setTitle: () => {},
   setBody: () => {},
   setNotes: () => {},
   setLoading: () => {},
   setOpenNotes: () => {},
   setReadNote: () => {},
+  setUpdateNote: () => {},
   setInitRemove: () => {},
+  setNoteSwitch: () => {},
   setSave: () => {},
   setErrors: () => {},
   setForm: () => {},
@@ -75,6 +93,10 @@ const defaultNotepadContext: NotepadContextType = {
   eraseWriting: () => {},
   resetNote: () => {},
   initSaveNote: () => {},
+  handleUpdateNote: () => {},
+  initUpdateNote: () => {},
+  initCancelUpdate: () => {},
+  handleCancelUpdateNote: () => {},
 };
 
 export const NotepadContext = createContext<NotepadContextType>(
@@ -94,10 +116,84 @@ export default function NotepadProvider({
   const [form, setForm] = useState<Record<string, any>>({});
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
+  const [noteSwitch, setNoteSwitch] = useState<boolean>(false);
+  const [updateNote, setUpdateNote] = useState<boolean>(false);
+  const [cancelUpdateNote, setCancelUpdateNote] = useState<boolean>(false);
 
   const router = useRouter();
 
   const { theme } = useTheme();
+
+  function initCancelUpdate() {
+    setCancelUpdateNote(true);
+  }
+
+  function handleCancelUpdateNote() {
+    eraseWriting();
+    setUpdateNote(false);
+    handleNoteSwap();
+    setCancelUpdateNote(false);
+  }
+
+  const handleUpdateNote = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    if (!title || !body) {
+      toast.error("Give your note a title!");
+      return;
+    }
+
+    try {
+      toast.loading("Updating note...");
+      const res = await fetch("http://localhost:3000/api/notes", {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ title, body }),
+      });
+      if (res.ok) {
+        toast.dismiss();
+        router.refresh();
+        toast.success("Note saved successfully!");
+      } else {
+        throw new Error("Failed to create note");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      resetNote();
+      setTimeout(() => {
+        toast.dismiss();
+      }, 4000);
+    }
+  };
+
+  const initUpdateNote = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    if (body === "") {
+      if (theme === "dark") {
+        toast.error("Note cannot be empty!", {
+          style: {
+            background: "#1D1D26",
+            color: "#fff",
+          },
+        });
+      } else {
+        toast.error("Note cannot be empty!");
+      }
+
+      return false; // Indicate failure
+    } else {
+      setSave(true);
+      return true; // Indicate success
+    }
+  };
 
   function eraseWriting() {
     const writingSpace = document.getElementById("writingSpace");
@@ -124,6 +220,7 @@ export default function NotepadProvider({
   ) => {
     event.preventDefault();
     setSave(false);
+    setCancelUpdateNote(false);
   };
 
   const handleSaveNote = async (
@@ -186,6 +283,7 @@ export default function NotepadProvider({
 
   const handleNoteSwap = () => {
     setOpenNotes((prevState) => !prevState);
+    setNoteSwitch((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -212,6 +310,8 @@ export default function NotepadProvider({
   return (
     <NotepadContext.Provider
       value={{
+        updateNote,
+        noteSwitch,
         notes,
         loading,
         openNotes,
@@ -220,14 +320,18 @@ export default function NotepadProvider({
         save,
         errors,
         form,
+        cancelUpdateNote,
+        setCancelUpdateNote,
         setNotes,
         setLoading,
         setOpenNotes,
         setReadNote,
         setInitRemove,
         setSave,
+        setNoteSwitch,
         setErrors,
         setForm,
+        setUpdateNote,
         handleContentChange,
         handleCancelNote,
         handleSaveNote,
@@ -237,6 +341,10 @@ export default function NotepadProvider({
         initSaveNote,
         setTitle,
         setBody,
+        handleUpdateNote,
+        initUpdateNote,
+        initCancelUpdate,
+        handleCancelUpdateNote,
       }}
     >
       {children}

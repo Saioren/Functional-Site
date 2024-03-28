@@ -1,0 +1,68 @@
+/* index.module.scss */
+.lightNotepad {
+    border-radius: 0 0 10px 10px;
+    box-shadow: 2px 2px 12px rgba($color: black, $alpha: 0.5);
+    
+  }
+
+  .darkNotepad {
+    border-radius: 0 0 10px 10px;
+    box-shadow: 2px 2px 12px rgba($color: black, $alpha: 0.5);
+  }
+  
+  .lightHeader {
+    background-color: #333;
+    border-radius: 5px 5px 0 0;
+    color: white;
+  }
+  
+  .lightPaper {
+    background: repeating-linear-gradient(
+    to bottom,
+    #f1ede9,
+    #f1ede9 32px,
+    #94acd4 32px,
+    #94acd4 33px
+  );
+    font-size: 22px;
+    font-family: 'Patrick Hand', cursive;
+  }
+  
+  .lightPaper:before {
+    content: '';
+    position: absolute;
+    bottom: 0 ;
+    top: 0;
+    width: 60px;
+    border-right: 2px solid #d44147;
+    left: 0;
+  }
+
+  .darkHeader {
+    background-color: #060505;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .darkPaper {
+    background: repeating-linear-gradient(
+    to bottom,
+    #1f1f2d, 
+    #100f12 32px,
+    #50426c 32px, 
+    rgb(31, 29, 33) 33px
+  );
+    font-size: 22px;
+    font-family: 'Patrick Hand', cursive;
+  }
+  
+  .darkPaper:before {
+    content: '';
+    position: absolute;
+    bottom: 0 ;
+    top: 0;
+    width: 60px;
+    border-right: 2px solid #00ff9d;
+    opacity: 0.5;
+    left: 0;
+  }
+  

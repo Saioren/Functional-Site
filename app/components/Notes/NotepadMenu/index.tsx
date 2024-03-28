@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import IndividualNote from "./IndividualNote";
 import { Note, useNotepadProviderContext } from "@/context/NotepadProvider";
 import { useTheme } from "@/context/ThemeContext";
-import { useRouter } from "next/router";
 
 export default function NotepadMenu({}) {
   const { theme } = useTheme();
@@ -68,7 +67,7 @@ export default function NotepadMenu({}) {
                     <IndividualNote note={note} index={index} />
                   </div>
                 ))}
-
+              {loading && <h2>Loading notes...</h2>}
               {!loading && notes.length === 0 && (
                 <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full">
                   <motion.div className="flex items-center justify-center h-full w-full">

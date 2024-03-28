@@ -14,8 +14,14 @@ interface IndividualNoteProps {
 
 export default function IndividualNote({ note, index }: IndividualNoteProps) {
   const router = useRouter();
-  const { openNotes, readNote, setOpenNotes, setInitRemove, setReadNote } =
-    useNotepadProviderContext();
+  const {
+    openNotes,
+    noteSwitch,
+    readNote,
+    setOpenNotes,
+    setInitRemove,
+    setReadNote,
+  } = useNotepadProviderContext();
 
   const [clickedNoteId, setClickedNoteId] = useState("");
 
@@ -72,7 +78,7 @@ export default function IndividualNote({ note, index }: IndividualNoteProps) {
     console.log("note._id:", note._id);
   }
 
-  return openNotes ? (
+  return noteSwitch ? (
     <motion.div
       key={note._id}
       initial={{ opacity: 0, y: 25 }}
@@ -109,22 +115,24 @@ export default function IndividualNote({ note, index }: IndividualNoteProps) {
       )}
     </motion.div>
   ) : (
-    <div
-      onClick={handleNoteRead}
-      className="flex flex-col hover:scale-110 transition active:scale-105 cursor-pointer bg-white backdrop-blur-sm dark:bg-slate-400/40  w-full h-full rounded-md p-[1rem] shadow-md"
-    >
-      <div>
-        <h2 className={`${readNote ? "" : "truncate overflow-hidden"}`}>
-          {note.title}
-        </h2>
-        <p className={`${readNote ? "" : "truncate overflow-hidden"}`}>
-          {note.body}
-        </p>
+    !readNote && (
+      <div
+        onClick={handleNoteRead}
+        className="flex flex-col hover:scale-110 transition active:scale-105 cursor-pointer bg-white backdrop-blur-sm dark:bg-slate-400/40  w-full h-full rounded-md p-[1rem] shadow-md"
+      >
+        <div>
+          <h2 className={`${readNote ? "" : "truncate overflow-hidden"}`}>
+            {note.title}
+          </h2>
+          <p className={`${readNote ? "" : "truncate overflow-hidden"}`}>
+            {note.body}
+          </p>
+        </div>
+        <div className="flex justify-between gap-4">
+          <h3>{createdAtDateString}</h3>
+          <h4>{createdAtTimeString}</h4>
+        </div>
       </div>
-      <div className="flex justify-between gap-4">
-        <h3>{createdAtDateString}</h3>
-        <h4>{createdAtTimeString}</h4>
-      </div>
-    </div>
+    )
   );
 }

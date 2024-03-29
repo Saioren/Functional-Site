@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTheme } from "./ThemeContext";
-
+import WeeklyHours from "@/models/weeklyHours";
 type TimetableContextProviderProps = {
   children: React.ReactNode;
 };
@@ -160,9 +160,14 @@ export default function TimetableProvider({
 
     if (!seconds && !minutes && !hours) {
       toast.error("Start the timers to clock out!");
+      return; // Return early if timer values are all zero
     }
+
     try {
+      handlePause();
       toast.loading("Clocking out...");
+
+      // Save the timer data to the timers collection
       const res = await fetch("http://localhost:3000/api/timers", {
         method: "POST",
         headers: {
@@ -170,9 +175,14 @@ export default function TimetableProvider({
         },
         body: JSON.stringify({ hours, minutes, seconds }),
       });
+
       if (res.ok) {
         toast.dismiss();
         router.refresh();
+
+        // Call function to update weekly hours
+        await handleSaveWeeklyTime();
+
         toast.success("Nice work!");
       } else {
         throw new Error("Failed to save time!");
@@ -180,10 +190,38 @@ export default function TimetableProvider({
     } catch (error) {
       console.log(error);
     } finally {
+      handleStop();
       setTimeout(() => {
-        handleStop();
         toast.dismiss();
       }, 4000);
+    }
+  };
+  const handleSaveWeeklyTime = async () => {
+    try {
+      // Calculate total time in seconds
+      const totalTimeInSeconds = hours * 3600 + minutes * 60 + seconds;
+
+      // Calculate total time in hours (rounded to two decimal places)
+      const totalTimeInHours = totalTimeInSeconds / 3600;
+
+      // Find the current week's document in the WeeklyHours collection
+      const currentWeek = await WeeklyHours.findOne({
+        weekNumber: getCurrentWeekNumber(),
+      });
+
+      if (currentWeek) {
+        // If the document exists, update the hours field with the total time
+        currentWeek.hours += totalTimeInHours;
+        await currentWeek.save();
+      } else {
+        // If the document doesn't exist, create a new document for the current week
+        await WeeklyHours.create({
+          weekNumber: getCurrentWeekNumber(),
+          hours: totalTimeInHours,
+        });
+      }
+    } catch (error) {
+      console.log("Error saving weekly time:", error);
     }
   };
 

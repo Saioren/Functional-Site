@@ -36,32 +36,34 @@ export default function MiniStopwatch() {
               )}
               {minutes >= 1 && (
                 <>
-                  <span>{minutes < 10 ? "0" + minutes : minutes}</span>
+                  {hours === 0 ? (
+                    <span>{minutes < 10 ? "0" + minutes : minutes}</span>
+                  ) : (
+                    <span>{minutes < 10 ? "0" + minutes : minutes}</span>
+                  )}
+
                   <span>:</span>
                 </>
               )}
               <>
                 {minutes === 0 ? (
-                  <span>
-                    {seconds === 1 ? seconds + " second" : seconds + " seconds"}
-                  </span>
+                  <span>{seconds + " sec"}</span>
                 ) : (
                   <span>{seconds < 10 ? "0" + seconds : seconds}</span>
                 )}
               </>
+              {hours === 0 && minutes > 0 ? " min" : ""}
             </div>
             <div className="flex gap-4">
               <button
                 className="dark:bg-gray-700/80 group cursor-pointer bg-slate-300/60 rounded-full shadow-sm p-[0.5rem] hover:scale-110 active:scale-105 transition"
                 onClick={handleStart}
-                disabled={started}
               >
                 <FaPlay className="group-hover:text-green-500 transition" />
               </button>
               <button
                 className="dark:bg-gray-700/80 group cursor-pointer bg-slate-300/60 rounded-full shadow-sm p-[0.5rem] hover:scale-110 active:scale-105 transition"
                 onClick={handlePause}
-                disabled={!started}
               >
                 <FaPause className="group-hover:text-blue-500 transition" />
               </button>

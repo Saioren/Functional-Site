@@ -54,11 +54,14 @@ type NotepadContextType = {
   resetNote: () => void;
   initCancelUpdate: () => void;
   initSaveNote: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  handleUpdateNote: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
   initUpdateNote: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   handleCancelUpdateNote: () => void;
+  clickedNoteId: string;
+  setClickedNoteId: React.Dispatch<React.SetStateAction<string>>;
+  setNewTitle: React.Dispatch<React.SetStateAction<string>>;
+  setNewBody: React.Dispatch<React.SetStateAction<string>>;
+  newTitle: string;
+  newBody: string;
 };
 
 const defaultNotepadContext: NotepadContextType = {
@@ -73,6 +76,8 @@ const defaultNotepadContext: NotepadContextType = {
   errors: {},
   form: {},
   cancelUpdateNote: false,
+  clickedNoteId: "",
+  setClickedNoteId: () => {},
   setCancelUpdateNote: () => {},
   setTitle: () => {},
   setBody: () => {},
@@ -93,10 +98,13 @@ const defaultNotepadContext: NotepadContextType = {
   eraseWriting: () => {},
   resetNote: () => {},
   initSaveNote: () => {},
-  handleUpdateNote: () => {},
   initUpdateNote: () => {},
   initCancelUpdate: () => {},
   handleCancelUpdateNote: () => {},
+  setNewTitle: () => {},
+  setNewBody: () => {},
+  newTitle: "",
+  newBody: "",
 };
 
 export const NotepadContext = createContext<NotepadContextType>(
@@ -106,6 +114,8 @@ export const NotepadContext = createContext<NotepadContextType>(
 export default function NotepadProvider({
   children,
 }: NotepadContextProviderProps) {
+  const [newTitle, setNewTitle] = useState("");
+  const [newBody, setNewBody] = useState("");
   const [notes, setNotes] = useState<Note[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [openNotes, setOpenNotes] = useState<boolean>(false);
@@ -119,6 +129,8 @@ export default function NotepadProvider({
   const [noteSwitch, setNoteSwitch] = useState<boolean>(false);
   const [updateNote, setUpdateNote] = useState<boolean>(false);
   const [cancelUpdateNote, setCancelUpdateNote] = useState<boolean>(false);
+  const [clickedNoteId, setClickedNoteId] = useState<string>(" ");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const router = useRouter();
 
@@ -135,40 +147,10 @@ export default function NotepadProvider({
     setCancelUpdateNote(false);
   }
 
-  const handleUpdateNote = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-
-    if (!title || !body) {
-      toast.error("Give your note a title!");
-      return;
-    }
-
-    try {
-      toast.loading("Updating note...");
-      const res = await fetch("http://localhost:3000/api/notes", {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ title, body }),
-      });
-      if (res.ok) {
-        toast.dismiss();
-        router.refresh();
-        toast.success("Note updated successfully!");
-      } else {
-        throw new Error("Failed to update note");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      resetNote();
-      setTimeout(() => {
-        toast.dismiss();
-      }, 4000);
-    }
+  const handleSearchNotes = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    handleSearch(value);
   };
 
   const initUpdateNote = (
@@ -310,6 +292,8 @@ export default function NotepadProvider({
   return (
     <NotepadContext.Provider
       value={{
+        clickedNoteId,
+        setClickedNoteId,
         updateNote,
         noteSwitch,
         notes,
@@ -341,10 +325,13 @@ export default function NotepadProvider({
         initSaveNote,
         setTitle,
         setBody,
-        handleUpdateNote,
         initUpdateNote,
         initCancelUpdate,
         handleCancelUpdateNote,
+        newBody,
+        newTitle,
+        setNewTitle,
+        setNewBody,
       }}
     >
       {children}

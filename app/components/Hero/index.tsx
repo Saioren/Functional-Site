@@ -22,7 +22,7 @@ export default function Hero() {
       <h1 className="text-3xl mb-3">
         <span className={classes.saioren}>Saioren's</span> Work Website
       </h1>
-      <p>- Below is a list of my functions -</p>
+      <p>- Here is a list of my functions -</p>
     </motion.div>
   );
 }

@@ -18,6 +18,7 @@ export default function NotepadMenu({}) {
     setOpenNotes,
     setReadNote,
     handleNoteSwap,
+    handleSearchNotes,
   } = useNotepadProviderContext();
 
   return (
@@ -50,6 +51,7 @@ export default function NotepadMenu({}) {
                   <input
                     className="pl-[2rem] transition rounded-full px-[1rem] py-[0.5rem] outline-none dark:bg-gray-700 shadow-md"
                     placeholder="Search notes"
+                    onClick={() => handleSearchNotes(e.target.value)}
                   ></input>
                 </div>
               </div>

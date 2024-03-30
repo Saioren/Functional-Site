@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsXLg } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Note, useNotepadProviderContext } from "@/context/NotepadProvider";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type ReadNoteProps = {
   note: Note;
   handleNoteRead: () => void;
   removeNote: () => void;
+  resetNote: () => void;
 };
 
 export default function ReadNote({
   note,
   handleNoteRead,
   removeNote,
+  resetNote,
 }: ReadNoteProps) {
+  const router = useRouter();
+
   const {
     setOpenNotes,
     setNoteSwitch,

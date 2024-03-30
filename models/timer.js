@@ -13,6 +13,10 @@ const TimerSchema = new mongoose.Schema(
         seconds: {
             type: Number,
             default: 0
+        },
+        weeklyHours: {
+            type: Number,
+            default: 0
         }
     },
     {

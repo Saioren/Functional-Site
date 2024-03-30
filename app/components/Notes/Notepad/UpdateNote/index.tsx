@@ -4,10 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Note, useNotepadProviderContext } from "@/context/NotepadProvider";
 import classes from "./index.module.scss";
 import { useTheme } from "@/context/ThemeContext";
-
-type UpdateNoteProps = {
-  note: Note;
-};
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function UpdateNote({}) {
   const {
@@ -15,15 +13,59 @@ export default function UpdateNote({}) {
     handleContentChange,
     setTitle,
     initUpdateNote,
-    handleUpdateNote,
     handleCancelNote,
     initCancelUpdate,
     setCancelUpdateNote,
     cancelUpdateNote,
     handleCancelUpdateNote,
+    clickedNoteId,
+    newTitle,
+    newBody,
     save,
+    notes,
+    resetNote,
   } = useNotepadProviderContext();
+  const router = useRouter();
+
   const { theme } = useTheme();
+
+  const note = notes.find((note) => note._id === clickedNoteId);
+
+  const handleUpdateNote = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    if (!note || !note.title) {
+      toast.error("Give your note a title!");
+      return;
+    }
+
+    try {
+      toast.loading("Updating note...");
+      const res = await fetch(`http://localhost:3000/api/notes/${note._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ newTitle, newBody }),
+      });
+      if (res.ok) {
+        toast.dismiss();
+        router.refresh();
+        toast.success("Note updated successfully!");
+      } else {
+        throw new Error("Failed to update note");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      resetNote();
+      setTimeout(() => {
+        toast.dismiss();
+      }, 4000);
+    }
+  };
   return (
     <form
       onSubmit={() => handleUpdateNote}

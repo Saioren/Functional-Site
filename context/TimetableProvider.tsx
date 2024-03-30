@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTheme } from "./ThemeContext";
-import WeeklyHours from "@/models/weeklyHours";
+import Timer from "@/models/timer";
 type TimetableContextProviderProps = {
   children: React.ReactNode;
 };
@@ -34,6 +34,8 @@ type TimetableContextProps = {
   handleSaveTimer: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
+  weekNumber: number;
+  setWeekNumber: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const defaultTimerContext: TimetableContextProps = {
@@ -59,6 +61,8 @@ const defaultTimerContext: TimetableContextProps = {
   handlePause: () => {},
   handleStop: () => {},
   handleSaveTimer: () => {},
+  weekNumber: 0,
+  setWeekNumber: () => {},
 };
 export const TimetableContext = createContext<TimetableContextProps | null>(
   defaultTimerContext
@@ -85,6 +89,7 @@ export default function TimetableProvider({
   const [miniStopwatch, setMiniStopwatch] = useState(false);
   const [timers, setTimers] = useState<TimerType[]>([]);
   const [loading, setLoading] = useState(false);
+  const [weekNumber, setWeekNumber] = useState(0);
 
   const router = useRouter();
   const theme = useTheme();
@@ -152,6 +157,16 @@ export default function TimetableProvider({
     setHours(0);
     setMiniStopwatch(false);
   }
+  const updateWeeklyHours = (
+    stoppedTimeInSeconds: number,
+    currentWeeklyHours: number
+  ) => {
+    // Convert stopped time to hours
+    const stoppedHours = stoppedTimeInSeconds / 3600;
+    // Add stopped hours to current weekly hours
+    const updatedWeeklyHours = currentWeeklyHours + stoppedHours;
+    return updatedWeeklyHours;
+  };
 
   const handleSaveTimer = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -173,15 +188,17 @@ export default function TimetableProvider({
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ hours, minutes, seconds }),
+        body: JSON.stringify({ hours, minutes, seconds, weeklyHours }),
       });
 
       if (res.ok) {
+        // Calculate stopped time in seconds
+        const stoppedTimeInSeconds = hours * 3600 + minutes * 60 + seconds;
+        setWeeklyHours(stoppedTimeInSeconds);
+        // Update weekly hours
+
         toast.dismiss();
         router.refresh();
-
-        // Call function to update weekly hours
-        await handleSaveWeeklyTime();
 
         toast.success("Nice work!");
       } else {
@@ -196,40 +213,19 @@ export default function TimetableProvider({
       }, 4000);
     }
   };
-  const handleSaveWeeklyTime = async () => {
-    try {
-      // Calculate total time in seconds
-      const totalTimeInSeconds = hours * 3600 + minutes * 60 + seconds;
 
-      // Calculate total time in hours (rounded to two decimal places)
-      const totalTimeInHours = totalTimeInSeconds / 3600;
-
-      // Find the current week's document in the WeeklyHours collection
-      const currentWeek = await WeeklyHours.findOne({
-        weekNumber: getCurrentWeekNumber(),
-      });
-
-      if (currentWeek) {
-        // If the document exists, update the hours field with the total time
-        currentWeek.hours += totalTimeInHours;
-        await currentWeek.save();
-      } else {
-        // If the document doesn't exist, create a new document for the current week
-        await WeeklyHours.create({
-          weekNumber: getCurrentWeekNumber(),
-          hours: totalTimeInHours,
-        });
-      }
-    } catch (error) {
-      console.log("Error saving weekly time:", error);
-    }
-  };
+  const handleSaveWeeklyTime = async (
+    objectId: string,
+    updatedWeeklyHours: number
+  ) => {};
 
   const contextValue: TimetableContextProps = {
     loading,
     setLoading,
     timers,
     setTimers,
+    weekNumber,
+    setWeekNumber,
     weeklyHours,
     setWeeklyHours,
     started,

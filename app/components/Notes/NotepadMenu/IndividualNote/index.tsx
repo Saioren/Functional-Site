@@ -21,9 +21,9 @@ export default function IndividualNote({ note, index }: IndividualNoteProps) {
     setOpenNotes,
     setInitRemove,
     setReadNote,
+    clickedNoteId,
+    setClickedNoteId,
   } = useNotepadProviderContext();
-
-  const [clickedNoteId, setClickedNoteId] = useState("");
 
   const removeNote = async () => {
     toast.loading("Deleting note...");
@@ -70,13 +70,6 @@ export default function IndividualNote({ note, index }: IndividualNoteProps) {
     minute: "2-digit",
     hour12: false,
   });
-
-  {
-    console.log("clickedNoteId:", clickedNoteId);
-  }
-  {
-    console.log("note._id:", note._id);
-  }
 
   return noteSwitch ? (
     <motion.div

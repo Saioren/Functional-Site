@@ -12,6 +12,8 @@ export default function Stopwatch({}) {
     handlePause,
     handleStart,
     handleSaveTimer,
+    setEntryName,
+    entryName,
   } = useTimetableContextProvider();
 
   return (
@@ -20,6 +22,8 @@ export default function Stopwatch({}) {
         <input
           className="pl-4 bg-white shadow-lg dark:bg-gray-600/20 p-[0.5rem] rounded-full outline-none hover:scale-110 active:scale-105 transition border border-black/10"
           placeholder="Name your task"
+          onChange={(e) => setEntryName(e.target.value)}
+          value={entryName}
         ></input>
       </section>
       <section className="flex h-full items-center gap-8">

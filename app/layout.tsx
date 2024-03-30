@@ -12,8 +12,8 @@ import MiniStopwatch from "./components/Timetable/MiniStopwatch";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Clock in!",
-  description: "Track your work week hours.",
+  title: "Chartreuse",
+  description: "Track all of your work needs.",
 };
 
 export default function RootLayout({

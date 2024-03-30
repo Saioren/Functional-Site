@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleRight } from "react-icons/fa";
 import classes from "./index.module.scss";
 import { RiSearch2Line } from "react-icons/ri";
@@ -9,6 +9,18 @@ import { useTheme } from "@/context/ThemeContext";
 
 export default function NotepadMenu({}) {
   const { theme } = useTheme();
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
+
+  const handleSearch = (searchTerm: string) => {
+    setSearchTerm(searchTerm);
+    if (searchTerm === "") {
+      setFilteredNotes(notes); // Show all notes when searchTerm is empty
+    } else {
+      const filtered = notes.filter((note) => note.title.includes(searchTerm));
+      setFilteredNotes(filtered);
+    }
+  };
 
   const {
     notes,
@@ -20,6 +32,10 @@ export default function NotepadMenu({}) {
     handleNoteSwap,
     handleSearchNotes,
   } = useNotepadProviderContext();
+
+  useEffect(() => {
+    setFilteredNotes(notes);
+  }, [notes]);
 
   return (
     <div
@@ -51,7 +67,8 @@ export default function NotepadMenu({}) {
                   <input
                     className="pl-[2rem] transition rounded-full px-[1rem] py-[0.5rem] outline-none dark:bg-gray-700 shadow-md"
                     placeholder="Search notes"
-                    onClick={() => handleSearchNotes(e.target.value)}
+                    type="text"
+                    onChange={(e) => handleSearch(e.target.value)}
                   ></input>
                 </div>
               </div>
@@ -60,7 +77,7 @@ export default function NotepadMenu({}) {
           <section className="p-[1rem] pt-[6rem]">
             <div className="flex flex-wrap gap-4">
               {notes &&
-                notes.map((note: Note, index: number) => (
+                filteredNotes.map((note: Note, index: number) => (
                   <div
                     className="flex max-w-[11.22rem] w-full"
                     style={{ width: "calc(25% - [1rem])" }}

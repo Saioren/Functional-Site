@@ -1,15 +1,19 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Stopwatch from "./Stopwatch";
 import { motion } from "framer-motion";
-import { useTimetableContextProvider } from "@/context/TimetableProvider";
+import {
+  TimerType,
+  useTimetableContextProvider,
+} from "@/context/TimetableProvider";
 import TimersDisplay from "./TimersDisplay";
 import { Toaster } from "react-hot-toast";
 
 export default function Timetable() {
   const { weeklyHours, setWeeklyHours, timers, setTimers } =
     useTimetableContextProvider();
+  const [orderedTimers, setOrderedTimers] = useState<TimerType[]>([]);
 
   return (
     <div className="p-[2rem] flex w-full flex-col gap-4 justify-center items-center ">

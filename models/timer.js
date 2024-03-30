@@ -17,7 +17,11 @@ const TimerSchema = new mongoose.Schema(
         weeklyHours: {
             type: Number,
             default: 0
-        }
+        },
+        entryName: {
+            type: String,
+            default: '',
+        },
     },
     {
         timestamps: true,

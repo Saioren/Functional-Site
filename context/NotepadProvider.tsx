@@ -62,6 +62,9 @@ type NotepadContextType = {
   setNewBody: React.Dispatch<React.SetStateAction<string>>;
   newTitle: string;
   newBody: string;
+  handleSearchNotes: (e: string) => void;
+  notFound: boolean;
+  setNotFound: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const defaultNotepadContext: NotepadContextType = {
@@ -105,6 +108,9 @@ const defaultNotepadContext: NotepadContextType = {
   setNewBody: () => {},
   newTitle: "",
   newBody: "",
+  handleSearchNotes: () => {},
+  notFound: false,
+  setNotFound: () => {},
 };
 
 export const NotepadContext = createContext<NotepadContextType>(
@@ -131,6 +137,7 @@ export default function NotepadProvider({
   const [cancelUpdateNote, setCancelUpdateNote] = useState<boolean>(false);
   const [clickedNoteId, setClickedNoteId] = useState<string>(" ");
   const [searchTerm, setSearchTerm] = useState("");
+  const [notFound, setNotFound] = useState(false);
 
   const router = useRouter();
 
@@ -143,14 +150,34 @@ export default function NotepadProvider({
   function handleCancelUpdateNote() {
     eraseWriting();
     setUpdateNote(false);
+    setClickedNoteId(" ");
     handleNoteSwap();
     setCancelUpdateNote(false);
   }
 
-  const handleSearchNotes = (e) => {
-    const value = e.target.value;
+  const handleSearchNotes = (value: string) => {
     setSearchTerm(value);
-    handleSearch(value);
+    handleSearch(value); // Pass the search term to handleSearch
+  };
+
+  const handleSearch = (searchTerm: string) => {
+    if (!notes) {
+      toast.error("Error searching notes");
+      return;
+    }
+
+    const filteredNotes = notes.filter((note) =>
+      note.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    if (filteredNotes.length > 0) {
+      // Handle the filtered result here
+      console.log(filteredNotes);
+      setNotFound(false);
+    } else {
+      console.log("No notes found");
+      setNotFound(true);
+    }
   };
 
   const initUpdateNote = (
@@ -292,6 +319,8 @@ export default function NotepadProvider({
   return (
     <NotepadContext.Provider
       value={{
+        notFound,
+        setNotFound,
         clickedNoteId,
         setClickedNoteId,
         updateNote,
@@ -332,6 +361,7 @@ export default function NotepadProvider({
         newTitle,
         setNewTitle,
         setNewBody,
+        handleSearchNotes,
       }}
     >
       {children}

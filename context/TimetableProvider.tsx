@@ -36,9 +36,18 @@ type TimetableContextProps = {
   ) => void;
   weekNumber: number;
   setWeekNumber: React.Dispatch<React.SetStateAction<number>>;
+  entryName: string;
+  setEntryName: React.Dispatch<React.SetStateAction<string>>;
+  deleteEntry: boolean;
+  setDeleteEntry: React.Dispatch<React.SetStateAction<boolean>>;
+  clickedEntryId: string;
+  setClickedEntryId: React.Dispatch<React.SetStateAction<string>>;
+  handleDeleteEntry: (id: string) => void;
 };
 
 const defaultTimerContext: TimetableContextProps = {
+  clickedEntryId: "",
+  setClickedEntryId: () => {},
   loading: false,
   setLoading: () => {},
   timers: [],
@@ -63,6 +72,11 @@ const defaultTimerContext: TimetableContextProps = {
   handleSaveTimer: () => {},
   weekNumber: 0,
   setWeekNumber: () => {},
+  entryName: "",
+  setEntryName: () => {},
+  setDeleteEntry: () => {},
+  deleteEntry: false,
+  handleDeleteEntry: () => {},
 };
 export const TimetableContext = createContext<TimetableContextProps | null>(
   defaultTimerContext
@@ -73,6 +87,8 @@ export type TimerType = {
   hours: number;
   minutes: number;
   seconds: number;
+  weeklyHours: number;
+  entryName: string;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -83,16 +99,84 @@ export default function TimetableProvider({
   const [weeklyHours, setWeeklyHours] = useState(0);
   const [started, setStarted] = useState(false);
   const [pause, setPause] = useState(true);
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const [hours, setHours] = useState(() => {
+    const timerDataString = localStorage.getItem("timerData");
+    return timerDataString ? JSON.parse(timerDataString).hours : 0;
+  });
+  const [minutes, setMinutes] = useState(() => {
+    const timerDataString = localStorage.getItem("timerData");
+    return timerDataString ? JSON.parse(timerDataString).minutes : 0;
+  });
+  const [seconds, setSeconds] = useState(() => {
+    const timerDataString = localStorage.getItem("timerData");
+    return timerDataString ? JSON.parse(timerDataString).seconds : 0;
+  });
   const [miniStopwatch, setMiniStopwatch] = useState(false);
   const [timers, setTimers] = useState<TimerType[]>([]);
   const [loading, setLoading] = useState(false);
   const [weekNumber, setWeekNumber] = useState(0);
+  const [entryName, setEntryName] = useState("");
+  const [clickedEntryId, setClickedEntryId] = useState("");
+  const [deleteEntry, setDeleteEntry] = useState(false);
 
   const router = useRouter();
   const theme = useTheme();
+
+  const handleDeleteEntry = (id: string) => {
+    setDeleteEntry(true);
+    setClickedEntryId(id);
+  };
+
+  const handleSaveTimer = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    if (!seconds && !minutes && !hours) {
+      toast.error("Start the timer to clock out!");
+      return; // Return early if timer values are all zero
+    }
+
+    try {
+      handlePause();
+      toast.loading("Clocking out...");
+      // Save the timer data to the timers collection
+      const res = await fetch("http://localhost:3000/api/timers", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          hours,
+          minutes,
+          seconds,
+          weeklyHours,
+          entryName,
+        }),
+      });
+
+      if (res.ok) {
+        // Calculate stopped time in seconds
+        const stoppedTimeInSeconds = hours * 3600 + minutes * 60 + seconds;
+        setWeeklyHours(stoppedTimeInSeconds);
+        setEntryName(entryName);
+        // Update weekly hours
+        toast.dismiss();
+        router.refresh();
+
+        toast.success("Nice work!");
+      } else {
+        throw new Error("Failed to save time!");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      handleStop();
+      setTimeout(() => {
+        toast.dismiss();
+      }, 4000);
+    }
+  };
 
   useEffect(() => {
     const fetchTimer = async () => {
@@ -113,24 +197,44 @@ export default function TimetableProvider({
     };
 
     fetchTimer();
+  }, [handleSaveTimer]);
+
+  useEffect(() => {
+    // Retrieve timer data from localStorage on component mount
+    const timerDataString = localStorage.getItem("timerData");
+    if (timerDataString) {
+      const timerData = JSON.parse(timerDataString);
+      setHours(timerData.hours);
+      setMinutes(timerData.minutes);
+      setSeconds(timerData.seconds);
+    }
   }, []);
+
+  useEffect(() => {
+    // Save timer data to localStorage whenever the timer state changes
+    const timerData = { hours, minutes, seconds };
+    localStorage.setItem("timerData", JSON.stringify(timerData));
+    console.log(timerData);
+  }, [hours, minutes, seconds]);
 
   useEffect(() => {
     let intervalId: any;
     if (!pause) {
       intervalId = setInterval(() => {
-        setSeconds((prevSeconds) => {
+        setSeconds((prevSeconds: number) => {
           let newSeconds = prevSeconds + 1;
           if (newSeconds >= 60) {
-            setMinutes((prevMinutes) => {
+            // Increment minutes when seconds reach 60 or more
+            setMinutes((prevMinutes: number) => {
               let newMinutes = prevMinutes + 1;
               if (newMinutes >= 60) {
-                setHours((prevHours) => prevHours + 1);
+                // Increment hours when minutes reach 60 or more
+                setHours((prevHours: number) => prevHours + 1);
                 newMinutes = 0;
               }
               return newMinutes;
             });
-            newSeconds = 0;
+            newSeconds = 0; // Reset seconds to 0
           }
           return newSeconds;
         });
@@ -156,6 +260,7 @@ export default function TimetableProvider({
     setSeconds(0);
     setHours(0);
     setMiniStopwatch(false);
+    setEntryName("");
   }
   const updateWeeklyHours = (
     stoppedTimeInSeconds: number,
@@ -168,58 +273,18 @@ export default function TimetableProvider({
     return updatedWeeklyHours;
   };
 
-  const handleSaveTimer = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-
-    if (!seconds && !minutes && !hours) {
-      toast.error("Start the timers to clock out!");
-      return; // Return early if timer values are all zero
-    }
-
-    try {
-      handlePause();
-      toast.loading("Clocking out...");
-
-      // Save the timer data to the timers collection
-      const res = await fetch("http://localhost:3000/api/timers", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ hours, minutes, seconds, weeklyHours }),
-      });
-
-      if (res.ok) {
-        // Calculate stopped time in seconds
-        const stoppedTimeInSeconds = hours * 3600 + minutes * 60 + seconds;
-        setWeeklyHours(stoppedTimeInSeconds);
-        // Update weekly hours
-
-        toast.dismiss();
-        router.refresh();
-
-        toast.success("Nice work!");
-      } else {
-        throw new Error("Failed to save time!");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      handleStop();
-      setTimeout(() => {
-        toast.dismiss();
-      }, 4000);
-    }
-  };
-
   const handleSaveWeeklyTime = async (
     objectId: string,
     updatedWeeklyHours: number
   ) => {};
 
   const contextValue: TimetableContextProps = {
+    clickedEntryId,
+    setClickedEntryId,
+    deleteEntry,
+    setDeleteEntry,
+    entryName,
+    setEntryName,
     loading,
     setLoading,
     timers,
@@ -244,6 +309,7 @@ export default function TimetableProvider({
     miniStopwatch,
     setMiniStopwatch,
     handleSaveTimer,
+    handleDeleteEntry,
   };
 
   return (

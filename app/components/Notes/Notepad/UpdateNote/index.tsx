@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaAngleRight, FaPaperPlane } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import { Note, useNotepadProviderContext } from "@/context/NotepadProvider";
@@ -12,6 +12,7 @@ export default function UpdateNote({}) {
     handleNoteSwap,
     handleContentChange,
     setTitle,
+    setBody,
     initUpdateNote,
     handleCancelNote,
     initCancelUpdate,
@@ -25,15 +26,22 @@ export default function UpdateNote({}) {
     notes,
     resetNote,
   } = useNotepadProviderContext();
+
   const router = useRouter();
 
   const { theme } = useTheme();
 
   const note = notes.find((note) => note._id === clickedNoteId);
 
-  const handleUpdateNote = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  useEffect(() => {
+    // Set the title and body of the clicked note when 'note' changes
+    if (note) {
+      setTitle(note.title);
+      setBody(note.body);
+    }
+  }, [note]);
+
+  const handleUpdateNote = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!note || !note.title) {
@@ -48,7 +56,7 @@ export default function UpdateNote({}) {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ newTitle, newBody }),
+        body: JSON.stringify({ title: newTitle, body: newBody }), // Updated with newTitle and newBody
       });
       if (res.ok) {
         toast.dismiss();
@@ -66,9 +74,10 @@ export default function UpdateNote({}) {
       }, 4000);
     }
   };
+
   return (
     <form
-      onSubmit={() => handleUpdateNote}
+      onSubmit={handleUpdateNote}
       className={`${
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
       } overflow-hidden w-full flex flex-col`}
@@ -93,7 +102,8 @@ export default function UpdateNote({}) {
           theme === "dark" ? classes.darkPaper : classes.lightPaper
         } flex-grow relative outline-none py-0 pl-[4rem] text-wrap overflow-auto w-full`}
         contentEditable={true}
-        //defaultValue={note.body}
+        suppressContentEditableWarning={true}
+        dangerouslySetInnerHTML={{ __html: note ? note.body : "" }}
         onInput={handleContentChange}
       ></div>
       <div className="group absolute bottom-2 right-2 rounded-full">
@@ -120,7 +130,7 @@ export default function UpdateNote({}) {
                   className="outline-none bg-white dark:bg-gray-800 rounded-md py-2 px-3"
                   placeholder="Note title"
                   type="text"
-                  //value={note.title}
+                  value={note ? note.title : ""}
                   onChange={(e) => setTitle(e.target.value)}
                 ></input>
                 <div className="flex px-4 w-full items-center justify-between">
@@ -132,7 +142,7 @@ export default function UpdateNote({}) {
                   </button>
                   <button
                     type="submit"
-                    onClick={handleUpdateNote}
+                    onClick={() => handleUpdateNote}
                     className="bg-transparent hover:bg-gray-300/60 dark-hover:bg-gray-800 hover:scale-110 transition active:scale-105 py-1 px-3 rounded-full"
                   >
                     Update

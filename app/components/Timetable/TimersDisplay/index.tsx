@@ -4,7 +4,10 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FaTrash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { TimerType } from "@/context/TimetableProvider";
+import {
+  TimerType,
+  useTimetableContextProvider,
+} from "@/context/TimetableProvider";
 
 type TimersDisplayProps = {
   timer: TimerType;
@@ -20,21 +23,21 @@ export default function TimersDisplay({ timer, index }: TimersDisplayProps) {
     hour12: false,
   });
 
+  const {
+    deleteEntry,
+    clickedEntryId,
+    setDeleteEntry,
+    setClickedEntryId,
+    handleDeleteEntry,
+  } = useTimetableContextProvider();
+
   const router = useRouter();
 
   const [previousSettings, setPreviousSettings] = useState(false);
-  const [deleteEntry, setDeleteEntry] = useState(false);
 
   function handlePreviousSettings() {
     setPreviousSettings((prevState) => !prevState);
   }
-
-  const handleDeleteEntry = (id: string) => {
-    setDeleteEntry(true);
-    setClickedEntryId(id);
-  };
-
-  const [clickedEntryId, setClickedEntryId] = useState("");
 
   const removeEntry = async () => {
     try {
@@ -46,10 +49,10 @@ export default function TimersDisplay({ timer, index }: TimersDisplayProps) {
         }
       );
       if (res.ok) {
+        router.refresh();
         toast.dismiss();
         setDeleteEntry(false);
         toast.success("Entry deleted.");
-        router.refresh();
         setTimeout(() => {
           toast.dismiss();
         }, 4000);
@@ -66,6 +69,9 @@ export default function TimersDisplay({ timer, index }: TimersDisplayProps) {
     <div className="flex border border-black/10 rounded-md transition w-full mb-4 last:ml-4">
       <div className="flex relative justify-between rounded-md transition bg-white dark:bg-gray-700/60 h-full w-full  p-[1rem] shadow-lg ">
         <div className="flex gap-4">
+          {timer.entryName && (
+            <div>{timer.entryName ? timer.entryName : ""}</div>
+          )}
           <div>{createdAtDateString}</div>
           <div>{createdAtTimeString}</div>
         </div>

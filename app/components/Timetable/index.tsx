@@ -38,7 +38,9 @@ export default function Timetable() {
             <Stopwatch />
           </div>
         </motion.section>
-        <section></section>
+        <section className="absolute right-0 -bottom-[2rem]">
+          {/*<div>{timer.weeklyHours} hours this week!</div>*/}
+        </section>
 
         <motion.div
           initial={{

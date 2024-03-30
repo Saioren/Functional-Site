@@ -8,6 +8,7 @@ import {
   TimerType,
   useTimetableContextProvider,
 } from "@/context/TimetableProvider";
+import { format } from "date-fns";
 
 type TimersDisplayProps = {
   timer: TimerType;
@@ -22,6 +23,8 @@ export default function TimersDisplay({ timer, index }: TimersDisplayProps) {
     minute: "2-digit",
     hour12: false,
   });
+
+  const formattedDate = format(new Date(timer.createdAt), "EEEE, MMMM d");
 
   const {
     deleteEntry,
@@ -72,7 +75,7 @@ export default function TimersDisplay({ timer, index }: TimersDisplayProps) {
           {timer.entryName && (
             <div>{timer.entryName ? timer.entryName : ""}</div>
           )}
-          <div>{createdAtDateString}</div>
+          <div>{formattedDate}</div>
           <div>{createdAtTimeString}</div>
         </div>
         <section className=" flex gap-4 items-center">

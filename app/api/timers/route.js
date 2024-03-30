@@ -1,18 +1,40 @@
 import { connectMongoDB } from "../../../lib/mongodb";
 import Timer from "../../../models/timer";
 import { NextResponse } from 'next/server';
+import { startOfWeek, endOfWeek } from 'date-fns'; 
+
+export async function GET() {
+    await connectMongoDB();
+    
+    const currentDate = new Date();
+    const startOfCurrentWeek = startOfWeek(currentDate);
+    const endOfCurrentWeek = endOfWeek(currentDate);
+    
+    const timers = await Timer.find({
+        createdAt: { $gte: startOfCurrentWeek, $lte: endOfCurrentWeek }
+    }).sort({ createdAt: -1 });
+
+    const totalWeeklyHours = timers.reduce((total, timer) => total + timer.weeklyHours, 0);
+    
+    return NextResponse.json({ timers, totalWeeklyHours });
+}
 
 export async function POST(request) {
     const { hours, minutes, seconds, entryName, weeklyHours } = await request.json();
     await connectMongoDB();
-    await Timer.create({ hours, minutes, seconds, entryName, weeklyHours });
-    return NextResponse.json({ message: 'Timer created' }, { status: 200 });
-}
+    const totalHours = await Timer.aggregate([
+        {
+            $group: {
+                _id: null,
+                total: { $sum: "$weeklyHours" }
+            }
+        }
+    ]);
 
-export async function GET() {
-    await connectMongoDB();
-    const timers = await Timer.find().sort({ createdAt: -1 });
-    return NextResponse.json({ timers });
+    const totalHoursValue = totalHours.length > 0 ? totalHours[0].total : 0;
+
+    await Timer.create({ hours, minutes, seconds, entryName, weeklyHours, totalHours: totalHoursValue + weeklyHours });
+    return NextResponse.json({ message: 'Timer created' }, { status: 200 });
 }
 
 export async function DELETE(request) {

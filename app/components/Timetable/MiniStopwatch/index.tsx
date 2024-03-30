@@ -52,7 +52,7 @@ export default function MiniStopwatch() {
                   <span>{seconds < 10 ? "0" + seconds : seconds}</span>
                 )}
               </>
-              {hours === 0 && minutes > 0 ? " min" : ""}
+              {hours === 0 && minutes > 0 ? <span>&nbsp;min</span> : ""}
             </div>
             <div className="flex gap-4">
               <button

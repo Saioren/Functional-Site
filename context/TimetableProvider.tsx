@@ -223,25 +223,24 @@ export default function TimetableProvider({
       intervalId = setInterval(() => {
         setSeconds((prevSeconds: number) => {
           let newSeconds = prevSeconds + 1;
+          let newMinutes = minutes; // Store minutes value to avoid stale closure
+          let newHours = hours; // Store hours value to avoid stale closure
           if (newSeconds >= 60) {
-            // Increment minutes when seconds reach 60 or more
-            setMinutes((prevMinutes: number) => {
-              let newMinutes = prevMinutes + 1;
-              if (newMinutes >= 60) {
-                // Increment hours when minutes reach 60 or more
-                setHours((prevHours: number) => prevHours + 1);
-                newMinutes = 0;
-              }
-              return newMinutes;
-            });
-            newSeconds = 0; // Reset seconds to 0
+            newMinutes += 1;
+            newSeconds = 0;
+            if (newMinutes >= 60) {
+              newHours += 1;
+              newMinutes = 0;
+            }
           }
+          setMinutes(newMinutes);
+          setHours(newHours);
           return newSeconds;
         });
       }, 1000);
     }
     return () => clearInterval(intervalId);
-  }, [pause, started]);
+  }, [pause, started, seconds, minutes, hours]);
 
   function handleStart() {
     setPause(false);

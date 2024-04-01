@@ -1,5 +1,5 @@
-import { connectMongoDB } from "../../../lib/mongodb";
-import Note from "../../../models/note";
+import { connectMongoDB } from '@/lib/mongodb';
+import Note from '@/models/note'
 import { NextResponse } from 'next/server'
 
 export async function POST(request) {

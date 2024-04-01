@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleRight, FaPaperPlane } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import { Note, useNotepadProviderContext } from "@/context/NotepadProvider";
@@ -7,57 +7,66 @@ import { useTheme } from "@/context/ThemeContext";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-export default function UpdateNote({}) {
+export default function UpdateNote() {
+  const router = useRouter();
+  const { theme } = useTheme();
   const {
     handleNoteSwap,
     handleContentChange,
     setTitle,
     setBody,
     initUpdateNote,
+    handleResetUpdateNote,
+    clickedNoteId,
     handleCancelNote,
     initCancelUpdate,
     setCancelUpdateNote,
     cancelUpdateNote,
     handleCancelUpdateNote,
-    clickedNoteId,
-    newTitle,
-    newBody,
-    save,
     notes,
+    save,
+    setNewTitle,
     resetNote,
+    setNewBody,
+    setUpdateNote,
+    title: newTitle, // Renamed to avoid conflict
+    body: newBody, // Renamed to avoid conflict
   } = useNotepadProviderContext();
 
-  const router = useRouter();
-
-  const { theme } = useTheme();
-
-  const note = notes.find((note) => note._id === clickedNoteId);
-
   useEffect(() => {
-    // Set the title and body of the clicked note when 'note' changes
-    if (note) {
-      setTitle(note.title);
-      setBody(note.body);
+    if (notes) {
+      // Find the note with the matching ID
+      const note = notes.find((note) => note._id === clickedNoteId);
+
+      if (note) {
+        setTitle(note.title);
+        setBody(note.body);
+      }
     }
-  }, [note]);
+  }, [notes, setTitle, setBody]);
 
   const handleUpdateNote = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!note || !note.title) {
+    if (!note || !note._id || !newTitle) {
+      // Ensure note._id and newTitle exist
       toast.error("Give your note a title!");
       return;
     }
 
     try {
       toast.loading("Updating note...");
-      const res = await fetch(`http://localhost:3000/api/notes/${note._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ title: newTitle, body: newBody }), // Updated with newTitle and newBody
-      });
+      const res = await fetch(
+        `http://localhost:3000/api/notes/${clickedNoteId}`,
+        {
+          // Include note ID in the URL
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({ newTitle, newBody }), // Use newTitle directly
+        }
+      );
       if (res.ok) {
         toast.dismiss();
         router.refresh();
@@ -69,11 +78,16 @@ export default function UpdateNote({}) {
       console.log(error);
     } finally {
       resetNote();
+      handleResetUpdateNote();
       setTimeout(() => {
         toast.dismiss();
       }, 4000);
     }
   };
+
+  const note = notes.find((note) => note._id === clickedNoteId);
+
+  console.log("title:", newTitle, "body:", newBody, note?._id);
 
   return (
     <form
@@ -103,9 +117,11 @@ export default function UpdateNote({}) {
         } flex-grow relative outline-none py-0 pl-[4rem] text-wrap overflow-auto w-full`}
         contentEditable={true}
         suppressContentEditableWarning={true}
-        dangerouslySetInnerHTML={{ __html: note ? note.body : "" }}
         onInput={handleContentChange}
-      ></div>
+      >
+        {note ? note.body : ""}
+      </div>
+
       <div className="group absolute bottom-2 right-2 rounded-full">
         <button
           onClick={(e) => initUpdateNote(e)}
@@ -130,9 +146,10 @@ export default function UpdateNote({}) {
                   className="outline-none bg-white dark:bg-gray-800 rounded-md py-2 px-3"
                   placeholder="Note title"
                   type="text"
-                  value={note ? note.title : ""}
+                  value={newTitle}
                   onChange={(e) => setTitle(e.target.value)}
-                ></input>
+                />
+
                 <div className="flex px-4 w-full items-center justify-between">
                   <button
                     onClick={handleCancelNote}

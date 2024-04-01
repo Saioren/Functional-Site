@@ -73,8 +73,14 @@ export default function ReadNote({
           animate={{ opacity: 1, x: 0 }}
           className="flex flex-col gap-2"
         >
-          <h3>{createdAtDateString}</h3>
-          <h3>{createdAtTimeString}</h3>
+          <div className="flex gap-2">
+            Created at: <h3>{createdAtDateString}</h3>
+            <h3>{createdAtTimeString}</h3>
+          </div>
+          <div className="flex gap-2">
+            Updated at: <h3>{updatedAtDateString}</h3>
+            <h3>{updatedAtTimeString}</h3>
+          </div>
         </motion.div>
       </div>
       <section className="p-[2rem] flex flex-col gap-4">

@@ -197,7 +197,7 @@ export default function TimetableProvider({
     };
 
     fetchTimer();
-  }, [handleSaveTimer]);
+  }, []);
 
   useEffect(() => {
     // Retrieve timer data from localStorage on component mount

@@ -8,8 +8,13 @@ import ActiveSectionContextProvider from "../context/ActiveSection";
 import HeaderProvider from "@/context/HeaderProvider";
 import TimetableProvider from "@/context/TimetableProvider";
 import MiniStopwatch from "./components/Timetable/MiniStopwatch";
+import HandleTitle from "./components/HandleTitle";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Saioren's Site",
+};
 
 export default function RootLayout({
   children,
@@ -29,6 +34,7 @@ export default function RootLayout({
               <HeaderProvider>
                 <Header />
                 {children}
+                <HandleTitle />
                 <MiniStopwatch />
                 <ThemeSwitch />
               </HeaderProvider>

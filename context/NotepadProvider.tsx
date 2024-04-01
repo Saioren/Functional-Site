@@ -18,7 +18,9 @@ type NotepadContextProviderProps = {
 };
 
 type NotepadContextType = {
+  handleResetUpdateNote: () => void;
   notes: Note[];
+  body: string;
   loading: boolean;
   openNotes: boolean;
   readNote: boolean;
@@ -29,6 +31,7 @@ type NotepadContextType = {
   form: Record<string, any>;
   noteSwitch: boolean;
   cancelUpdateNote: boolean;
+  title: string;
   setCancelUpdateNote: React.Dispatch<React.SetStateAction<boolean>>;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setUpdateNote: React.Dispatch<React.SetStateAction<boolean>>;
@@ -69,6 +72,8 @@ type NotepadContextType = {
 
 const defaultNotepadContext: NotepadContextType = {
   notes: [],
+  title: "",
+  body: "",
   loading: true,
   openNotes: false,
   readNote: false,
@@ -80,6 +85,7 @@ const defaultNotepadContext: NotepadContextType = {
   form: {},
   cancelUpdateNote: false,
   clickedNoteId: "",
+  handleResetUpdateNote: () => {},
   setClickedNoteId: () => {},
   setCancelUpdateNote: () => {},
   setTitle: () => {},
@@ -155,6 +161,13 @@ export default function NotepadProvider({
     setCancelUpdateNote(false);
   }
 
+  function handleResetUpdateNote() {
+    eraseWriting();
+    setUpdateNote(false);
+    setClickedNoteId(" ");
+    setCancelUpdateNote(false);
+  }
+
   const handleSearchNotes = (value: string) => {
     setSearchTerm(value);
     handleSearch(value); // Pass the search term to handleSearch
@@ -222,6 +235,7 @@ export default function NotepadProvider({
 
   const handleContentChange = (event: React.ChangeEvent<HTMLDivElement>) => {
     setBody(event.target.innerText);
+    setNewBody(event.target.innerText);
   };
 
   const handleCancelNote = (
@@ -319,6 +333,7 @@ export default function NotepadProvider({
   return (
     <NotepadContext.Provider
       value={{
+        handleResetUpdateNote,
         notFound,
         setNotFound,
         clickedNoteId,
@@ -334,6 +349,8 @@ export default function NotepadProvider({
         errors,
         form,
         cancelUpdateNote,
+        title,
+        body,
         setCancelUpdateNote,
         setNotes,
         setLoading,

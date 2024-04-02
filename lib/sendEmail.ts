@@ -10,10 +10,24 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export const sendEmail = async (formData: FormData) => {
     const senderEmail = formData.get('senderEmail')
     const message = formData.get('message');
+    const recipient = formData.get('recipient');
+    const subjectData = formData.get('subjectData');
 
     if(!validateString(senderEmail, 500)){
         return {
             error: "Invalid sender email",
+        }
+    }
+
+    if(!validateString(subjectData, 500)){
+        return {
+            error: "Invalid subject",
+        }
+    }
+
+    if(!validateString(recipient, 500)){
+        return {
+            error: "Invalid recipient"
         }
     }
 
@@ -30,14 +44,15 @@ export const sendEmail = async (formData: FormData) => {
     }
     try {
         await resend.emails.send({
-            from: 'Contact Form <onboarding@resend.dev>',
-            to: 'mikrutevan@gmail.com',
-            subject: 'Message from contact form',
+            from: `Contact form ${senderEmail}`,
+            to: recipient as string,
+            subject: subjectData as string,
             reply_to: senderEmail as string,
             //text: message as string, 
             react: React.createElement(ReactEmailStyle, {
                 message: message,
                 senderEmail: senderEmail as string,
+                subjectData: subjectData as string,
             })
         })
     } catch (error) {

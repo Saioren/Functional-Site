@@ -15,16 +15,18 @@ import { Tailwind } from "@react-email/tailwind";
 type ReactEmailStyleProps = {
   message: string;
   senderEmail: string;
+  subjectData: string;
 };
 
 export default function ReactEmailStyle({
   message,
   senderEmail,
+  subjectData,
 }: ReactEmailStyleProps) {
   return (
     <Html>
       <Head />
-      <Preview>New message from your site!</Preview>
+      <Preview>{subjectData}</Preview>
       <Tailwind>
         <Body>
           <Container>

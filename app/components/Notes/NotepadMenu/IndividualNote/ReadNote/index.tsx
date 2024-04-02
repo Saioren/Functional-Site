@@ -10,14 +10,12 @@ type ReadNoteProps = {
   note: Note;
   handleNoteRead: () => void;
   removeNote: () => void;
-  resetNote: () => void;
 };
 
 export default function ReadNote({
   note,
   handleNoteRead,
   removeNote,
-  resetNote,
 }: ReadNoteProps) {
   const router = useRouter();
 

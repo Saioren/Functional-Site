@@ -52,10 +52,10 @@ export default function TimersDisplay({ timer, index }: TimersDisplayProps) {
         }
       );
       if (res.ok) {
-        router.refresh();
         toast.dismiss();
         setDeleteEntry(false);
         toast.success("Entry deleted.");
+        router.refresh();
         setTimeout(() => {
           toast.dismiss();
         }, 4000);

@@ -8,6 +8,7 @@ export default function TeaserSection() {
     <div className={`flex justify-center flex-wrap gap-10`}>
       {components.map((item, index) => (
         <motion.div
+          key={item.header}
           className="max-w-[26rem] w-full"
           initial={{
             opacity: 0,

@@ -62,10 +62,10 @@ export default function NotepadMenu({}) {
           {!readNote && (
             <section className="z-5 p-[1rem] fixed flex items-center gap-2  w-full backdrop-blur-sm">
               <div>
-                <div className="cursor-pointer hover:scale-105 transition flex items-center w-100% h-full rounded-full">
+                <div className="z-10 relative cursor-pointer hover:scale-105 transition flex items-center w-100% h-full rounded-full">
                   <RiSearch2Line className="absolute z-10 ml-3 transition" />
                   <input
-                    className="pl-[2rem] transition rounded-full px-[1rem] py-[0.5rem] outline-none dark:bg-gray-700 shadow-md"
+                    className=" pl-[2rem] transition rounded-full px-[1rem] py-[0.5rem] outline-none dark:bg-gray-700 shadow-md"
                     placeholder="Search notes"
                     type="text"
                     onChange={(e) => handleSearch(e.target.value)}
@@ -79,7 +79,7 @@ export default function NotepadMenu({}) {
               {notes &&
                 filteredNotes.map((note: Note, index: number) => (
                   <div
-                    className="flex max-w-[11.22rem] w-full"
+                    className="flex max-w-[11.20rem] w-full"
                     style={{ width: "calc(25% - [1rem])" }}
                     key={note._id}
                   >

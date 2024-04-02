@@ -6,7 +6,7 @@ import Hero from "../Hero";
 
 export default function Homepage() {
   return (
-    <div className="p-[3rem] flex">
+    <div className="p-[3rem]">
       <Hero />
       <TeaserSection />
     </div>

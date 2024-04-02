@@ -20,7 +20,8 @@ export default function Hero() {
     >
       <p className="mb-3">Welcome to</p>
       <h1 className="text-3xl mb-3">
-        <span className={classes.saioren}>Saioren's</span> Work Website
+        <span className={classes.saioren}>Saioren&apos;s</span>
+        Work Website
       </h1>
       <p>- Here is a list of my functions -</p>
     </motion.div>

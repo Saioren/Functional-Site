@@ -98,7 +98,10 @@ export default function TimetableProvider({
 }: TimetableContextProviderProps) {
   const [weeklyHours, setWeeklyHours] = useState(0);
   const [started, setStarted] = useState(false);
-  const [pause, setPause] = useState(true);
+  const [pause, setPause] = useState(() => {
+    const pauseData = localStorage.getItem("pauseData");
+    return pauseData ? JSON.parse(pauseData).pause : true;
+  });
   const [hours, setHours] = useState(() => {
     const timerDataString = localStorage.getItem("timerData");
     return timerDataString ? JSON.parse(timerDataString).hours : 0;
@@ -162,8 +165,6 @@ export default function TimetableProvider({
         setEntryName(entryName);
         // Update weekly hours
         toast.dismiss();
-        router.refresh();
-
         toast.success("Nice work!");
       } else {
         throw new Error("Failed to save time!");
@@ -172,6 +173,7 @@ export default function TimetableProvider({
       console.log(error);
     } finally {
       handleStop();
+      router.refresh();
       setTimeout(() => {
         toast.dismiss();
       }, 4000);
@@ -211,11 +213,19 @@ export default function TimetableProvider({
   }, []);
 
   useEffect(() => {
-    // Save timer data to localStorage whenever the timer state changes
+    const pauseData = localStorage.getItem("pauseData");
+    if (pauseData) {
+      setPause(JSON.parse(pauseData).pause);
+    }
+  }, []);
+
+  useEffect(() => {
     const timerData = { hours, minutes, seconds };
     localStorage.setItem("timerData", JSON.stringify(timerData));
-    console.log(timerData);
-  }, [hours, minutes, seconds]);
+
+    const pauseData = { pause };
+    localStorage.setItem("pauseData", JSON.stringify(pauseData));
+  }, [hours, minutes, seconds, pause]);
 
   useEffect(() => {
     let intervalId: any;

@@ -6,14 +6,6 @@
     @apply px-5 py-3 bg-gray-900 rounded-full hover:bg-gray-950 hover:scale-110
 }
 
-@layer utilities {
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
-   /* Hide scrollbar for IE, Edge and Firefox */
-    .no-scrollbar {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+::-webkit-scrollbar {
+    display: none;
   }
-}

@@ -4,6 +4,7 @@ import { languages } from "@/lib/data";
 import classes from "./index.module.scss";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 type SettingsModalProps = {
   activeSetting: string;
@@ -75,7 +76,7 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
                   opacity: 1,
                 }}
                 transition={{ delay: 0.1 * index }}
-                key={index}
+                key={language.name}
               >
                 <a
                   className={`flex items-center bg-slate-300/40 dark:bg-gray-800/60 py-2 px-3 rounded-full hover:scale-110 active:scale-105 transition gap-1 text-sm cursor-pointer 
@@ -88,7 +89,7 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
                   <h4>{language.name}</h4>
                   {typeof language.icon === "string" ? (
                     <React.Fragment>
-                      <img
+                      <Image
                         src={language.icon}
                         alt={`${language.name} icon`}
                         width={16}
@@ -110,6 +111,7 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
         <div className="flex flex-col gap-3">
           {links.map((link, index) => (
             <motion.div
+              key={link.name}
               initial={{ y: 25, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 * index }}

@@ -62,7 +62,7 @@ export default function Header() {
         </Link>
         <ul className="hidden sm:flex gap-5 list-none">
           {links.map((link, index) => (
-            <li className="hover:text-gray-300">
+            <li key={link.name} className="hover:text-gray-300">
               <Link
                 href={link.hash}
                 onClick={() => {
@@ -112,6 +112,7 @@ export default function Header() {
             <div className="flex flex-col gap-3 items-center rounded-md font-semibold w-100% mb-5 last:mb-0">
               {menuItems.map((item, index) => (
                 <motion.div
+                  key={item.name}
                   initial={{
                     opacity: 0,
                     y: -15,
@@ -123,7 +124,6 @@ export default function Header() {
                   transition={{ delay: 0.09 * index }}
                 >
                   <div
-                    key={index}
                     className={`cursor-pointer w-100% flex flex-row-reverse items-center gap-1 transition ${
                       classes[item.color]
                     } hover:scale-110 active:scale-105`}

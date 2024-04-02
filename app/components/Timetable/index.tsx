@@ -18,6 +18,10 @@ export default function Timetable() {
   return (
     <div className="p-[2rem] flex w-full flex-col gap-4 justify-center items-center ">
       <Toaster />
+      <div className="text-center">
+        <h2 className="text-2xl">Clock In!</h2>
+        <p>Track your work hours here.</p>
+      </div>
       <section className="flex flex-col w-full relative mb-[3rem] rounded-md">
         <motion.section
           initial={{

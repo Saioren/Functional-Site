@@ -18,10 +18,15 @@ export default function Timetable() {
   return (
     <div className="p-[2rem] flex w-full flex-col gap-4 justify-center items-center ">
       <Toaster />
-      <div className="text-center">
-        <h2 className="text-2xl">Clock In!</h2>
-        <p>Track your work hours here.</p>
-      </div>
+      <motion.div
+        initial={{ y: -25, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+      >
+        <div className="text-center">
+          <h2 className="text-2xl">Clock In!</h2>
+          <p>Track your work hours here.</p>
+        </div>
+      </motion.div>
       <section className="flex flex-col w-full relative mb-[3rem] rounded-md">
         <motion.section
           initial={{
@@ -31,9 +36,6 @@ export default function Timetable() {
           animate={{
             y: 0,
             opacity: 1,
-          }}
-          transition={{
-            delay: 0.1,
           }}
           className="text-center p-[2rem] bg-white dark:bg-gray-600/20 shadow-lg"
         >

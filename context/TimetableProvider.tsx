@@ -99,20 +99,36 @@ export default function TimetableProvider({
   const [weeklyHours, setWeeklyHours] = useState(0);
   const [started, setStarted] = useState(false);
   const [pause, setPause] = useState(() => {
-    const pauseData = localStorage.getItem("pauseData");
-    return pauseData ? JSON.parse(pauseData).pause : true;
+    if (typeof window !== "undefined") {
+      const pauseData = localStorage.getItem("pauseData");
+      return pauseData ? JSON.parse(pauseData).pause : true;
+    } else {
+      return true;
+    }
   });
   const [hours, setHours] = useState(() => {
-    const timerDataString = localStorage.getItem("timerData");
-    return timerDataString ? JSON.parse(timerDataString).hours : 0;
+    if (typeof window !== "undefined") {
+      const timerDataString = localStorage.getItem("timerData");
+      return timerDataString ? JSON.parse(timerDataString).hours : 0;
+    } else {
+      return 0;
+    }
   });
   const [minutes, setMinutes] = useState(() => {
-    const timerDataString = localStorage.getItem("timerData");
-    return timerDataString ? JSON.parse(timerDataString).minutes : 0;
+    if (typeof window !== "undefined") {
+      const timerDataString = localStorage.getItem("timerData");
+      return timerDataString ? JSON.parse(timerDataString).minutes : 0;
+    } else {
+      return 0;
+    }
   });
   const [seconds, setSeconds] = useState(() => {
-    const timerDataString = localStorage.getItem("timerData");
-    return timerDataString ? JSON.parse(timerDataString).seconds : 0;
+    if (typeof window !== "undefined") {
+      const timerDataString = localStorage.getItem("timerData");
+      return timerDataString ? JSON.parse(timerDataString).seconds : 0;
+    } else {
+      return 0;
+    }
   });
   const [miniStopwatch, setMiniStopwatch] = useState(false);
   const [timers, setTimers] = useState<TimerType[]>([]);

@@ -49,7 +49,7 @@ export default function CreateNote() {
         <button
           onClick={(e) => initSaveNote(e)}
           type="submit"
-          className="flex items-center bg-white backdrop-blur-sm shadow-md border border-black/10 dark:border-white/10 gap-2 dark:bg-gray-800/80 py-3 px-4 rounded-full group-hover:scale-110 group-active:scale-105 transition"
+          className="flex items-center bg-white backdrop-blur-sm shadow-md border border-black/10 dark:border-white/10 gap-2 dark:bg-slate-800/80 py-3 px-4 rounded-full group-hover:scale-110 group-active:scale-105 transition"
         >
           Submit
           <FaPaperPlane className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />

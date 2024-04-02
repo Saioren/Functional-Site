@@ -73,6 +73,7 @@ export default function Timetable() {
           {timers.length > 0
             ? timers.map((timer, index) => (
                 <motion.div
+                  key={index}
                   className="flex w-1/2"
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}

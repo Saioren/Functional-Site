@@ -1,4 +1,4 @@
-import connectMongoDB from "@/lib/mongodb";
+import {connectMongoDB} from "@/lib/mongodb";
 import Timer from "@/models/timer";
 import { NextResponse } from "next/server";
 

@@ -60,8 +60,8 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
           >
             <h3 className="mb-4">Hello! I am Evan!</h3>
             <p className="flex justify-center mb-8">
-              I'm a 22 year old developer who uses the following languages and
-              frameworks to develop websites:
+              I&apos;m a 22 year old developer who uses the following languages
+              and frameworks to develop websites:
             </p>
           </motion.div>
           <div className="flex flex-wrap gap-2 justify-center">

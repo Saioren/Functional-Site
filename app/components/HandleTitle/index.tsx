@@ -8,7 +8,7 @@ export default function HandleTitle() {
   const { pause, seconds, minutes, hours } = useTimetableContextProvider();
 
   useEffect(() => {
-    const formatTime = (value) => {
+    const formatTime = (value: any) => {
       return value < 10 ? "0" + value : value.toString();
     };
 

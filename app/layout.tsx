@@ -9,6 +9,7 @@ import HeaderProvider from "@/context/HeaderProvider";
 import TimetableProvider from "@/context/TimetableProvider";
 import MiniStopwatch from "./components/Timetable/MiniStopwatch";
 import HandleTitle from "./components/HandleTitle";
+import MouseTrail from "./components/MouseTrail/MouseTrail";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
               <HeaderProvider>
                 <Header />
                 {children}
+
                 <HandleTitle />
                 <MiniStopwatch />
                 <ThemeSwitch />

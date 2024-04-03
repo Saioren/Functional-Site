@@ -54,4 +54,4 @@ const useMouseTrailColor = () => {
   return mouseTrailColor;
 };
 
-export default useMouseTrailColor;
+export default useMouseTrailColor;*/

@@ -65,8 +65,8 @@ export const components = [
     {
         header: 'Timetable',
         description: 'Keep track of your work hours!',
-        lightTeaser: '/lightTimetable.png',
-        darkTeaser: '/darkTimetable.png',
+        lightTeaser: '/clockinlight.png',
+        darkTeaser: '/clockindark.png',
         href: '/timetable'
     },
     {
@@ -86,8 +86,8 @@ export const components = [
     {
         header: 'Email',
         description: 'Send and recieve emails!',
-        lightTeaser: '/lightTimetable.png',
-        darkTeaser: '/darkTimetable.png',
+        lightTeaser: '/emaillight.png',
+        darkTeaser: '/emaildark.png',
         href: '/email',
     },
 ]

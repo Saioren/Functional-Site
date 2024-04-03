@@ -26,8 +26,6 @@ export default function SendEmailComponent() {
       formDataToSend.append("recipient", formData.recipient);
       formDataToSend.append("subjectData", formData.subjectData);
       formDataToSend.append("message", formData.message);
-      console.log(formData.message);
-      console.log(FormData);
 
       await sendEmail(formDataToSend);
       toast.success("Email sent!");
@@ -59,8 +57,6 @@ export default function SendEmailComponent() {
       [name]: value,
     }));
   }
-
-  console.log(formData);
 
   return (
     <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}>

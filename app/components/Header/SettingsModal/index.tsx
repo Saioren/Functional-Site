@@ -105,8 +105,18 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
           </div>
         </div>
       )}
-      {activeSetting === "Settings" && <div></div>}
-      {activeSetting === "Help" && <div></div>}
+      {activeSetting === "Settings" && (
+        <div className="max=w=[10rem]">No settings to show for now.</div>
+      )}
+      {activeSetting === "Help" && (
+        <div className="max-w-[10rem] text-wrap">
+          Email{" "}
+          <a href="/email">
+            <span className="font-semibold">mikrutevan@gmail.com</span>
+          </a>{" "}
+          for any assistance needs.
+        </div>
+      )}
       {activeSetting === "Pages" && (
         <div className="flex flex-col gap-3">
           {links.map((link, index) => (

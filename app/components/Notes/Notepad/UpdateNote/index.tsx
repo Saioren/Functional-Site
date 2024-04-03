@@ -57,7 +57,7 @@ export default function UpdateNote() {
     try {
       toast.loading("Updating note...");
       const res = await fetch(
-        `http://localhost:3000/api/notes/${clickedNoteId}`,
+        `https://saiorens-functions-site.vercel.app/api/notes/${clickedNoteId}`,
         {
           // Include note ID in the URL
           method: "PUT",

@@ -36,6 +36,7 @@ const MouseTrail = () => {
 
     const handleMouseLeave = () => {
       setOnScreen(false);
+      
     };
 
     window.addEventListener("mousemove", handleMouseMove);

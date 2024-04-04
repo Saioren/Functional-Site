@@ -22,9 +22,9 @@ export default function HandleTitle() {
       formattedTime += formatTime(minutes) + ":";
     }
 
-    const endingParticle = minutes > 0 && hours === 0 ? " min" : " sec";
+    const endingParticle = minutes > 0 && hours === 0 ? " min •" : " sec •";
 
-    const formatEndingParticle = hours === 0 ? endingParticle : " hours";
+    const formatEndingParticle = hours === 0 ? endingParticle : " hours •";
 
     formattedTime += formatTime(seconds) + formatEndingParticle;
 

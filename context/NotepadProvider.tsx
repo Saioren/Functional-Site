@@ -258,16 +258,13 @@ export default function NotepadProvider({
 
     try {
       toast.loading("Saving note...");
-      const res = await fetch(
-        "https://saiorens-functions-site.vercel.app/api/notes",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({ title, body }),
-        }
-      );
+      const res = await fetch("http://localhost:3000/api/notes", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ title, body }),
+      });
       if (res.ok) {
         toast.dismiss();
         router.refresh();
@@ -315,12 +312,9 @@ export default function NotepadProvider({
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await fetch(
-          "https://saiorens-functions-site.vercel.app/api/notes",
-          {
-            cache: "no-store",
-          }
-        );
+        const res = await fetch("http://localhost:3000/api/notes", {
+          cache: "no-store",
+        });
         if (!res.ok) {
           throw new Error("Failed to fetch notes");
         }

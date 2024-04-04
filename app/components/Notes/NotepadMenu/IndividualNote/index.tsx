@@ -28,7 +28,7 @@ export default function IndividualNote({ note, index }: IndividualNoteProps) {
   const removeNote = async () => {
     toast.loading("Deleting note...");
     const res = await fetch(
-      `https://saiorens-functions-site.vercel.app/api/notes?id=${clickedNoteId}`,
+      `http://localhost:3000/api/notes?id=${clickedNoteId}`,
       {
         method: "DELETE",
       }

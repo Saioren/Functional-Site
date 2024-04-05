@@ -90,7 +90,7 @@ export default function NotepadMenu({}) {
               {!loading && notes.length === 0 && (
                 <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full">
                   <motion.div className="flex items-center justify-center h-full w-full">
-                    <div className="flex flex-col gap-2 text-center bg-gray-400/30 dark:bg-gray-600/60 px-[1rem] py-[2rem] rounded-md">
+                    <div className="flex flex-col gap-2 text-center bg-white/80 shadow-md dark:bg-gray-700/60 px-[1rem] py-[2rem] rounded-md">
                       <h2 className="text-xl">
                         Your notes are{" "}
                         <span className="font-semibold">empty</span>.

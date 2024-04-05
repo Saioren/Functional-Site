@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { links } from "@/lib/data";
+import { homepageLinks, links } from "@/lib/data";
 import Link from "next/link";
+import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { useActiveSectionContext } from "../../../context/ActiveSection";
 import { HamburgerIcon } from "./HamburgerIcon";
@@ -25,6 +26,8 @@ export default function Header() {
     settingClicked,
     setSettingClicked,
   } = useHeaderProviderContext();
+
+  console.log(activeSection);
 
   const handleModal: () => void = () => {
     if (!menu) {
@@ -60,10 +63,15 @@ export default function Header() {
         <Link className="sm:hidden block" href={"/"}>
           <Image src="/favicon.ico" width={48} height={48} alt="logo" />
         </Link>
-        <ul className="hidden sm:flex gap-5 list-none">
-          {links.map((link, index) => (
-            <li key={link.name} className="hover:text-gray-300">
+        <ul className="hidden sm:flex gap-4 list-none">
+          {homepageLinks.map((link, index) => (
+            <li key={link.name}>
               <Link
+                className={`flex w-full items-center justify-center  transition ${
+                  activeSection === link.name
+                    ? "text-gray-950 dark:text-gray-100 border-b border-gray-950 dark:border-gray-100"
+                    : "hover:text-gray-950 dark:text-gray-500 dark:hover:text-gray-100  text-gray-500 "
+                }`}
                 href={link.hash}
                 onClick={() => {
                   setActiveSection(link.name);
@@ -71,7 +79,17 @@ export default function Header() {
                 }}
               >
                 {link.name}
-                {link.name === activeSection && <span></span>}
+                {link.name === activeSection && (
+                  <motion.span
+                    className="underline absolute inset-0 -z-10"
+                    layoutId="activeSection"
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 30,
+                    }}
+                  ></motion.span>
+                )}
               </Link>
             </li>
           ))}

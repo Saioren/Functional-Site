@@ -4,6 +4,7 @@ import { BsBook, BsClipboard2, BsClock, BsEnvelope, BsFillCalendar2DayFill, BsHo
 import { DiCss3, DiGithubBadge, DiHtml5, DiJavascript, DiMongodb, DiNodejsSmall, DiReact, DiSass } from "react-icons/di"
 import { FaFacebook, FaLinkedinIn } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
+import timetableImg from '@/public/darkTimetable.png'
 
 export const links = [
     {
@@ -32,6 +33,57 @@ export const links = [
         icon: React.createElement(BsEnvelope),
     },
 ]
+
+export const homepageLinks = [
+    {
+      name: "Home",
+      hash: "/",
+    },
+    {
+      name: "About",
+      hash: "#about",
+    },
+    {
+      name: "Projects",
+      hash: "#projects",
+    },
+    {
+      name: "Skills",
+      hash: "#skills",
+    },
+    {
+      name: "Experience",
+      hash: "#experience",
+    },
+    {
+      name: "Contact",
+      hash: "#contact",
+    },
+  ] as const;
+
+  export const projectsData = [
+    {
+      title: "CorpComment",
+      description:
+        "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
+      tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
+      imageUrl: timetableImg,
+    },
+    {
+      title: "rmtDev",
+      description:
+        "Job board for remote developer jobs. I was the front-end developer. It has features like filtering, sorting and pagination.",
+      tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
+      imageUrl: timetableImg,
+    },
+    {
+      title: "Word Analytics",
+      description:
+        "A public web app for quick analytics on text. It shows word count, character count and social media post limits.",
+      tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
+      imageUrl: timetableImg,
+    },
+  ] as const;
 
 export const menuItems = [
     {

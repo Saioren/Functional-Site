@@ -18,11 +18,8 @@ const NotesComponent = () => {
     useNotepadProviderContext();
 
   return (
-    <main className="p-[2rem]">
+    <main className="p-[2rem] pt-[5rem] flex justify-center">
       <div>
-        <Toaster position="top-center" />
-      </div>
-      <div className="absolute -top-[5rem]">
         <Toaster position="top-center" />
       </div>
       <motion.div
@@ -35,12 +32,12 @@ const NotesComponent = () => {
           } flex justify-center items-center`}
         >
           <section
-            className={`${classes.cardFaceFront} ${classes.cardFace} max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0`}
+            className={`${classes.cardFaceFront} ${classes.cardFace} max-h-[39.75rem] flex justify-center w-[50rem] min-h-[15rem] max-w-[50rem] top-0`}
           >
             <Notepad />
           </section>
           <section
-            className={`max-h-[39.75rem] flex justify-center w-full max-w-[50rem] top-0 ${classes.cardFaceBack} ${classes.cardFace}`}
+            className={`max-h-[39.75rem] flex justify-center w-[50rem] max-w-[50rem] top-0 ${classes.cardFaceBack} ${classes.cardFace}`}
           >
             <NotepadMenu />
           </section>

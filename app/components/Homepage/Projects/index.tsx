@@ -19,7 +19,7 @@ export default function Projects() {
       animate={{}}
       transition={{}}
     >
-      <main className="mb-[6rem]">
+      <main className="mb-[3rem] pt-[3rem]">
         <SectionHeading>My Projects</SectionHeading>
         <div>
           {projectsData.map((project, index) => (

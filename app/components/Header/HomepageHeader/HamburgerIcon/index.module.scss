@@ -1,0 +1,29 @@
+.hamburgerWrap {
+    height: 48px;
+    width: auto;
+    & button {
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+    }
+}
+
+.active1 {
+    transform: translateY(5px);
+    rotate: -45deg;
+  }
+  
+  .active2 {
+    transform: translateY(-5px);
+    rotate: 45deg;
+  }
+  
+
+.line1, .line2 {
+  transition: all 300ms;
+  transform-origin: center;
+  stroke-width: 2px;
+}

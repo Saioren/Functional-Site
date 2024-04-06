@@ -8,6 +8,7 @@ type ButtonProps = {
   colorScheme: string;
   image?: ReactElement;
   type: string;
+  onClick?: React.MouseEventHandler;
 };
 
 export default function ButtonComponent({
@@ -16,6 +17,7 @@ export default function ButtonComponent({
   colorScheme,
   image,
   type,
+  onClick,
 }: ButtonProps) {
   return type === "anchor" ? (
     <a

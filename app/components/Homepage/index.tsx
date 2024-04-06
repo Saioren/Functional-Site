@@ -11,11 +11,13 @@ import Contact from "./Contact";
 import MaxWidth from "../MaxWidth";
 import SpacerComponent from "./Spacer";
 import Footer from "../Footer";
+import { Toaster } from "react-hot-toast";
 
 export default function Homepage() {
   return (
-    <MaxWidth width={50}>
-      <div className="text-center flex flex-col items-center pt-[2rem]">
+    <MaxWidth>
+      <div className="text-center flex flex-col items-center justify-center pt-[2rem]">
+        <Toaster />
         <Hero />
         <SpacerComponent />
         <About />

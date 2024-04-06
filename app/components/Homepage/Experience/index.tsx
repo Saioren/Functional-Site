@@ -14,7 +14,7 @@ export default function Experience() {
       animate={{}}
       transition={{}}
     >
-      <main className="mb-[6rem]">
+      <main className="mb-[3rem] pt-[3rem]">
         <SectionHeading>My Experience</SectionHeading>
         <div>Experience</div>
       </main>

@@ -40,21 +40,21 @@ export const homepageLinks = [
       hash: "/",
     },
     {
-      name: "About",
-      hash: "#about",
-    },
-    {
-      name: "Projects",
-      hash: "#projects",
-    },
-    {
-      name: "Skills",
-      hash: "#skills",
-    },
-    {
-      name: "Experience",
-      hash: "#experience",
-    },
+        name: "About",
+        hash: "#about",
+      },
+      {
+        name: "Projects",
+        hash: "#projects",
+      },
+      {
+        name: "Skills",
+        hash: "#skills",
+      },
+      {
+        name: "Experience",
+        hash: "#experience",
+      },
     {
       name: "Contact",
       hash: "#contact",
@@ -198,6 +198,12 @@ export const linkSettings = [
             color: 'teal',
         },
         {
+            name: 'Payload CMS',
+            icon:  '/payload.png',
+            href: 'https://payloadcms.com/',
+            color: 'black',
+        },
+        {
             name: 'Next.JS',
             icon:  'next-js.svg',
             href: 'https://nextjs.org/',
@@ -226,6 +232,12 @@ export const linkSettings = [
             icon:  'framer-motion.svg',
             href: 'https://www.framer.com/motion/',
             color: 'magenta',
+        },
+        {
+            name: 'Wordpress',
+            icon:  '/wordpress.png',
+            href: 'https://wordpress.com/',
+            color: 'gray',
         },
         {
             name: 'MongoDB',

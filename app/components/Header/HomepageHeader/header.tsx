@@ -3,8 +3,9 @@
 import React, { useState } from "react";
 import { homepageLinks, links } from "@/lib/data";
 import Link from "next/link";
+import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { useActiveSectionContext } from "../../../context/ActiveSection";
+import { useActiveSectionContext } from "@/context/ActiveSection";
 import { HamburgerIcon } from "./HamburgerIcon";
 import { menuItems } from "@/lib/data";
 import Image from "next/image";
@@ -12,7 +13,7 @@ import { useHeaderProviderContext } from "@/context/HeaderProvider";
 import SettingsModal from "./SettingsModal";
 import classes from "./index.module.scss";
 
-export default function Header() {
+export default function HomepageHeader() {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
   const {
@@ -118,7 +119,7 @@ export default function Header() {
               opacity: 1,
             }}
             exit={{ opacity: 0 }}
-            className={`flex rounded-md absolute top-[5.5rem] right-[1rem] ml-[1rem] p-[2rem] dark:bg-gray-800/60 border border-black/5 bg-white/80 backdrop-blur-sm shadow-lg`}
+            className={`flex rounded-md absolute top-[5.5rem] right-[1rem] ml-[1rem] p-[2rem] dark:bg-gray-700/75 border border-black/5 bg-white/80 backdrop-blur-sm shadow-lg`}
           >
             {settingClicked && (
               <SettingsModal

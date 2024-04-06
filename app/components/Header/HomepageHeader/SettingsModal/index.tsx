@@ -60,8 +60,8 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
           >
             <h3 className="mb-4">Hello! I am Evan!</h3>
             <p className="flex justify-center mb-8">
-              I made this website to act as a resume, but also to serve me
-              various functions for my work. Take a look around!
+              I made this website to act as a resume, but also as a site I will
+              use daily for my work. Take a look around!
             </p>
           </motion.div>
         </div>

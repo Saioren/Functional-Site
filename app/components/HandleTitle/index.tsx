@@ -28,14 +28,12 @@ export default function HandleTitle() {
 
     formattedTime += formatTime(seconds) + formatEndingParticle;
 
-    document.title = !pause
-      ? formattedTime + " Saioren's Site"
-      : "Saioren's Site";
+    document.title = !pause ? formattedTime + " Saioren.io" : "Saioren.io";
   }, [pause, seconds, minutes, hours]);
 
   return (
     <NextSeo
-      title="Saioren's Site"
+      title="Saioren.io"
       description="Saioren's site to track work stuff!"
     />
   );

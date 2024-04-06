@@ -12,12 +12,13 @@ export async function GET() {
     
     const timers = await Timer.find({
         createdAt: { $gte: startOfCurrentWeek, $lte: endOfCurrentWeek }
-    }).sort({ createdAt: -1 });
+    }).sort({ createdAt: -1 }).limit(10); 
 
     const totalWeeklyHours = timers.reduce((total, timer) => total + timer.weeklyHours, 0);
     
     return NextResponse.json({ timers, totalWeeklyHours });
 }
+
 
 export async function POST(request) {
     const { hours, minutes, seconds, entryName, weeklyHours } = await request.json();

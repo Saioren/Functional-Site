@@ -2,6 +2,7 @@ import { useSectionInView } from "@/lib/hooks";
 import React from "react";
 import { motion } from "framer-motion";
 import SectionHeading from "../../Heading";
+import HomepageSendEmailComponent from "../../Email/HomepageEmail";
 
 export default function Contact() {
   const { ref } = useSectionInView("Contact", 0.5);
@@ -14,9 +15,11 @@ export default function Contact() {
       animate={{}}
       transition={{}}
     >
-      <main className="mb-[10rem]">
+      <main className="mb-[13rem] pt-[3rem]">
         <SectionHeading>Contact Me</SectionHeading>
-        <div>Contact</div>
+        <div>
+          <HomepageSendEmailComponent />
+        </div>
       </main>
     </motion.div>
   );

@@ -7,8 +7,11 @@ import { BsArrowRight } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
+import { useActiveSectionContext } from "@/context/ActiveSection";
 
 export default function Hero() {
+  const { activeSection, setActiveSection, setTimeOfLastClick } =
+    useActiveSectionContext();
   const { ref } = useSectionInView("Home", 0);
   return (
     <motion.div
@@ -43,15 +46,19 @@ export default function Hero() {
       </p>
       <div className="flex gap-4 items-center">
         <ButtonComponent
+          onClick={() => {
+            setActiveSection("Contact");
+            setTimeOfLastClick(Date.now());
+          }}
           colorScheme="dark"
-          href={"#/contact"}
+          href={"#contact"}
           type="link"
           image={React.createElement(BsArrowRight)}
           buttonText="Contact me here"
         />
         <ButtonComponent
           colorScheme="light"
-          href={"#/contact"}
+          href={"#contact"}
           type="link"
           image={React.createElement(HiDownload)}
           buttonText="Download my CV"

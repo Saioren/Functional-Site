@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 export default function Email() {
   return (
-    <div className="py-[2rem]">
+    <div className="flex w-full">
       <Toaster position="top-center" />
       <EmailComponent />
     </div>

@@ -15,8 +15,8 @@ export default function Projects() {
       ref={ref}
       id="projects"
       className=""
-      initial={{}}
-      animate={{}}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{}}
     >
       <main className="mb-[3rem] pt-[3rem]">

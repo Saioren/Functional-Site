@@ -75,7 +75,7 @@ export default function ReadNote({
             Created: <h3>{createdAtDateString}</h3>
             <h3>{createdAtTimeString}</h3>
           </div>
-          {createdAtDateString !== updatedAtDateString && (
+          {updatedAtDateString && (
             <div className="flex gap-2">
               Updated: <h3>{updatedAtDateString}</h3>
               <h3>{updatedAtTimeString}</h3>

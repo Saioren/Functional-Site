@@ -10,8 +10,8 @@ export default function Experience() {
       ref={ref}
       id="experience"
       className=""
-      initial={{}}
-      animate={{}}
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{}}
     >
       <main className="mb-[3rem] pt-[3rem]">

@@ -5,7 +5,7 @@ import NotepadProvider from "@/context/NotepadProvider";
 export default function Notes() {
   return (
     <NotepadProvider>
-      <main className="pt-[2rem] sm:pt-[1rem]">
+      <main className="flex w-full justify-center">
         <NotesComponent />
       </main>
     </NotepadProvider>

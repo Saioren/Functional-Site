@@ -11,8 +11,8 @@ export default function Contact() {
       ref={ref}
       id="contact"
       className=""
-      initial={{}}
-      animate={{}}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{}}
     >
       <main className="mb-[13rem] pt-[3rem]">

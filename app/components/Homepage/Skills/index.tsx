@@ -21,11 +21,13 @@ const fadeInAnimationVariants = {
 };
 
 export default function Skills() {
-  const { ref } = useSectionInView("Skills", 1);
+  const { ref } = useSectionInView("Skills", 0.25);
   return (
     <section ref={ref} id="skills" className="">
       <main className="mb-[3rem] pt-[3rem]">
-        <SectionHeading>My Skills</SectionHeading>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <SectionHeading>My Skills</SectionHeading>
+        </motion.div>
         <ul className="flex gap-4 flex-wrap justify-center decoration-none">
           {languages.map((language, index) => (
             <motion.li

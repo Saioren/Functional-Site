@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 export default function TimetablePage() {
   return (
-    <div className="pt-[2rem] sm:pt-[1rem]">
+    <div className="flex w-full h-100vh">
       <Timetable />
       <Toaster />
     </div>

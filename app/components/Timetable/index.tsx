@@ -27,7 +27,7 @@ export default function Timetable() {
           <p>Track your work hours here.</p>
         </div>
       </motion.div>
-      <section className="flex flex-col w-full relative mb-[3rem] rounded-md">
+      <section className="flex flex-col w-full relative  rounded-md">
         <motion.section
           initial={{
             y: -50,

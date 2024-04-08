@@ -63,23 +63,23 @@ export const homepageLinks = [
 
   export const projectsData = [
     {
-      title: "CorpComment",
+      title: "Keen Studio",
       description:
-        "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
-      tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
+        "I work as a programmer at Keen Studio. With experienced professionals around me, I challenge myself everyday.",
+      tags: ["React", "Next.js", "MongoDB", "Payload CMS", "Node.js"],
       imageUrl: timetableImg,
     },
     {
-      title: "rmtDev",
+      title: "Coding Courses",
       description:
-        "Job board for remote developer jobs. I was the front-end developer. It has features like filtering, sorting and pagination.",
-      tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
+        "I've taken multiple in-depth 10-20 hour courses for each language of interest. I am confident in my abilities to code in Javascript, and anything related.",
+      tags: ["React", "TypeScript", "Javascript", "CSS", "HTML"],
       imageUrl: timetableImg,
     },
     {
-      title: "Word Analytics",
+      title: "",
       description:
-        "A public web app for quick analytics on text. It shows word count, character count and social media post limits.",
+        "",
       tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
       imageUrl: timetableImg,
     },

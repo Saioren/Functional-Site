@@ -18,7 +18,7 @@ const NotesComponent = () => {
     useNotepadProviderContext();
 
   return (
-    <main className="p-[2rem] pt-[5rem] flex justify-center">
+    <main className="p-[2rem] pt-[5rem] relative w-full flex justify-center">
       <div>
         <Toaster position="top-center" />
       </div>

@@ -41,7 +41,7 @@ export default function Hero() {
         <span className={classes.saioren}>
           Hello! I am <span className="font-semibold">Evan</span>!{" "}
         </span>
-        I'm a 22 year old programmer, who uses Typescript among many other
+        I&apos;m a 22 year old programmer, who uses Typescript among many other
         things. I set expectations high and strive to be the best I can.
       </p>
       <div className="flex gap-4 items-center">

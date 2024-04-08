@@ -5,7 +5,7 @@ import SectionHeading from "../../Heading";
 import HomepageSendEmailComponent from "../../Email/HomepageEmail";
 
 export default function Contact() {
-  const { ref } = useSectionInView("Contact", 0.5);
+  const { ref } = useSectionInView("Contact", 0.15);
   return (
     <motion.div
       ref={ref}

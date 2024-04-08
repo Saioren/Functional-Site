@@ -2,7 +2,7 @@ import React from "react"
 import { AiOutlineLink, AiOutlineQuestionCircle, AiOutlineSetting, AiOutlineUser } from "react-icons/ai"
 import { BsBook, BsClipboard2, BsClock, BsEnvelope, BsFillCalendar2DayFill, BsHouseFill } from "react-icons/bs"
 import { DiCss3, DiGithubBadge, DiHtml5, DiJavascript, DiMongodb, DiNodejsSmall, DiReact, DiSass } from "react-icons/di"
-import { FaFacebook, FaLinkedinIn } from "react-icons/fa"
+import { FaCode, FaFacebook, FaGlobeAmericas, FaLinkedinIn, FaNodeJs, FaReact } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 import timetableImg from '@/public/darkTimetable.png'
 
@@ -77,11 +77,46 @@ export const homepageLinks = [
       imageUrl: timetableImg,
     },
     {
-      title: "",
+      title: "Saioren.io",
       description:
-        "",
-      tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
+        "Welcome to my first live site. If you're curious about more of my projects, check out my GitHub.",
+      tags: ["React", "Next.js", "Framer", "Tailwind", "MongoDB"],
       imageUrl: timetableImg,
+    },
+  ] as const;
+
+  export const experiencesData = [
+    {
+      title: "Humble Beginnings",
+      location: "Grand Rapids, MI",
+      description:
+        "I was reccomended to start coding by my uncle and dad who are both in the programming / design field. I started small, mastering CSS & HTML first.",
+      icon: React.createElement(FaGlobeAmericas),
+      date: "Jun 2023",
+    },
+    {
+      title: "Leveling Up",
+      location: "Grand Rapids, MI",
+      description:
+        "I learned the ins and outs of Javascript and quickly segwayed to React.",
+      icon: React.createElement(FaReact),
+      date: "Aug 2023",
+    },
+    {
+      title: "The Next Step",
+      location: "Grand Rapids, MI",
+      description:
+        "I began learning Typescript, Next.js & Node.js. Scaling up to a real developer now.",
+      icon: React.createElement(FaNodeJs),
+      date: "Jan 2024",
+    },
+    {
+      title: "Keen Studio Intern",
+      location: "Grand Rapids, MI",
+      description:
+        "I'm slowly becoming proficient at front and backend developing in Javascript. Whether it be Next.js, Node.js, or a headless CMS.",
+      icon: React.createElement(FaCode),
+      date: "Feb 2024 - present",
     },
   ] as const;
 

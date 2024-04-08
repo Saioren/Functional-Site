@@ -24,7 +24,7 @@ export default function Skills() {
   const { ref } = useSectionInView("Skills", 0.25);
   return (
     <section ref={ref} id="skills" className="">
-      <main className="mb-[3rem] pt-[3rem]">
+      <main className="pb-[3rem] pt-[3rem]">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <SectionHeading>My Skills</SectionHeading>
         </motion.div>

@@ -9,7 +9,7 @@ import TeaserImage from "../../TeaserSection/TeaserImage";
 import Project from "./Project/project";
 
 export default function Projects() {
-  const { ref } = useSectionInView("Projects", 0.5);
+  const { ref } = useSectionInView("Projects", 0.25);
   return (
     <motion.div
       ref={ref}

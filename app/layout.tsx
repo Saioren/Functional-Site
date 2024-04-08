@@ -16,7 +16,7 @@ import Header from "./components/Header/header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Saioren's Site",
+  title: "Saioren.io",
 };
 
 export default function RootLayout({

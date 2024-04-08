@@ -10,3 +10,10 @@
     display: none;
   }
 
+body {
+    cursor: default;
+}
+
+::selection {
+    background: rgb(115, 124, 255);
+  }

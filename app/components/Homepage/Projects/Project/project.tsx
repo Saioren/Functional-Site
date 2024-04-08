@@ -12,7 +12,8 @@ export default function Project({
   title,
   description,
   tags,
-  imageUrl,
+  darkImageUrl,
+  lightImageUrl,
 }: ProjectProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -51,7 +52,7 @@ export default function Project({
         </div>
 
         <Image
-          src={imageUrl}
+          src={theme === "dark" ? darkImageUrl : lightImageUrl}
           alt="Project I worked on"
           quality={95}
           className="absolute bottom-0 right-0  w-[20rem] sm:top-8 sm:-right-40 sm:w-[28.25rem] rounded-t-lg shadow-2xl

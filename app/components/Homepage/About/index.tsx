@@ -5,7 +5,7 @@ import MaxWidth from "../../MaxWidth";
 import SectionHeading from "../../Heading";
 
 export default function About() {
-  const { ref } = useSectionInView("About", 0.5);
+  const { ref } = useSectionInView("About", 0.4);
   const paragraphContent = `I love coding. It takes up most of my time now'adays. I'm a huge
   fitness and health enthusiast. I believe a healthy body contributes to
   a wealth of good that people don't take seriously enough. A big part

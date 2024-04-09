@@ -14,7 +14,7 @@ export default function Contact() {
         animate={{ opacity: 1 }}
         transition={{}}
       >
-        <main className="pt-[3rem] pb-[9rem] flex w-full flex-col max-w-[40rem]">
+        <main className="pt-[3rem] sm:pb-[9rem] pb-[12rem] flex w-full flex-col max-w-[40rem]">
           <SectionHeading>Contact Me</SectionHeading>
           <div className="flex w-full">
             <HomepageSendEmailComponent />

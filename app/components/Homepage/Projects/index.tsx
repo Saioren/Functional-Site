@@ -27,7 +27,7 @@ export default function Projects() {
         >
           <SectionHeading>My Projects</SectionHeading>
         </motion.div>
-        <div>
+        <div className="flex gap-8 flex-col">
           {projectsData.map((project, index) => (
             <React.Fragment key={index}>
               <Project {...project} />

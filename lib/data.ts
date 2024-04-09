@@ -78,8 +78,8 @@ export const homepageLinks = [
       description:
         "I've taken multiple in-depth 10-20 hour courses for each language of interest. I am confident in my abilities to code in Javascript, and anything related.",
       tags: ["React", "TypeScript", "Javascript", "CSS", "HTML"],
-      darkImageUrl: timetableImg,
-      lightImageUrl: timetableImg,
+      darkImageUrl: darkSaioren,
+      lightImageUrl: lightSaioren,
     },
     {
       title: "Saioren.io",

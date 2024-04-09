@@ -31,15 +31,17 @@ export default function Project({
         scale: scaleProgess,
         opacity: opacityProgess,
       }}
-      className="group mb-3 sm:mb-8 last:mb-0 "
+      className="group"
     >
-      <section className="bg-gray-100 max-w-[42rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative sm:h-[20rem] hover:bg-gray-200 transition sm:group-even:pl-8 dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
-        <div className="pt-4 pb-7 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] h-[28rem] flex flex-col sm:h-full sm:group-even:ml-[18rem] w-100%">
-          <h3 className="text-2xl font-semibold">{title}</h3>
-          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70">
-            {description}
-          </p>
-          <ul className="flex flex-wrap mt-4 gap-2 sm:mt-auto">
+      <section className="bg-gray-100 max-w-[42rem] border border-black/5 rounded-lg overflow-hidden  relative sm:h-[20rem] hover:bg-gray-200 transition sm:group-even:flex-row-reverse  dark:text-white flex dark:bg-white/10 flex-col sm:flex-row dark:hover:bg-white/20 h-[30rem] ">
+        <div className="p-[2rem] sm:max-w-[50%] flex h-full gap-8 flex-col sm:h-full  w-100%">
+          <div className="flex gap-4 flex-col">
+            <h3 className="text-2xl font-semibold">{title}</h3>
+            <p className="leading-relaxed text-gray-700 dark:text-white/70">
+              {description}
+            </p>
+          </div>
+          <ul className="flex flex-wrap gap-2 ">
             {tags.map((tag, index) => (
               <li
                 className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
@@ -50,13 +52,13 @@ export default function Project({
             ))}
           </ul>
         </div>
-
-        <Image
-          src={theme === "dark" ? darkImageUrl : lightImageUrl}
-          alt="Project I worked on"
-          quality={95}
-          className="absolute bottom-0 right-0  w-[20rem] sm:top-8 sm:-right-40 sm:w-[28.25rem] rounded-t-lg shadow-2xl
-        transition 
+        <div className=" sm:absolute sm:-right-[8rem] sm:group-even:-left-[8rem] sm:top-[2rem] top-[17rem] px-[2rem] sm:w-[28.25rem] w-full rounded-t-lg  ">
+          <Image
+            src={theme === "dark" ? darkImageUrl : lightImageUrl}
+            alt="Project I worked on"
+            quality={95}
+            className="shadow-2xl rounded-t-lg
+            transition 
         sm:group-hover:scale-[1.04]
         sm:group-hover:-translate-x-3
         sm:group-hover:translate-y-3
@@ -65,9 +67,9 @@ export default function Project({
         sm:group-even:group-hover:translate-x-3
         sm:group-even:group-hover:translate-y-3
         sm:group-even:group-hover:rotate-2
-
-        sm:group-even:right-[initial] sm:group-even:-left-40 "
-        />
+"
+          />
+        </div>
       </section>
     </motion.div>
   );

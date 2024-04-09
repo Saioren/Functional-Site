@@ -44,7 +44,7 @@ export default function Hero() {
         I&apos;m a 22 year old programmer, who uses Typescript among many other
         things. I set expectations high and strive to be the best I can.
       </p>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center sm:flex-row flex-col">
         <ButtonComponent
           onClick={() => {
             setActiveSection("Contact");
@@ -63,18 +63,20 @@ export default function Hero() {
           image={React.createElement(HiDownload)}
           buttonText="Download my CV"
         />
-        <ButtonComponent
-          colorScheme="light"
-          href={"https://github.com/Saioren"}
-          type="anchor"
-          image={React.createElement(FaGithub)}
-        />
-        <ButtonComponent
-          colorScheme="light"
-          href={"https://www.linkedin.com/in/evan-mikrut-799190283/"}
-          type="anchor"
-          image={React.createElement(FaLinkedin)}
-        />
+        <div className="flex gap-8">
+          <ButtonComponent
+            colorScheme="light"
+            href={"https://github.com/Saioren"}
+            type="anchor"
+            image={React.createElement(FaGithub)}
+          />
+          <ButtonComponent
+            colorScheme="light"
+            href={"https://www.linkedin.com/in/evan-mikrut-799190283/"}
+            type="anchor"
+            image={React.createElement(FaLinkedin)}
+          />
+        </div>
       </div>
     </motion.div>
   );

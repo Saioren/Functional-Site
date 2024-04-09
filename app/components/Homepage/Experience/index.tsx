@@ -16,7 +16,7 @@ export default function Experience() {
   const { ref } = useSectionInView("Experience", 0.25);
   const { theme } = useTheme();
   return (
-    <section ref={ref} id="experience" className="pt-[3rem] pb-[3rem]">
+    <section ref={ref} id="experience" className="py-[3rem]">
       <SectionHeading>My Experience</SectionHeading>
       <VerticalTimeline lineColor="" className="ml-0 mr-0">
         {experiencesData.map((item, index) => {

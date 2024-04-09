@@ -15,7 +15,7 @@ export default function Contact() {
       animate={{ opacity: 1 }}
       transition={{}}
     >
-      <main className="mb-[13rem] pt-[3rem]">
+      <main className="py-[3rem]">
         <SectionHeading>Contact Me</SectionHeading>
         <div>
           <HomepageSendEmailComponent />

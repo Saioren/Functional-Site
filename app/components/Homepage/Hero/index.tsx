@@ -12,7 +12,7 @@ import { useActiveSectionContext } from "@/context/ActiveSection";
 export default function Hero() {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
-  const { ref } = useSectionInView("Home", 0);
+  const { ref } = useSectionInView("Home", 0.5);
   return (
     <motion.div
       ref={ref}

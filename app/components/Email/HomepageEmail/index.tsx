@@ -59,8 +59,12 @@ export default function HomepageSendEmailComponent() {
   }
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <section className="relative dark:bg-gray-600/20 backdrop-blur-sm bg-white w-[40rem] border border-black/10 shadow-lg rounded-md pb-[4rem]">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="flex w-full"
+    >
+      <section className="relative dark:bg-gray-600/20 backdrop-blur-sm bg-white border border-black/10 shadow-lg rounded-md pb-[4rem] flex w-full">
         <form
           className=" flex flex-col justify-center items-center p-[1rem] gap-4"
           onSubmit={handleSubmit}

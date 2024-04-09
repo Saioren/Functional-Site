@@ -25,7 +25,6 @@ export default function Homepage() {
         <Skills />
         <Experience />
         <Contact />
-        <Footer />
       </div>
     </MaxWidth>
   );

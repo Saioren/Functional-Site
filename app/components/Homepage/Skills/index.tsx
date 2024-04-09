@@ -26,7 +26,13 @@ export default function Skills() {
     <section ref={ref} id="skills" className="">
       <main className="pb-[3rem] pt-[3rem]">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <SectionHeading>My Skills</SectionHeading>
+          <motion.div
+            viewport={{ once: true }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+          >
+            <SectionHeading>My Skills</SectionHeading>
+          </motion.div>
         </motion.div>
         <ul className="flex gap-4 flex-wrap justify-center decoration-none">
           {languages.map((language, index) => (

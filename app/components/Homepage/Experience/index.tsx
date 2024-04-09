@@ -1,8 +1,7 @@
 "use client";
 
 import { useSectionInView } from "@/lib/hooks";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
 import SectionHeading from "../../Heading";
 import { experiencesData } from "@/lib/data";
 import { useTheme } from "@/context/ThemeContext";
@@ -11,18 +10,30 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
+import { motion } from "framer-motion";
 
 export default function Experience() {
+  const [visible, setVisible] = useState(false);
   const { ref } = useSectionInView("Experience", 0.25);
   const { theme } = useTheme();
   return (
     <section ref={ref} id="experience" className="py-[3rem]">
-      <SectionHeading>My Experience</SectionHeading>
-      <VerticalTimeline lineColor="" className="ml-0 mr-0">
+      <motion.div
+        viewport={{ once: true }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+      >
+        <SectionHeading>My Experience</SectionHeading>
+      </motion.div>
+      <VerticalTimeline
+        lineColor={theme === "light" ? "#f3f4f6" : "rgba(255, 255, 255, 0.05)"}
+        className="ml-0 mr-0"
+      >
         {experiencesData.map((item, index) => {
           return (
             <React.Fragment key={index}>
               <VerticalTimelineElement
+                visible={true}
                 contentStyle={{
                   background:
                     theme === "light" ? "#f3f4f6" : "rgba(255, 255, 255, 0.05)",

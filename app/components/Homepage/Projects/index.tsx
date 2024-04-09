@@ -20,7 +20,13 @@ export default function Projects() {
       transition={{}}
     >
       <main className="mb-[3rem] pt-[3rem]">
-        <SectionHeading>My Projects</SectionHeading>
+        <motion.div
+          viewport={{ once: true }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+        >
+          <SectionHeading>My Projects</SectionHeading>
+        </motion.div>
         <div>
           {projectsData.map((project, index) => (
             <React.Fragment key={index}>

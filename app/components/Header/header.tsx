@@ -47,7 +47,7 @@ export default function Header() {
   };
 
   return (
-    <header className="z-[999] fixed top-0 left-0 right-0 flex justify-between items-center px-6 bg-green-300">
+    <header className="z-[999] fixed top-0 left-0 right-0 flex justify-between items-center px-6">
       <motion.nav
         initial={{
           opacity: 0,

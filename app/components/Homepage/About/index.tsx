@@ -1,11 +1,14 @@
 import { useSectionInView } from "@/lib/hooks";
-import React from "react";
-import { motion } from "framer-motion";
-import MaxWidth from "../../MaxWidth";
+import React, { useEffect, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
 import SectionHeading from "../../Heading";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function About() {
-  const { ref } = useSectionInView("About", 0.4);
+  const { ref, inView } = useSectionInView("About", 0.4);
+  const [triggeredOnce, setTriggeredOnce] = useState(false);
+  const { theme } = useTheme();
+  const controls = useAnimation();
   const paragraphContent = `I love coding. It takes up most of my time now'adays. I'm a huge
   fitness and health enthusiast. I believe a healthy body contributes to
   a wealth of good that people don't take seriously enough. A big part
@@ -14,23 +17,35 @@ export default function About() {
   that, I draw, and see myself as quite the artist. I speak Japanese,
   and studied in school, only to pick it back up a little over a year
   ago. And anime is my jam. Specifically comedy / shonen.`;
+
+  useEffect(() => {
+    if (inView) {
+      if (!triggeredOnce) {
+        controls.start({
+          y: -50,
+          opacity: 1,
+        });
+      }
+      setTriggeredOnce(true);
+    } else {
+      controls.start({
+        y: 0,
+      });
+    }
+  }, [inView, controls]);
+
   return (
-    <motion.section
-      ref={ref}
-      id="about"
-      className=""
-      whileInView="animate"
-      viewport={{
-        once: true,
-      }}
-      initial={{ y: 50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.175 }}
-    >
-      <main className="mb-[3rem] pt-[3rem] leading-8 tracking-wide">
-        <SectionHeading>About Me</SectionHeading>
-        <div>{paragraphContent}</div>
-      </main>
-    </motion.section>
+    <section ref={ref} id="about" className="">
+      <motion.div
+        className="py-[3rem]"
+        initial={{ opacity: 0 }}
+        animate={controls}
+      >
+        <main className="mb-[3rem] pt-[3rem] leading-8 tracking-wide">
+          <SectionHeading>About Me</SectionHeading>
+          <div>{paragraphContent}</div>
+        </main>
+      </motion.div>
+    </section>
   );
 }

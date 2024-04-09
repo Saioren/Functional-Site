@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { sendEmail } from "@/lib/sendEmail";
 import { motion } from "framer-motion";
 
-export default function SendEmailComponent() {
+export default function HomepageSendEmailComponent() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     senderEmail: "",
@@ -63,6 +63,9 @@ export default function SendEmailComponent() {
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
+        viewport={{
+          once: true,
+        }}
       ></motion.div>
       <form
         className=" flex flex-col justify-center items-center p-[1rem] gap-4"
@@ -71,8 +74,11 @@ export default function SendEmailComponent() {
         <motion.div
           className=" border border-black/10 rounded-md w-full shadow-md"
           initial={{ opacity: 0, y: -25 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
+          viewport={{
+            once: true,
+          }}
         >
           <input
             className="dark:bg-gray-700/60  outline-none w-full py-2 px-3"
@@ -85,29 +91,15 @@ export default function SendEmailComponent() {
             placeholder="Your email"
           />
         </motion.div>
+
         <motion.div
           className="border border-black/10 rounded-md w-full shadow-md"
           initial={{ opacity: 0, y: -25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <input
-            className="dark:bg-gray-700/60  outline-none w-full py-2 px-3"
-            name="recipient"
-            required
-            defaultValue="evan@keen-studio.com"
-            value={formData.recipient}
-            onChange={(e) => handleInputChange(e)}
-            type="email"
-            maxLength={500}
-            placeholder="Recipient"
-          />
-        </motion.div>
-        <motion.div
-          className="border border-black/10 rounded-md w-full shadow-md"
-          initial={{ opacity: 0, y: -25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          viewport={{
+            once: true,
+          }}
         >
           <input
             className="dark:bg-gray-700/60 outline-none w-full py-2 px-3"
@@ -124,8 +116,11 @@ export default function SendEmailComponent() {
         <motion.div
           className=" border border-black/10 rounded-md w-full max-h-[20rem] overflow-y-auto h-[12rem] shadow-md"
           initial={{ opacity: 0, y: -25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          viewport={{
+            once: true,
+          }}
         >
           <textarea
             className="dark:bg-gray-700/60 resize-none outline-none w-full py-2 px-3 h-full"
@@ -140,8 +135,11 @@ export default function SendEmailComponent() {
         <motion.div
           className="group absolute bottom-4 right-2 rounded-full"
           initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          viewport={{
+            once: true,
+          }}
         >
           <button
             type="submit"

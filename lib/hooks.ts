@@ -1,23 +1,37 @@
-'use client';
-
 import { useActiveSectionContext } from "@/context/ActiveSection";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { useEffect, useRef, useState } from "react";
 import type { SectionName } from "./types";
 
 export function useSectionInView(sectionName: SectionName, threshold = 0.75) {
-  const { ref, inView } = useInView({
-    threshold,
-  });
+  const [inView, setInView] = useState(false); 
   const { setActiveSection, timeOfLastClick } = useActiveSectionContext();
+  const ref = useRef(null);
+
+  const onIntersect = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && Date.now() - timeOfLastClick > 1000) {
+        setActiveSection(sectionName);
+      }
+      setInView(entry.isIntersecting);
+    });
+  };
+
+  const options = {
+    threshold: threshold
+  };
 
   useEffect(() => {
-    if (inView && Date.now() - timeOfLastClick > 1000) {
-      setActiveSection(sectionName);
+    const observer = new IntersectionObserver(onIntersect, options);
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-  }, [inView, setActiveSection, timeOfLastClick, sectionName]);
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref, options]);
 
   return {
     ref,
+    inView
   };
 }

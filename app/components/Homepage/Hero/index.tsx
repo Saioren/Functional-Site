@@ -59,6 +59,7 @@ export default function Hero() {
             setActiveSection("Contact");
             setTimeOfLastClick(Date.now());
           }}
+          paddingX={7}
           colorScheme={theme === "dark" ? "light" : "dark"}
           href={"#contact"}
           type="link"
@@ -66,6 +67,7 @@ export default function Hero() {
           buttonText="Contact me here"
         />
         <ButtonComponent
+          paddingX={7}
           colorScheme={theme === "dark" ? "dark" : "light"}
           href={"#contact"}
           type="link"

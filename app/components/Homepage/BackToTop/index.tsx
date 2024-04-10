@@ -7,7 +7,7 @@ import { useTheme } from "@/context/ThemeContext";
 export default function BackToTop() {
   const { theme } = useTheme();
   return (
-    <div className="flex pb-[2rem] flex-col w-100%">
+    <div className="flex pb-[1rem] flex-col w-100%">
       <ButtonComponent
         paddingX={3}
         image={React.createElement(FaArrowUp)}

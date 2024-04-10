@@ -61,7 +61,13 @@ export default function HomepageHeader() {
         className="top-0 sm:top-[1rem] flex items-center rounded-none h-[4.5rem]  dark:border-white/20 dark:bg-gray-850 dark:text-gray-50"
       >
         <Link className="sm:hidden block" href={"/"}>
-          <Image src="/favicon.ico" width={48} height={48} alt="logo" />
+          <Image
+            className={classes.logo}
+            src="/favicon.ico"
+            width={800}
+            height={800}
+            alt="logo"
+          />
         </Link>
         <ul className="hidden sm:flex gap-4 list-none">
           {homepageLinks.map((link, index) => (

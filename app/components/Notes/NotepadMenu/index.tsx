@@ -15,7 +15,7 @@ export default function NotepadMenu({}) {
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
     if (searchTerm === "") {
-      setFilteredNotes(notes); // Show all notes when searchTerm is empty
+      setFilteredNotes(notes);
     } else {
       const filtered = notes.filter((note) => note.title.includes(searchTerm));
       setFilteredNotes(filtered);

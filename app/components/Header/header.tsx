@@ -26,8 +26,6 @@ export default function Header() {
     setSettingClicked,
   } = useHeaderProviderContext();
 
-  console.log(activeSection);
-
   const handleModal: () => void = () => {
     if (!menu) {
       setMenu(true);

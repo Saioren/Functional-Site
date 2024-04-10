@@ -99,7 +99,7 @@ export default function UpdateNote() {
       <div
         className={`${
           theme === "dark" ? classes.darkHeader : classes.lightHeader
-        } p-3 w-full bg-gray-800 text-center relative`}
+        } p-3 w-full flex bg-gray-800 text-center relative z-10 flex-col`}
       >
         <FaAngleRight
           onClick={initCancelUpdate}

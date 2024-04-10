@@ -5,7 +5,7 @@ import SectionHeading from "../../Heading";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function About() {
-  const { ref, inView } = useSectionInView("About", 0.25);
+  const { ref, inView } = useSectionInView("About", 1);
   const { theme } = useTheme();
   const paragraphContent = `I love coding. It takes up most of my time now'adays. I'm a huge
   fitness and health enthusiast. I believe a healthy body contributes to

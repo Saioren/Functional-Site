@@ -315,6 +315,7 @@ export default function NotepadProvider({
     setTimeout(() => {
       setNoteSwap((prevState) => !prevState);
     }, 140);
+    console.log(noteSwap);
   };
 
   useEffect(() => {

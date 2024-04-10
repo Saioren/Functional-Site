@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 
 export default function Experience() {
   const [visible, setVisible] = useState(false);
-  const { ref } = useSectionInView("Experience", 0.35);
+  const { ref } = useSectionInView("Experience", 0.4);
   const { theme } = useTheme();
   return (
     <section ref={ref} id="experience" className="py-[3rem]">

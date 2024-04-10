@@ -26,6 +26,7 @@ export default function ReadNote({
     initRemove,
     setInitRemove,
     setReadNote,
+    setNoteSwap,
   } = useNotepadProviderContext();
   const createdAtDate = new Date(note.createdAt);
   const createdAtDateString = createdAtDate.toLocaleDateString();
@@ -50,6 +51,9 @@ export default function ReadNote({
       setReadNote(false);
       setNoteSwitch(false);
     }, 1000);
+    setTimeout(() => {
+      setNoteSwap((prevState) => !prevState);
+    }, 140);
   }
 
   return (

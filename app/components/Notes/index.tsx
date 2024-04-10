@@ -46,7 +46,7 @@ const NotesComponent = () => {
 
           {noteSwap && (
             <section
-              className={`${classes.cardFaceBack} ${classes.cardFace} flex w-full max-w-[50rem] h-full`}
+              className={`${classes.cardFaceBack} ${classes.cardFace} flex w-full max-w-[50rem] h-full sm:mb-[3rem] mb-[1rem] min-h-[7rem]`}
             >
               <NotepadMenu />
             </section>

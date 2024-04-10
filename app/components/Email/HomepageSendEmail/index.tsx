@@ -119,7 +119,7 @@ export default function HomepageSendEmailComponent() {
         </section>
         <section className="flex w-full h-full">
           <motion.div
-            className="flexborder border-black/10 w-full"
+            className="flex border border-black/10 w-full"
             initial={{ opacity: 0, y: -25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}

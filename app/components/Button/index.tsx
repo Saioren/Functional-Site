@@ -10,7 +10,7 @@ type ButtonProps = {
   image?: ReactElement;
   type: string;
   onClick?: React.MouseEventHandler;
-  paddingX?: number;
+  smallBtn?: boolean;
 };
 
 export default function ButtonComponent({
@@ -20,7 +20,7 @@ export default function ButtonComponent({
   image,
   type,
   onClick,
-  paddingX = 7,
+  smallBtn = false,
 }: ButtonProps) {
   const { theme } = useTheme();
   return type === "anchor" ? (
@@ -39,11 +39,11 @@ export default function ButtonComponent({
     </a>
   ) : (
     <Link
-      className={`group ${
+      className={`group ${smallBtn ? "px-3" : "px-7"} ${
         colorScheme === "dark"
           ? "bg-gray-900 text-white"
           : "bg-white text-gray-900"
-      } px-${paddingX} py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition dark:shadow-none shadow-md`}
+      } py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition dark:shadow-none shadow-md`}
       href={`${href}`}
     >
       <button className="flex items-center gap-2">

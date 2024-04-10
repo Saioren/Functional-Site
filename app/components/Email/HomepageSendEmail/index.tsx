@@ -73,67 +73,71 @@ export default function HomepageSendEmailComponent() {
         className=" flex flex-col justify-center items-center p-[1rem] gap-4"
         onSubmit={handleSubmit}
       >
-        <motion.div
-          className=" border border-black/10 rounded-md w-full shadow-md"
-          initial={{ opacity: 0, y: -25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          viewport={{
-            once: true,
-          }}
-        >
-          <input
-            className="dark:bg-gray-700/60  outline-none w-full py-2 px-3"
-            name="senderEmail"
-            value={formData.senderEmail}
-            onChange={(e) => handleInputChange(e)}
-            required
-            type="email"
-            maxLength={500}
-            placeholder="Your email"
-          />
-        </motion.div>
+        <section className="flex flex-col gap-4 w-full h-1/2">
+          <motion.div
+            className=" border border-black/10 rounded-md w-full shadow-md"
+            initial={{ opacity: 0, y: -25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            viewport={{
+              once: true,
+            }}
+          >
+            <input
+              className="dark:bg-gray-700/60  outline-none w-full py-2 px-3"
+              name="senderEmail"
+              value={formData.senderEmail}
+              onChange={(e) => handleInputChange(e)}
+              required
+              type="email"
+              maxLength={500}
+              placeholder="Your email"
+            />
+          </motion.div>
 
-        <motion.div
-          className="border border-black/10 rounded-md w-full shadow-md"
-          initial={{ opacity: 0, y: -25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          viewport={{
-            once: true,
-          }}
-        >
-          <input
-            className="dark:bg-gray-700/60 outline-none w-full py-2 px-3"
-            name="subjectData"
-            required
-            value={formData.subjectData}
-            onChange={(e) => handleInputChange(e)}
-            type="text"
-            maxLength={500}
-            placeholder="Subject"
-            disabled={loading}
-          />
-        </motion.div>
-        <motion.div
-          className=" border border-black/10  w-full max-h-[20rem] overflow-y-auto h-[12rem] shadow-md"
-          initial={{ opacity: 0, y: -25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          viewport={{
-            once: true,
-          }}
-        >
-          <textarea
-            className="dark:bg-gray-700/60 resize-none outline-none w-full py-2 px-3 h-full"
-            name="message"
-            value={formData.message}
-            onChange={(e) => handleInputChange(e)}
-            placeholder="Your message"
-            required
-            maxLength={5000}
-          />
-        </motion.div>
+          <motion.div
+            className="border border-black/10 rounded-md w-full shadow-md"
+            initial={{ opacity: 0, y: -25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            viewport={{
+              once: true,
+            }}
+          >
+            <input
+              className="dark:bg-gray-700/60 outline-none w-full py-2 px-3"
+              name="subjectData"
+              required
+              value={formData.subjectData}
+              onChange={(e) => handleInputChange(e)}
+              type="text"
+              maxLength={500}
+              placeholder="Subject"
+              disabled={loading}
+            />
+          </motion.div>
+        </section>
+        <section className="flex w-full h-full">
+          <motion.div
+            className="flexborder border-black/10 w-full"
+            initial={{ opacity: 0, y: -25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            viewport={{
+              once: true,
+            }}
+          >
+            <textarea
+              className="dark:bg-gray-700/60 shadow-md resize-none outline-none w-full py-2 px-3 h-full pb-[5rem]"
+              name="message"
+              value={formData.message}
+              onChange={(e) => handleInputChange(e)}
+              placeholder="Your message"
+              required
+              maxLength={5000}
+            />
+          </motion.div>
+        </section>
         <motion.div
           className="group absolute bottom-4 right-2 rounded-full"
           initial={{ opacity: 0, y: 25 }}

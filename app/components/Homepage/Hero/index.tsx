@@ -59,7 +59,6 @@ export default function Hero() {
             setActiveSection("Contact");
             setTimeOfLastClick(Date.now());
           }}
-          paddingX={7}
           colorScheme={theme === "dark" ? "light" : "dark"}
           href={"#contact"}
           type="link"
@@ -67,7 +66,6 @@ export default function Hero() {
           buttonText="Contact me here"
         />
         <ButtonComponent
-          paddingX={7}
           colorScheme={theme === "dark" ? "dark" : "light"}
           href={"#contact"}
           type="link"
@@ -76,12 +74,14 @@ export default function Hero() {
         />
         <div className="flex gap-8 sm:gap-4">
           <ButtonComponent
+            smallBtn={true}
             colorScheme="light"
             href={"https://github.com/Saioren"}
             type="anchor"
             image={React.createElement(FaGithub)}
           />
           <ButtonComponent
+            smallBtn={true}
             colorScheme="light"
             href={"https://www.linkedin.com/in/evan-mikrut-799190283/"}
             type="anchor"

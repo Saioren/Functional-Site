@@ -25,27 +25,9 @@ export default function HomepageHeader() {
     setActiveSetting,
     settingClicked,
     setSettingClicked,
+    handleModal,
+    handleSettings,
   } = useHeaderProviderContext();
-
-  console.log(activeSection);
-
-  const handleModal: () => void = () => {
-    if (!menu) {
-      setMenu(true);
-      setSettings(true);
-    } else {
-      setMenu(false);
-      setSettings(false);
-      setSettingClicked(false);
-    }
-  };
-
-  const handleSettings = (setting: string) => {
-    if (settings) {
-      setActiveSetting(setting);
-      setSettingClicked(true);
-    }
-  };
 
   return (
     <header className="z-[999] fixed top-0 flex w-full justify-between items-center px-6">
@@ -112,7 +94,7 @@ export default function HomepageHeader() {
         }}
         transition={{ delay: 0.5 }}
       >
-        <HamburgerIcon menu={menu} handleModal={handleModal} />
+        <HamburgerIcon />
       </motion.div>
       <AnimatePresence>
         {menu && (
@@ -128,12 +110,7 @@ export default function HomepageHeader() {
             exit={{ opacity: 0 }}
             className={`flex rounded-md absolute top-[5.5rem] right-[1rem] ml-[1rem] p-[2rem] dark:bg-gray-700/75 border border-black/5 bg-white/80 backdrop-blur-sm shadow-lg`}
           >
-            {settingClicked && (
-              <SettingsModal
-                activeSetting={activeSetting}
-                setActiveSetting={setActiveSetting}
-              />
-            )}
+            {settingClicked && <SettingsModal />}
             <div className="flex flex-col gap-3 items-center rounded-md font-semibold w-100% mb-5 last:mb-0">
               {menuItems.map((item, index) => (
                 <motion.div

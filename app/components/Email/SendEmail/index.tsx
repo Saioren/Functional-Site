@@ -97,7 +97,6 @@ export default function SendEmailComponent() {
             className="dark:bg-gray-700/60  outline-none w-full py-2 px-3"
             name="recipient"
             required
-            defaultValue="evan@keen-studio.com"
             value={formData.recipient}
             onChange={(e) => handleInputChange(e)}
             type="email"

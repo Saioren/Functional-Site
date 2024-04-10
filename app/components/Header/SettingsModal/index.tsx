@@ -1,17 +1,11 @@
 import React from "react";
 import { linkSettings, links } from "@/lib/data";
-import { languages } from "@/lib/data";
-import classes from "./index.module.scss";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+import { useHeaderProviderContext } from "@/context/HeaderProvider";
 
-type SettingsModalProps = {
-  activeSetting: string;
-  setActiveSetting: React.Dispatch<React.SetStateAction<string>>;
-};
-
-export default function SettingsModal({ activeSetting }: SettingsModalProps) {
+export default function SettingsModal() {
+  const { handleModal, activeSetting } = useHeaderProviderContext();
   return (
     <div className="rounded-md flex gap-3 -z-10 pr-10">
       {activeSetting === "Links" && (
@@ -67,21 +61,32 @@ export default function SettingsModal({ activeSetting }: SettingsModalProps) {
         </div>
       )}
       {activeSetting === "Settings" && (
-        <div className="max=w=[10rem]">No settings to show for now.</div>
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="max-w-[10rem]">No settings to show for now.</div>
+        </motion.div>
       )}
       {activeSetting === "Help" && (
-        <div className="max-w-[10rem] text-wrap">
-          Email{" "}
-          <a href="/email">
-            <span className="font-semibold">mikrutevan@gmail.com</span>
-          </a>{" "}
-          for any assistance needs.
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="max-w-[10rem] text-wrap">
+            Email{" "}
+            <a href="#contact">
+              <span className="font-semibold">mikrutevan@gmail.com</span>
+            </a>{" "}
+            for any assistance needs.
+          </div>
+        </motion.div>
       )}
       {activeSetting === "Pages" && (
         <div className="flex flex-col gap-3">
           {links.map((link, index) => (
             <motion.div
+              onClick={() => handleModal()}
               key={link.name}
               initial={{ y: 25, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}

@@ -8,7 +8,7 @@ import Skills from "./Skills";
 import Projects from "./Projects";
 import Experience from "./Experience";
 import Contact from "./Contact";
-import MaxWidth from "../MaxWidth";
+import MaxWidth from "../MaxWidth copy";
 import SpacerComponent from "./Spacer";
 import Footer from "../Footer";
 import BackToTop from "./BackToTop";

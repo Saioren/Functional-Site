@@ -1,7 +1,7 @@
 import React from "react";
 import SendEmailComponent from "./SendEmail";
 import EmailHero from "./EmailHero";
-import MaxWidth from "../MaxWidth";
+import MaxWidth from "../MaxWidth copy";
 
 export default function EmailComponent() {
   return (

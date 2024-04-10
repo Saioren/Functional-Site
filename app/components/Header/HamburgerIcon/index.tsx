@@ -1,12 +1,9 @@
 import React from "react";
 import classes from "./index.module.scss";
+import { useHeaderProviderContext } from "@/context/HeaderProvider";
 
-type HamburgerIconProps = {
-  menu: boolean;
-  handleModal: any;
-};
-
-export const HamburgerIcon = ({ menu, handleModal }: HamburgerIconProps) => {
+export const HamburgerIcon = () => {
+  const { handleModal, menu } = useHeaderProviderContext();
   return (
     <div className={`hover:scale-105 transition`}>
       <button

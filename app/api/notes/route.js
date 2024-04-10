@@ -1,12 +1,14 @@
 import { connectMongoDB } from '@/lib/mongodb';
-import Note from '@/models/note'
-import { NextResponse } from 'next/server'
+import Note from '@/models/note';
+import { NextResponse } from 'next/server';
+import corsMiddleware from '@/lib/corsMiddleware'
 
+// Export named functions for each HTTP method
 export async function POST(request) {
     const { title, body } = await request.json();
     await connectMongoDB();
     await Note.create({ title, body });
-    return NextResponse.json({ message: 'Note created' }, {status: 200});
+    return NextResponse.json({ message: 'Note created' }, { status: 200 });
 }
 
 export async function GET() {
@@ -19,5 +21,8 @@ export async function DELETE(request) {
     const id = request.nextUrl.searchParams.get('id')
     await connectMongoDB();
     await Note.findByIdAndDelete(id);
-    return NextResponse.json({ message: 'Note deleted' }, { status: 200});
+    return NextResponse.json({ message: 'Note deleted' }, { status: 200 });
 }
+
+// Apply CORS middleware to all routes
+export default corsMiddleware;

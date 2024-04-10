@@ -1,7 +1,10 @@
 import { connectMongoDB } from "../../../lib/mongodb";
 import Timer from "../../../models/timer";
 import { NextResponse } from 'next/server';
-import { startOfWeek, endOfWeek } from 'date-fns'; 
+import { startOfWeek, endOfWeek } from 'date-fns';
+import corsMiddleware from '@/lib/corsMiddleware'; // Import CORS middleware
+
+export default corsMiddleware;
 
 export async function GET() {
     await connectMongoDB();
@@ -18,7 +21,6 @@ export async function GET() {
     
     return NextResponse.json({ timers, totalWeeklyHours });
 }
-
 
 export async function POST(request) {
     const { hours, minutes, seconds, entryName, weeklyHours } = await request.json();

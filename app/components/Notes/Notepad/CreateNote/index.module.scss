@@ -28,8 +28,7 @@
     font-family: 'Patrick Hand', cursive;
   }
   
-  .lightPaper:before {
-    content: '';
+  .lightLine {
     position: absolute;
     bottom: 0 ;
     top: 0;
@@ -55,7 +54,7 @@
     font-family: 'Patrick Hand', cursive;
   }
   
-  .darkPaper:before {
+  .darkLine {
     content: '';
     position: absolute;
     bottom: 0 ;

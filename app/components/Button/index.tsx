@@ -1,3 +1,4 @@
+import { useTheme } from "@/context/ThemeContext";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 import { BsArrowRight } from "react-icons/bs";
@@ -9,6 +10,7 @@ type ButtonProps = {
   image?: ReactElement;
   type: string;
   onClick?: React.MouseEventHandler;
+  paddingX?: number;
 };
 
 export default function ButtonComponent({
@@ -18,7 +20,9 @@ export default function ButtonComponent({
   image,
   type,
   onClick,
+  paddingX = 7,
 }: ButtonProps) {
+  const { theme } = useTheme();
   return type === "anchor" ? (
     <a
       target="_blank"
@@ -26,7 +30,7 @@ export default function ButtonComponent({
         colorScheme === "dark"
           ? "bg-gray-900 text-white"
           : "bg-white text-gray-900"
-      } px-3 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition`}
+      } px-3 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition dark:shadow-none shadow-md`}
       href={`${href}`}
     >
       <button className="flex items-center gap-2">
@@ -39,7 +43,7 @@ export default function ButtonComponent({
         colorScheme === "dark"
           ? "bg-gray-900 text-white"
           : "bg-white text-gray-900"
-      } px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition`}
+      } px-${paddingX} py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition dark:shadow-none shadow-md`}
       href={`${href}`}
     >
       <button className="flex items-center gap-2">

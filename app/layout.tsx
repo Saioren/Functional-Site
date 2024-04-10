@@ -17,6 +17,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Saioren.io",
+  icons: "/sigh.svg",
 };
 
 export default function RootLayout({

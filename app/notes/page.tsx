@@ -1,13 +1,16 @@
 import React from "react";
 import NotesComponent from "../components/Notes";
 import NotepadProvider from "@/context/NotepadProvider";
+import MaxWidth from "../components/MaxWidth";
+import { Toaster } from "react-hot-toast";
 
 export default function Notes() {
   return (
     <NotepadProvider>
-      <main className="flex w-full justify-center">
+      <MaxWidth>
+        <Toaster position="top-center" />
         <NotesComponent />
-      </main>
+      </MaxWidth>
     </NotepadProvider>
   );
 }

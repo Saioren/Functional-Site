@@ -14,33 +14,43 @@ const NotesComponent = () => {
   const { theme } = useTheme();
   const router = useRouter();
 
-  const { notes, loading, openNotes, setOpenNotes, handleNoteSwap } =
-    useNotepadProviderContext();
+  const {
+    notes,
+    loading,
+    openNotes,
+    setOpenNotes,
+    handleNoteSwap,
+    noteSwap,
+    setNoteSwap,
+  } = useNotepadProviderContext();
 
   return (
-    <main className="p-[2rem] pt-[5rem] relative w-full flex justify-center">
-      <div>
-        <Toaster position="top-center" />
-      </div>
+    <main className="pt-[3rem] flex w-full">
       <motion.div
         initial={{ opacity: 0, y: -60 }}
         animate={{ opacity: 1, y: 0 }}
+        className="flex w-full"
       >
         <div
           className={`${classes.notePadInner} ${
             openNotes ? classes.isFlipped : ""
-          } flex justify-center items-center`}
+          }  items-center flex w-full justify-center`}
         >
-          <section
-            className={`${classes.cardFaceFront} ${classes.cardFace} max-h-[39.75rem] flex justify-center w-[50rem] min-h-[15rem] max-w-[50rem] top-0`}
-          >
-            <Notepad />
-          </section>
-          <section
-            className={`max-h-[39.75rem] flex justify-center w-[50rem] max-w-[50rem] top-0 ${classes.cardFaceBack} ${classes.cardFace}`}
-          >
-            <NotepadMenu />
-          </section>
+          {!noteSwap && (
+            <section
+              className={`${classes.cardFaceFront} ${classes.cardFace} flex w-full max-w-[50rem]`}
+            >
+              <Notepad />
+            </section>
+          )}
+
+          {noteSwap && (
+            <section
+              className={`${classes.cardFaceBack} ${classes.cardFace} flex w-full max-w-[50rem]`}
+            >
+              <NotepadMenu />
+            </section>
+          )}
         </div>
       </motion.div>
     </main>

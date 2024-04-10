@@ -21,13 +21,12 @@ export default function CreateNote() {
       onSubmit={() => handleSaveNote}
       className={`${
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
-      } overflow-hidden w-full flex flex-col`}
-      style={{ maxHeight: "calc(100vh - 2rem)" }}
+      } overflow-hidden w-full h-full flex flex-col`}
     >
       <div
         className={`${
           theme === "dark" ? classes.darkHeader : classes.lightHeader
-        } p-3 w-full bg-gray-800 text-center relative`}
+        } p-3 w-full flex bg-gray-800 text-center relative z-10 flex-col`}
       >
         <FaAngleRight
           onClick={handleNoteSwap}
@@ -37,14 +36,19 @@ export default function CreateNote() {
         <p>Track your notes here.</p>
       </div>
       {/* Content editable div with event handler */}
-      <div
-        id="writingSpace"
-        className={`${
-          theme === "dark" ? classes.darkPaper : classes.lightPaper
-        } flex-grow relative outline-none py-0 pl-[4rem] text-wrap overflow-auto w-full`}
-        contentEditable={true}
-        onInput={handleContentChange}
-      ></div>
+      <section className="flex w-full h-full">
+        <div
+          id="writingSpace"
+          className={`${
+            theme === "dark" ? classes.darkPaper : classes.lightPaper
+          } flex-grow relative outline-none py-0 pl-[4rem] text-wrap overflow-scroll flex w-full`}
+          contentEditable={true}
+          onInput={handleContentChange}
+        ></div>
+        <div
+          className={theme === "light" ? classes.lightLine : classes.darkLine}
+        />
+      </section>
       <div className="group absolute bottom-2 right-2 rounded-full">
         <button
           onClick={(e) => initSaveNote(e)}

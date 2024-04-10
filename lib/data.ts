@@ -8,6 +8,7 @@ import timetableImg from '@/public/darkTimetable.png'
 import darkSaioren from '@/public/darkSaioren.png'
 import lightSaioren from '@/public/lightSaioren.png'
 import keenImage from '@/public/keen.png'
+import coursesImage from '@/public/courses.png'
 
 export const links = [
     {
@@ -78,8 +79,8 @@ export const homepageLinks = [
       description:
         "I've taken multiple in-depth 10-20 hour courses for each language of interest. I am confident in my abilities to code in Javascript, and anything related.",
       tags: ["React", "TypeScript", "Javascript", "CSS", "HTML"],
-      darkImageUrl: darkSaioren,
-      lightImageUrl: lightSaioren,
+      darkImageUrl: coursesImage,
+      lightImageUrl: coursesImage,
     },
     {
       title: "Saioren.io",

@@ -12,12 +12,12 @@ import MaxWidth from "../MaxWidth";
 import SpacerComponent from "./Spacer";
 import Footer from "../Footer";
 import { Toaster } from "react-hot-toast";
+import BackToTop from "./BackToTop";
 
 export default function Homepage() {
   return (
     <MaxWidth>
       <div className="text-center flex flex-col w-full items-center justify-center pt-[2rem]">
-        <Toaster />
         <Hero />
         <SpacerComponent />
         <About />
@@ -25,6 +25,7 @@ export default function Homepage() {
         <Skills />
         <Experience />
         <Contact />
+        <BackToTop />
       </div>
     </MaxWidth>
   );

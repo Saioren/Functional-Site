@@ -41,7 +41,7 @@ export default function NotepadMenu({}) {
     <div
       className={`${
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
-      } flex overflow-hidden flex-col max-w-[50rem] w-full`}
+      } flex overflow-hidden flex-col w-full`}
     >
       {!readNote && (
         <FaAngleRight

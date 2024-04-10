@@ -10,7 +10,7 @@ export default function HomepageSendEmailComponent() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     senderEmail: "",
-    recipient: "",
+    recipient: "mikrutevan@gmail.com",
     subjectData: "",
     message: "",
   });
@@ -28,10 +28,12 @@ export default function HomepageSendEmailComponent() {
       formDataToSend.append("message", formData.message);
 
       await sendEmail(formDataToSend);
+      toast.dismiss();
       toast.success("Email sent!");
       clearFormData();
     } catch (error) {
       setLoading(false);
+      toast.dismiss();
       toast.error("Uh oh! Email was not sent!");
     } finally {
       setLoading(false);
@@ -114,7 +116,7 @@ export default function HomepageSendEmailComponent() {
           />
         </motion.div>
         <motion.div
-          className=" border border-black/10 rounded-md w-full max-h-[20rem] overflow-y-auto h-[12rem] shadow-md"
+          className=" border border-black/10  w-full max-h-[20rem] overflow-y-auto h-[12rem] shadow-md"
           initial={{ opacity: 0, y: -25 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}

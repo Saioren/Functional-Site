@@ -8,11 +8,13 @@ import { HiDownload } from "react-icons/hi";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
 import { useActiveSectionContext } from "@/context/ActiveSection";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function Hero() {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
   const { ref } = useSectionInView("Home", 0.5);
+  const { theme } = useTheme();
   return (
     <motion.div
       ref={ref}
@@ -26,7 +28,7 @@ export default function Hero() {
         y: 0,
       }}
       transition={{
-        delay: 0.1,
+        delay: 0.2,
       }}
       className="flex flex-col justify-center text-center items-center"
     >
@@ -41,8 +43,15 @@ export default function Hero() {
         <span className={classes.saioren}>
           Hello! I am <span className="font-semibold">Evan</span>!{" "}
         </span>
-        I&apos;m a 22 year old programmer, who uses Typescript among many other
-        things. I set expectations high and strive to be the best I can.
+        I&apos;m a 22 year old programmer, who's partial to coding in
+        <a
+          className="group"
+          href="https://www.typescriptlang.org/"
+          target="_blank"
+        >
+          <span className="dark:text-blue-400 text-blue-700"> Typescript</span>
+        </a>
+        . I set expectations high and strive to be the best I can.
       </p>
       <div className="flex gap-4 items-center sm:flex-row flex-col">
         <ButtonComponent
@@ -50,20 +59,20 @@ export default function Hero() {
             setActiveSection("Contact");
             setTimeOfLastClick(Date.now());
           }}
-          colorScheme="dark"
+          colorScheme={theme === "dark" ? "light" : "dark"}
           href={"#contact"}
           type="link"
           image={React.createElement(BsArrowRight)}
           buttonText="Contact me here"
         />
         <ButtonComponent
-          colorScheme="light"
+          colorScheme={theme === "dark" ? "dark" : "light"}
           href={"#contact"}
           type="link"
           image={React.createElement(HiDownload)}
-          buttonText="Download my CV"
+          buttonText="Download Resumé"
         />
-        <div className="flex gap-8">
+        <div className="flex gap-8 sm:gap-4">
           <ButtonComponent
             colorScheme="light"
             href={"https://github.com/Saioren"}

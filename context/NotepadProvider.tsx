@@ -68,6 +68,8 @@ type NotepadContextType = {
   handleSearchNotes: (e: string) => void;
   notFound: boolean;
   setNotFound: React.Dispatch<React.SetStateAction<boolean>>;
+  noteSwap: boolean;
+  setNoteSwap: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const defaultNotepadContext: NotepadContextType = {
@@ -117,6 +119,8 @@ const defaultNotepadContext: NotepadContextType = {
   handleSearchNotes: () => {},
   notFound: false,
   setNotFound: () => {},
+  noteSwap: false,
+  setNoteSwap: () => {},
 };
 
 export const NotepadContext = createContext<NotepadContextType>(
@@ -144,6 +148,7 @@ export default function NotepadProvider({
   const [clickedNoteId, setClickedNoteId] = useState<string>(" ");
   const [searchTerm, setSearchTerm] = useState("");
   const [notFound, setNotFound] = useState(false);
+  const [noteSwap, setNoteSwap] = useState(false);
 
   const router = useRouter();
 
@@ -307,6 +312,9 @@ export default function NotepadProvider({
   const handleNoteSwap = () => {
     setOpenNotes((prevState) => !prevState);
     setNoteSwitch((prevState) => !prevState);
+    setTimeout(() => {
+      setNoteSwap((prevState) => !prevState);
+    }, 140);
   };
 
   useEffect(() => {
@@ -379,6 +387,8 @@ export default function NotepadProvider({
         setNewTitle,
         setNewBody,
         handleSearchNotes,
+        noteSwap,
+        setNoteSwap,
       }}
     >
       {children}

@@ -28,10 +28,12 @@ export default function SendEmailComponent() {
       formDataToSend.append("message", formData.message);
 
       await sendEmail(formDataToSend);
+      toast.dismiss();
       toast.success("Email sent!");
       clearFormData();
     } catch (error) {
       setLoading(false);
+      toast.dismiss();
       toast.error("Uh oh! Email was not sent!");
     } finally {
       setLoading(false);

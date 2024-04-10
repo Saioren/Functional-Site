@@ -51,17 +51,33 @@ export default function Header() {
       <motion.nav
         initial={{
           opacity: 0,
-          scale: 0.8,
+          y: -15,
         }}
         animate={{
           opacity: 1,
-          scale: 1,
+          y: 0,
         }}
+        transition={{ delay: 0.5 }}
         className="top-0 sm:top-[1rem] flex items-center rounded-none h-[4.5rem]  dark:border-white/20 dark:bg-gray-850 dark:text-gray-50"
       >
-        <Link className="sm:hidden block" href={"/"}>
-          <Image src="/favicon.ico" width={48} height={48} alt="logo" />
-        </Link>
+        <motion.div
+          initial={{ x: -25, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <Link
+            className="sm:hidden block hover:translate-x-10 transition"
+            href={"/"}
+          >
+            <Image
+              src="/sigh.svg"
+              width={60}
+              height={60}
+              alt="logo"
+              className={classes.logo}
+            />
+          </Link>
+        </motion.div>
         <ul className="hidden sm:flex gap-4 list-none">
           {homepageLinks.map((link, index) => (
             <li key={link.name}>
@@ -97,12 +113,13 @@ export default function Header() {
       <motion.div
         initial={{
           opacity: 0,
-          scale: 0.8,
+          y: -15,
         }}
         animate={{
           opacity: 1,
-          scale: 1,
+          y: 0,
         }}
+        transition={{ delay: 0.5 }}
       >
         <HamburgerIcon menu={menu} handleModal={handleModal} />
       </motion.div>

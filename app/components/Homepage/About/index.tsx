@@ -5,10 +5,8 @@ import SectionHeading from "../../Heading";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function About() {
-  const { ref, inView } = useSectionInView("About", 0.4);
-  const [triggeredOnce, setTriggeredOnce] = useState(false);
+  const { ref, inView } = useSectionInView("About", 0.25);
   const { theme } = useTheme();
-  const controls = useAnimation();
   const paragraphContent = `I love coding. It takes up most of my time now'adays. I'm a huge
   fitness and health enthusiast. I believe a healthy body contributes to
   a wealth of good that people don't take seriously enough. A big part
@@ -18,28 +16,13 @@ export default function About() {
   and studied in school, only to pick it back up a little over a year
   ago. And anime is my jam. Specifically comedy / shonen.`;
 
-  useEffect(() => {
-    if (inView) {
-      if (!triggeredOnce) {
-        controls.start({
-          y: -50,
-          opacity: 1,
-        });
-      }
-      setTriggeredOnce(true);
-    } else {
-      controls.start({
-        y: 0,
-      });
-    }
-  }, [inView, controls]);
-
   return (
-    <section ref={ref} id="about" className="">
+    <section ref={ref} id="about">
       <motion.div
-        className="py-[3rem]"
+        className="pt-[3rem]"
         initial={{ opacity: 0 }}
-        animate={controls}
+        whileInView={{ opacity: 1 }}
+        transition={{ once: true }}
       >
         <main className="mb-[3rem] pt-[3rem] leading-8 tracking-wide">
           <SectionHeading>About Me</SectionHeading>

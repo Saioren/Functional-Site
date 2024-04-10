@@ -121,6 +121,8 @@ export default function UpdateNote() {
       >
         {note ? note.body : ""}
       </div>
+      <div className={classes.darkLine} />
+      <div className={classes.lightLine} />
 
       <div className="group absolute bottom-2 right-2 rounded-full">
         <button

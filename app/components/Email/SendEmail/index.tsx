@@ -124,13 +124,13 @@ export default function SendEmailComponent() {
           />
         </motion.div>
         <motion.div
-          className=" border border-black/10 w-full max-h-[20rem]  h-[12rem]"
+          className="flex border border-black/10 w-full max-h-[20rem]  h-[12rem]"
           initial={{ opacity: 0, y: -25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
           <textarea
-            className="resize-none outline-none w-full py-2 px-3 dark:bg-gray-700/60 shadow-md"
+            className="resize-none outline-none w-full flex py-2 px-3 dark:bg-gray-700/60 shadow-md"
             name="message"
             value={formData.message}
             onChange={(e) => handleInputChange(e)}

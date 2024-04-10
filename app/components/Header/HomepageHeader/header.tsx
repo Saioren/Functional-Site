@@ -149,7 +149,7 @@ export default function HomepageHeader() {
                   transition={{ delay: 0.09 * index }}
                 >
                   <div
-                    className={`cursor-pointer w-100% flex flex-row-reverse items-center gap-1 transition ${
+                    className={` w-100% flex flex-row-reverse items-center gap-1 transition ${
                       classes[item.color]
                     } hover:scale-110 active:scale-105`}
                     onClick={() => handleSettings(item.name)}

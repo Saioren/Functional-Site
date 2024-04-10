@@ -66,7 +66,7 @@ export default function Header() {
           transition={{ delay: 0.5 }}
         >
           <Link
-            className="sm:hidden block hover:translate-x-10 transition"
+            className="sm:hidden block hover:scale-110 active:scale-105 transition"
             href={"/"}
           >
             <Image

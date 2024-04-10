@@ -56,8 +56,8 @@ export default function Header() {
           >
             <Image
               src="/sigh.svg"
-              width={58}
-              height={58}
+              width={800}
+              height={800}
               alt="logo"
               className={classes.logo}
             />

@@ -2,9 +2,6 @@ import { connectMongoDB } from "../../../lib/mongodb";
 import Timer from "../../../models/timer";
 import { NextResponse } from 'next/server';
 import { startOfWeek, endOfWeek } from 'date-fns';
-import corsMiddleware from '@/lib/corsMiddleware'; // Import CORS middleware
-
-export default corsMiddleware;
 
 export async function GET() {
     await connectMongoDB();

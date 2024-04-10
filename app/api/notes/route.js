@@ -1,9 +1,7 @@
 import { connectMongoDB } from '@/lib/mongodb';
 import Note from '@/models/note';
 import { NextResponse } from 'next/server';
-import corsMiddleware from '@/lib/corsMiddleware'
 
-// Export named functions for each HTTP method
 export async function POST(request) {
     const { title, body } = await request.json();
     await connectMongoDB();
@@ -23,6 +21,3 @@ export async function DELETE(request) {
     await Note.findByIdAndDelete(id);
     return NextResponse.json({ message: 'Note deleted' }, { status: 200 });
 }
-
-// Apply CORS middleware to all routes
-export default corsMiddleware;

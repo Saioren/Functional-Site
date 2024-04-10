@@ -11,7 +11,6 @@ import Contact from "./Contact";
 import MaxWidth from "../MaxWidth";
 import SpacerComponent from "./Spacer";
 import Footer from "../Footer";
-import { Toaster } from "react-hot-toast";
 import BackToTop from "./BackToTop";
 
 export default function Homepage() {

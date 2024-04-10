@@ -25,20 +25,20 @@ const NotesComponent = () => {
   } = useNotepadProviderContext();
 
   return (
-    <main className="pt-[3rem] flex w-full">
+    <main className="flex w-full h-full">
       <motion.div
         initial={{ opacity: 0, y: -60 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex w-full"
+        className="flex w-full h-full"
       >
         <div
           className={`${classes.notePadInner} ${
             openNotes ? classes.isFlipped : ""
-          }  items-center flex w-full justify-center`}
+          }  items-center flex w-full justify-center max-h-[50rem]  pt-[3rem]`}
         >
           {!noteSwap && (
             <section
-              className={`${classes.cardFaceFront} ${classes.cardFace} flex w-full max-w-[50rem]`}
+              className={`${classes.cardFaceFront} ${classes.cardFace} flex w-full max-w-[50rem] h-full sm:mb-[3rem] mb-[1rem] min-h-[7rem]`}
             >
               <Notepad />
             </section>
@@ -46,7 +46,7 @@ const NotesComponent = () => {
 
           {noteSwap && (
             <section
-              className={`${classes.cardFaceBack} ${classes.cardFace} flex w-full max-w-[50rem]`}
+              className={`${classes.cardFaceBack} ${classes.cardFace} flex w-full max-w-[50rem] h-full`}
             >
               <NotepadMenu />
             </section>

@@ -95,7 +95,6 @@ export default function UpdateNote() {
       className={`${
         theme === "dark" ? classes.darkNotepad : classes.lightNotepad
       } overflow-hidden w-full flex flex-col`}
-      style={{ maxHeight: "calc(100vh - 2rem)" }}
     >
       <div
         className={`${

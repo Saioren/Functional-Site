@@ -14,11 +14,9 @@
 
 .cardFaceFront {
   z-index: 2;
-  height: calc(80vh - 24px);
 }
 
 .cardFaceBack {
   transform: rotateY(180deg);
   z-index: 1; 
-  height: calc(80vh - 24px); 
 }

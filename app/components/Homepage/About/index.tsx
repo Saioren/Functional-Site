@@ -19,7 +19,7 @@ export default function About() {
   return (
     <section ref={ref} id="about">
       <motion.div
-        className="pt-[3rem]"
+        className=""
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ once: true }}

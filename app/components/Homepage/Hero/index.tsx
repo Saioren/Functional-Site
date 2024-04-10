@@ -43,7 +43,7 @@ export default function Hero() {
         <span className={classes.saioren}>
           Hello! I am <span className="font-semibold">Evan</span>!{" "}
         </span>
-        I&apos;m a 22 year old programmer, who's partial to coding in
+        I&apos;m a 22 year old programmer, who&apos;s partial to coding in
         <a
           className="group"
           href="https://www.typescriptlang.org/"

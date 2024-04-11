@@ -2,11 +2,6 @@ import { connectMongoDB } from "@/lib/mongodb";
 import Note from '@/models/note';
 import { NextResponse } from 'next/server';
 
-// Define a function to set CORS headers
-function setCorsHeaders(res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.saioren.io');
-  // You can also set other CORS headers like Access-Control-Allow-Methods, etc.
-}
 
 export async function PUT(request, { params }) {
     const { id } = params;
@@ -25,9 +20,8 @@ export async function PUT(request, { params }) {
 }
 
 
-export async function GET(request, response, { params }) {
-    // Set CORS headers
-    setCorsHeaders(response);
+export async function GET(request, { params }) {
+
 
     const { id } = params;
     try {

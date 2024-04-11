@@ -3,15 +3,7 @@ import Timer from "../../../models/timer";
 import { NextResponse } from 'next/server';
 import { startOfWeek, endOfWeek } from 'date-fns';
 
-// Define a function to set CORS headers
-function setCorsHeaders(res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.saioren.io');
-  // You can also set other CORS headers like Access-Control-Allow-Methods, etc.
-}
-
-export async function GET(request, response) {
-    // Set CORS headers
-    setCorsHeaders(response);
+export async function GET() {
 
     await connectMongoDB();
     
@@ -28,9 +20,7 @@ export async function GET(request, response) {
     return NextResponse.json({ timers, totalWeeklyHours });
 }
 
-export async function POST(request, response) {
-    // Set CORS headers
-    setCorsHeaders(response);
+export async function POST(request) {
 
     const { hours, minutes, seconds, entryName, weeklyHours } = await request.json();
     await connectMongoDB();
@@ -49,9 +39,7 @@ export async function POST(request, response) {
     return NextResponse.json({ message: 'Timer created' }, { status: 200 });
 }
 
-export async function DELETE(request, response) {
-    // Set CORS headers
-    setCorsHeaders(response);
+export async function DELETE(request) {
 
     const id = request.nextUrl.searchParams.get('id');
     await connectMongoDB();

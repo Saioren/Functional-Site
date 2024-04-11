@@ -160,19 +160,22 @@ export default function TimetableProvider({
       handlePause();
       toast.loading("Clocking out...");
       // Save the timer data to the timers collection
-      const res = await fetch("http://saioren.io/api/timers", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          hours,
-          minutes,
-          seconds,
-          weeklyHours,
-          entryName,
-        }),
-      });
+      const res = await fetch(
+        "https://cryptic-headland-94862.herokuapp.com/https://example.comhttps://saioren.io/api/timers",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            hours,
+            minutes,
+            seconds,
+            weeklyHours,
+            entryName,
+          }),
+        }
+      );
 
       if (res.ok) {
         // Calculate stopped time in seconds
@@ -199,9 +202,12 @@ export default function TimetableProvider({
   useEffect(() => {
     const fetchTimer = async () => {
       try {
-        const res = await fetch("http://saioren.io/api/timers", {
-          cache: "no-store",
-        });
+        const res = await fetch(
+          "https://cryptic-headland-94862.herokuapp.com/https://saioren.io/api/timers",
+          {
+            cache: "no-store",
+          }
+        );
         if (!res.ok) {
           throw new Error("Failed to fetch timers");
         }

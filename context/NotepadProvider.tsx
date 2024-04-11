@@ -263,7 +263,7 @@ export default function NotepadProvider({
 
     try {
       toast.loading("Saving note...");
-      const res = await fetch("https://localhost:3000/api/notes", {
+      const res = await fetch("http://localhost:3000/api/notes", {
         mode: "no-cors",
         method: "POST",
         headers: {
@@ -322,7 +322,7 @@ export default function NotepadProvider({
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await fetch("https://localhost:3000/api/notes", {
+        const res = await fetch("http://localhost:3000/api/notes", {
           mode: "no-cors",
           cache: "no-store",
         });

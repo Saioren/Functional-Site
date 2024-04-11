@@ -22,7 +22,9 @@ export default function About() {
         className=""
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ once: true }}
+        viewport={{
+          once: true,
+        }}
       >
         <main className="mb-[3rem] pt-[3rem] leading-8 tracking-wide">
           <SectionHeading>About Me</SectionHeading>

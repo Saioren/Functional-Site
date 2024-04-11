@@ -160,7 +160,7 @@ export default function TimetableProvider({
       handlePause();
       toast.loading("Clocking out...");
       // Save the timer data to the timers collection
-      const res = await fetch(`http://${process.env.API_ENDPOINT}/api/timers`, {
+      const res = await fetch(`https://159.203.150.175/api/timers`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -199,12 +199,9 @@ export default function TimetableProvider({
   useEffect(() => {
     const fetchTimer = async () => {
       try {
-        const res = await fetch(
-          `http://${process.env.API_ENDPOINT}/api/timers`,
-          {
-            cache: "no-store",
-          }
-        );
+        const res = await fetch(`https://159.203.150.175/api/timers`, {
+          cache: "no-store",
+        });
         if (!res.ok) {
           throw new Error("Failed to fetch timers");
         }

@@ -264,6 +264,7 @@ export default function NotepadProvider({
     try {
       toast.loading("Saving note...");
       const res = await fetch("https://saioren.io/api/notes", {
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -322,6 +323,7 @@ export default function NotepadProvider({
     const fetchNotes = async () => {
       try {
         const res = await fetch("https://saioren.io/api/notes", {
+          mode: "no-cors",
           cache: "no-store",
         });
         if (!res.ok) {

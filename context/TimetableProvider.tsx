@@ -161,6 +161,7 @@ export default function TimetableProvider({
       toast.loading("Clocking out...");
       // Save the timer data to the timers collection
       const res = await fetch("https://saioren.io/api/timers", {
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -200,6 +201,7 @@ export default function TimetableProvider({
     const fetchTimer = async () => {
       try {
         const res = await fetch("https://saioren.io/api/timers", {
+          mode: "no-cors",
           cache: "no-store",
         });
         if (!res.ok) {

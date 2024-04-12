@@ -46,8 +46,8 @@ export default function Header() {
         className="top-0 sm:top-[1rem] flex items-center rounded-none h-[4.5rem]  dark:border-white/20 dark:bg-gray-850 dark:text-gray-50"
       >
         <motion.div
-          initial={{ x: -25, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
           <Link
@@ -55,7 +55,7 @@ export default function Header() {
             href={"/"}
           >
             <Image
-              src="/sigh.svg"
+              src="/sigh.png"
               width="2000"
               height="2000"
               alt="logo"

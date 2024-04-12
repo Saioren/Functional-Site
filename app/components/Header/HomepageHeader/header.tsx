@@ -45,9 +45,9 @@ export default function HomepageHeader() {
         <Link className="sm:hidden block" href={"/"}>
           <Image
             className={classes.logo}
-            src="/favicon.ico"
-            width={800}
-            height={800}
+            src="/sigh.svg"
+            width="800"
+            height="800"
             alt="logo"
           />
         </Link>

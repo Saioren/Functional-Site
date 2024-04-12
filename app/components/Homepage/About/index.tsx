@@ -28,7 +28,9 @@ export default function About() {
       >
         <main className="mb-[3rem] pt-[3rem] leading-8 tracking-wide">
           <SectionHeading>About Me</SectionHeading>
-          <div>{paragraphContent}</div>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+            <div>{paragraphContent}</div>
+          </motion.div>
         </main>
       </motion.div>
     </section>

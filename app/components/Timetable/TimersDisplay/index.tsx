@@ -9,6 +9,7 @@ import {
   useTimetableContextProvider,
 } from "@/context/TimetableProvider";
 import { format } from "date-fns";
+import classes from "./index.module.scss";
 
 type TimersDisplayProps = {
   timer: TimerType;
@@ -69,23 +70,36 @@ export default function TimersDisplay({ timer, index }: TimersDisplayProps) {
   };
 
   return timer ? (
-    <div className="flex border border-black/10 rounded-md transition w-full mb-4 last:ml-4">
-      <div className="flex relative justify-between rounded-md transition bg-white dark:bg-gray-700/60 h-full w-full  p-[1rem] shadow-lg ">
-        <div className="flex gap-4">
+    <div className="flex border  border-black/10 rounded-md transition w-full mb-4 sm:last:ml-4">
+      <div
+        className={`flex relative sm:flex-row flex-col gap-4 items-center sm:justify-between justify-start rounded-md transition bg-white dark:bg-gray-700/60 h-full w-full p-[1rem] shadow-lg`}
+      >
+        <div className={`${classes.columnsMid}  flex gap-4`}>
           {timer.entryName && (
-            <div>{timer.entryName ? timer.entryName : ""}</div>
+            <div
+              className={`flex xl:max-w-[9.5rem] break-normal break-words break-all sm:max-w-[16rem] w-full`}
+            >
+              {timer.entryName ? timer.entryName : ""}
+            </div>
           )}
-          <div>{formattedDate}</div>
-          <div>{createdAtTimeString}</div>
+          <div className="flex sm:flex-row flex-col gap-4">
+            <div>{formattedDate}</div>
+            <div>{createdAtTimeString}</div>
+          </div>
         </div>
         <section className=" flex gap-4 items-center">
-          <div>
-            <h2>{timer.hours === 0 ? "" : timer.hours + " hours"}</h2>
-          </div>
+          {timer.hours !== 0 && (
+            <div>
+              <h2>{timer.hours === 0 ? "" : timer.hours + " hours"}</h2>
+            </div>
+          )}
 
-          <div>
-            <h2>{timer.minutes === 0 ? "" : timer.minutes + " minutes"}</h2>
-          </div>
+          {timer.minutes !== 0 && (
+            <div>
+              <h2>{timer.minutes === 0 ? "" : timer.minutes + " minutes"}</h2>
+            </div>
+          )}
+
           <div>
             <h2>{timer.seconds} seconds</h2>
           </div>

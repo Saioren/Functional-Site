@@ -160,7 +160,7 @@ export default function TimetableProvider({
       handlePause();
       toast.loading("Clocking out...");
       // Save the timer data to the timers collection
-      const res = await fetch(`https://saioren.io/api/timers`, {
+      const res = await fetch(`http://localhost:3000/api/timers`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -181,6 +181,7 @@ export default function TimetableProvider({
         setEntryName(entryName);
         // Update weekly hours
         toast.dismiss();
+        router.refresh();
         toast.success("Nice work!");
       } else {
         throw new Error("Failed to save time!");
@@ -189,7 +190,6 @@ export default function TimetableProvider({
       console.log(error);
     } finally {
       handleStop();
-      router.refresh();
       setTimeout(() => {
         toast.dismiss();
       }, 4000);
@@ -199,7 +199,8 @@ export default function TimetableProvider({
   useEffect(() => {
     const fetchTimer = async () => {
       try {
-        const res = await fetch(`https://saioren.io/api/timers`, {
+        const res = await fetch(`http://localhost:3000/api/timers`, {
+          mode: "no-cors",
           cache: "no-store",
         });
         if (!res.ok) {

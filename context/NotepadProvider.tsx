@@ -263,7 +263,7 @@ export default function NotepadProvider({
 
     try {
       toast.loading("Saving note...");
-      const res = await fetch(`https://saioren.io/api/notes`, {
+      const res = await fetch(`http://localhost:3000/api/notes`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -321,7 +321,7 @@ export default function NotepadProvider({
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await fetch(`https://saioren.io/api/notes`, {
+        const res = await fetch(`http://localhost:3000/api/notes`, {
           cache: "no-store",
         });
         if (!res.ok) {

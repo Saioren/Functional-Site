@@ -17,8 +17,8 @@ export default function Stopwatch({}) {
   } = useTimetableContextProvider();
 
   return (
-    <section className="flex w-full h-full justify-between gap-4">
-      <section className="flex w-full items-center">
+    <section className="flex flex-col md:flex-row justify-center md:justify-between gap-4">
+      <section className="flex items-center justify-center">
         <input
           className="pl-4 bg-white shadow-lg dark:bg-gray-600/20 p-[0.5rem] rounded-full outline-none hover:scale-110 active:scale-105 transition border border-black/10"
           placeholder="Name your task"
@@ -26,7 +26,7 @@ export default function Stopwatch({}) {
           value={entryName}
         ></input>
       </section>
-      <section className="flex h-full items-center gap-8">
+      <section className="flex items-center gap-4 sm:gap-8 justify-center sm:flex-row flex-col">
         <div className="flex gap-4 justify-center items-center text-lg">
           <div>
             <motion.div

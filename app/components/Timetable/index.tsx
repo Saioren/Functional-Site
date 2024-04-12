@@ -68,7 +68,7 @@ export default function Timetable() {
         animate={{ y: 0, opacity: 1 }}
         className=" bg-white shadow-lg dark:bg-gray-600/20 rounded-md p-[2rem] flex gap-4 w-full flex-col"
       >
-        <div>
+        <div className="flex justify-center sm:justify-start">
           <h2>Previous time periods:</h2>
         </div>
         <div className="flex flex-wrap w-full">
@@ -76,7 +76,7 @@ export default function Timetable() {
             ? timers.map((timer, index) => (
                 <motion.div
                   key={index}
-                  className="flex w-1/2"
+                  className="flex xl:w-1/2 w-full"
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * index }}

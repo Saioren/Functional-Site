@@ -61,98 +61,104 @@ export default function SendEmailComponent() {
   }
 
   return (
-    <section className="relative w-full flex flex-col dark:bg-gray-600/20 backdrop-blur-sm bg-white border border-black/10 shadow-lg rounded-md pb-[4rem]">
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-      ></motion.div>
-      <form
-        className=" flex flex-col justify-center items-center p-[1rem] gap-4"
-        onSubmit={handleSubmit}
-      >
+    <motion.div
+      className="w-full flex"
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+    >
+      <section className="relative w-full flex flex-col dark:bg-gray-600/20 backdrop-blur-sm bg-white border border-black/10 shadow-lg rounded-md pb-[4rem]">
         <motion.div
-          className=" border border-black/10 rounded-md w-full shadow-md"
-          initial={{ opacity: 0, y: -25 }}
+          initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+        ></motion.div>
+        <form
+          className=" flex flex-col justify-center items-center p-[1rem] gap-4"
+          onSubmit={handleSubmit}
         >
-          <input
-            className="dark:bg-gray-700/60  outline-none w-full py-2 px-3"
-            name="senderEmail"
-            value={formData.senderEmail}
-            onChange={(e) => handleInputChange(e)}
-            required
-            type="email"
-            maxLength={500}
-            placeholder="Your email"
-          />
-        </motion.div>
-        <motion.div
-          className="border border-black/10 rounded-md w-full shadow-md"
-          initial={{ opacity: 0, y: -25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <input
-            className="dark:bg-gray-700/60  outline-none w-full py-2 px-3"
-            name="recipient"
-            required
-            value={formData.recipient}
-            onChange={(e) => handleInputChange(e)}
-            type="email"
-            maxLength={500}
-            placeholder="Recipient"
-          />
-        </motion.div>
-        <motion.div
-          className="border border-black/10 rounded-md w-full shadow-md"
-          initial={{ opacity: 0, y: -25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <input
-            className="dark:bg-gray-700/60 outline-none w-full py-2 px-3"
-            name="subjectData"
-            required
-            value={formData.subjectData}
-            onChange={(e) => handleInputChange(e)}
-            type="text"
-            maxLength={500}
-            placeholder="Subject"
-            disabled={loading}
-          />
-        </motion.div>
-        <motion.div
-          className="flex border border-black/10 w-full max-h-[20rem]  h-[12rem]"
-          initial={{ opacity: 0, y: -25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <textarea
-            className="resize-none outline-none w-full flex py-2 px-3 dark:bg-gray-700/60 shadow-md"
-            name="message"
-            value={formData.message}
-            onChange={(e) => handleInputChange(e)}
-            placeholder="Your message"
-            required
-            maxLength={5000}
-          />
-        </motion.div>
-        <motion.div
-          className="group absolute bottom-4 right-2 rounded-full"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <button
-            type="submit"
-            className="flex items-center bg-white backdrop-blur-sm shadow-md border border-black/10 dark:border-white/10 gap-2 dark:bg-slate-700/60 py-3 px-4 rounded-full group-hover:scale-110 dark:text-bg-gray-100 dark:group-hover:text-bg-white group-active:scale-105 transition"
+          <motion.div
+            className=" border border-black/10 rounded-md w-full shadow-md"
+            initial={{ opacity: 0, y: -25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
           >
-            Submit
-            <FaPaperPlane className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
-          </button>
-        </motion.div>
-      </form>
-    </section>
+            <input
+              className="dark:bg-gray-700/60  outline-none w-full py-2 px-3"
+              name="senderEmail"
+              value={formData.senderEmail}
+              onChange={(e) => handleInputChange(e)}
+              required
+              type="email"
+              maxLength={500}
+              placeholder="Your email"
+            />
+          </motion.div>
+          <motion.div
+            className="border border-black/10 rounded-md w-full shadow-md"
+            initial={{ opacity: 0, y: -25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <input
+              className="dark:bg-gray-700/60  outline-none w-full py-2 px-3"
+              name="recipient"
+              required
+              value={formData.recipient}
+              onChange={(e) => handleInputChange(e)}
+              type="email"
+              maxLength={500}
+              placeholder="Recipient"
+            />
+          </motion.div>
+          <motion.div
+            className="border border-black/10 rounded-md w-full shadow-md"
+            initial={{ opacity: 0, y: -25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <input
+              className="dark:bg-gray-700/60 outline-none w-full py-2 px-3"
+              name="subjectData"
+              required
+              value={formData.subjectData}
+              onChange={(e) => handleInputChange(e)}
+              type="text"
+              maxLength={500}
+              placeholder="Subject"
+              disabled={loading}
+            />
+          </motion.div>
+          <motion.div
+            className="flex border border-black/10 w-full max-h-[20rem]  h-[12rem]"
+            initial={{ opacity: 0, y: -25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <textarea
+              className="resize-none outline-none w-full flex py-2 px-3 dark:bg-gray-700/60 shadow-md"
+              name="message"
+              value={formData.message}
+              onChange={(e) => handleInputChange(e)}
+              placeholder="Your message"
+              required
+              maxLength={5000}
+            />
+          </motion.div>
+          <motion.div
+            className="group absolute bottom-4 right-2 rounded-full"
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <button
+              type="submit"
+              className="flex items-center bg-white backdrop-blur-sm shadow-md border border-black/10 dark:border-white/10 gap-2 dark:bg-slate-700/60 py-3 px-4 rounded-full group-hover:scale-110 dark:text-bg-gray-100 dark:group-hover:text-bg-white group-active:scale-105 transition"
+            >
+              Submit
+              <FaPaperPlane className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
+            </button>
+          </motion.div>
+        </form>
+      </section>
+    </motion.div>
   );
 }

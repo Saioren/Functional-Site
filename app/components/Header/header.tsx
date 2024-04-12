@@ -56,10 +56,10 @@ export default function Header() {
           >
             <Image
               src="/sigh.svg"
-              width="800"
-              height="800"
+              width="2000"
+              height="2000"
               alt="logo"
-              className={classes.logo}
+              className={`${classes.logo} w-[3rem]`}
             />
           </Link>
         </motion.div>

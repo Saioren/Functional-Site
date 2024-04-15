@@ -2,21 +2,6 @@ import { connectMongoDB } from "../../../lib/mongodb";
 import Timer from "../../../models/timer";
 import { NextResponse } from 'next/server';
 import { startOfWeek, endOfWeek } from 'date-fns';
-import cors from '../cors'
-
-export default async function handler(req, res) {
-    cors(req, res);
-  
-    if (req.method === 'POST') {
-      return POST(req);
-    } else if (req.method === 'GET') {
-      return GET(req);
-    } else if (req.method === 'DELETE') {
-      return DELETE(req);
-    } else {
-      return NextResponse.error(new Error('Unsupported HTTP method'));
-    }
-  }
 
 export async function GET() {
 
@@ -35,9 +20,9 @@ export async function GET() {
     return NextResponse.json({ timers, totalWeeklyHours });
 }
 
-export async function POST(req) {
+export async function POST(request) {
 
-    const { hours, minutes, seconds, entryName, weeklyHours } = await req.json();
+    const { hours, minutes, seconds, entryName, weeklyHours } = await request.json();
     await connectMongoDB();
     const totalHours = await Timer.aggregate([
         {
@@ -54,9 +39,9 @@ export async function POST(req) {
     return NextResponse.json({ message: 'Timer created' }, { status: 200 });
 }
 
-export async function DELETE(req) {
+export async function DELETE(request) {
 
-    const id = req.nextUrl.searchParams.get('id');
+    const id = request.nextUrl.searchParams.get('id');
     await connectMongoDB();
     await Timer.findByIdAndDelete(id);
     return NextResponse.json({ message: 'Timer deleted' }, { status: 200 });

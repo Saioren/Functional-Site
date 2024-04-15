@@ -150,6 +150,8 @@ export default function NotepadProvider({
   const [notFound, setNotFound] = useState(false);
   const [noteSwap, setNoteSwap] = useState(false);
 
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/notes`;
+
   const router = useRouter();
 
   const { theme } = useTheme();
@@ -263,7 +265,7 @@ export default function NotepadProvider({
 
     try {
       toast.loading("Saving note...");
-      const res = await fetch(`http://localhost:3000/api/notes`, {
+      const res = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -272,7 +274,6 @@ export default function NotepadProvider({
       });
       if (res.ok) {
         toast.dismiss();
-        router.refresh();
         toast.success("Note saved successfully!");
       } else {
         throw new Error("Failed to create note");
@@ -315,13 +316,12 @@ export default function NotepadProvider({
     setTimeout(() => {
       setNoteSwap((prevState) => !prevState);
     }, 140);
-    console.log(noteSwap);
   };
 
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/notes`, {
+        const res = await fetch(apiUrl, {
           cache: "no-store",
         });
         if (!res.ok) {

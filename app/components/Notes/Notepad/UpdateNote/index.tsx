@@ -87,8 +87,6 @@ export default function UpdateNote() {
 
   const note = notes.find((note) => note._id === clickedNoteId);
 
-  console.log("title:", newTitle, "body:", newBody, note?._id);
-
   return (
     <form
       onSubmit={handleUpdateNote}

@@ -96,6 +96,7 @@ export type TimerType = {
 export default function TimetableProvider({
   children,
 }: TimetableContextProviderProps) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/timers`;
   const [weeklyHours, setWeeklyHours] = useState(0);
   const [started, setStarted] = useState(false);
   const [pause, setPause] = useState(() => {
@@ -160,7 +161,7 @@ export default function TimetableProvider({
       handlePause();
       toast.loading("Clocking out...");
       // Save the timer data to the timers collection
-      const res = await fetch(`http://localhost:3000/api/timers`, {
+      const res = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -199,8 +200,7 @@ export default function TimetableProvider({
   useEffect(() => {
     const fetchTimer = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/timers`, {
-          mode: "no-cors",
+        const res = await fetch(apiUrl, {
           cache: "no-store",
         });
         if (!res.ok) {

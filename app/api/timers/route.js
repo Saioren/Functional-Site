@@ -2,6 +2,21 @@ import { connectMongoDB } from "../../../lib/mongodb";
 import Timer from "../../../models/timer";
 import { NextResponse } from 'next/server';
 import { startOfWeek, endOfWeek } from 'date-fns';
+import cors from '../cors'
+
+export default async function handler(request, response) {
+    cors(request, response);
+  
+    if (request.method === 'POST') {
+      return POST(request);
+    } else if (request.method === 'GET') {
+      return GET(request);
+    } else if (request.method === 'DELETE') {
+      return DELETE(request);
+    } else {
+      return NextResponse.error(new Error('Unsupported HTTP method'));
+    }
+  }
 
 export async function GET() {
 

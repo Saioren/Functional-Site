@@ -13,7 +13,7 @@ export default function BackToTop() {
       viewport={{ once: true }}
       transition={{ delay: 0.2 }}
     >
-      <div className="flex sm:pb-[2rem] pb-[1rem] flex-col w-100%">
+      <div className="flex sm:pb-[1rem] pb-[3rem] flex-col w-100%">
         <ButtonComponent
           smallBtn={true}
           image={React.createElement(FaArrowUp)}

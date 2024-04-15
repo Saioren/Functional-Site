@@ -41,7 +41,7 @@ export default function CreateNote() {
           id="writingSpace"
           className={`${
             theme === "dark" ? classes.darkPaper : classes.lightPaper
-          } flex-grow relative outline-none py-0 pl-[4rem] text-wrap overflow-scroll flex w-full`}
+          } relative outline-none py-0 pl-[4rem] text-wrap overflow-scroll  w-full`}
           contentEditable={true}
           onInput={handleContentChange}
         ></div>

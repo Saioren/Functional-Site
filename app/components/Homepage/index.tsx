@@ -25,6 +25,7 @@ export default function Homepage() {
         <Experience />
         <Contact />
         <BackToTop />
+        {/*<Footer />*/}
       </div>
     </MaxWidth>
   );

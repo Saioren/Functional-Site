@@ -97,7 +97,7 @@ export const homepageLinks = [
       title: "Humble Beginnings",
       location: "Grand Rapids, MI",
       description:
-        "I started small, mastering CSS & HTML first. Shortly after, I learned the ins and outs of Javascript and React.",
+        "I started small, learning CSS & HTML first. Shortly after, I delved into Javascript and React.",
       icon: React.createElement(FaReact),
       date: "Jun 2023",
     },
@@ -105,7 +105,7 @@ export const homepageLinks = [
       title: "Leveling Up",
       location: "Grand Rapids, MI",
       description:
-        "I began learning Typescript, Next.js & Node.js. Scaling up to a real developer now.",
+        "I began learning Typescript, Next.js & Node.js. These bolstered my abilities greatly.",
       icon: React.createElement(FaNodeJs),
       date: "Jan 2024",
     },
@@ -113,7 +113,7 @@ export const homepageLinks = [
       title: "Keen Studio Intern",
       location: "Grand Rapids, MI",
       description:
-        "I'm slowly becoming proficient at frontend and backend developing in Javascript. Whether it be Next.js, Node.js, or a headless CMS.",
+        "I'm slowly becoming proficient at front & backend development in Javascript.  From Next.js to MongoDB.",
       icon: React.createElement(FaCode),
       date: "Feb 2024 - present",
     },

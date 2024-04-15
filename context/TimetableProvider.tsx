@@ -96,7 +96,7 @@ export type TimerType = {
 export default function TimetableProvider({
   children,
 }: TimetableContextProviderProps) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/timers`;
+  const apiUrl = "/api/timers";
   const [weeklyHours, setWeeklyHours] = useState(0);
   const [started, setStarted] = useState(false);
   const [pause, setPause] = useState(() => {

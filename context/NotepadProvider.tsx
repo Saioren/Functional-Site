@@ -150,7 +150,7 @@ export default function NotepadProvider({
   const [notFound, setNotFound] = useState(false);
   const [noteSwap, setNoteSwap] = useState(false);
 
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/notes`;
+  const apiUrl = "/api/notes";
 
   const router = useRouter();
 

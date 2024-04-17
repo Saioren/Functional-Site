@@ -4,7 +4,6 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "./ThemeContext";
 import toast from "react-hot-toast";
-import fetch from "node-fetch";
 
 export type Note = {
   _id: string;
@@ -277,8 +276,7 @@ export default function NotepadProvider({
         toast.dismiss();
         toast.success("Note saved successfully!");
       } else {
-        const errorText = await res.text();
-        throw new Error(`Failed to create note: ${res.status} - ${errorText}`);
+        throw new Error("Failed to create note");
       }
     } catch (error) {
       console.log(error);

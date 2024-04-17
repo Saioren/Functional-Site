@@ -65,13 +65,13 @@ export default function Hero() {
           image={React.createElement(BsArrowRight)}
           buttonText="Contact me here"
         />
-        <ButtonComponent
+        {/*<ButtonComponent
           colorScheme={theme === "dark" ? "dark" : "light"}
           href={"#contact"}
           type="link"
           image={React.createElement(HiDownload)}
           buttonText="Download Resumé"
-        />
+        />*/}
         <div className="flex gap-8 sm:gap-4">
           <ButtonComponent
             smallBtn={true}

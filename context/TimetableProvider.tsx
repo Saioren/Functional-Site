@@ -5,6 +5,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTheme } from "./ThemeContext";
 import Timer from "@/models/timer";
+import fetch from "node-fetch";
 type TimetableContextProviderProps = {
   children: React.ReactNode;
 };

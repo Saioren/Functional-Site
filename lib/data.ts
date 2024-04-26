@@ -4,10 +4,9 @@ import { BsBook, BsClipboard2, BsClock, BsEnvelope, BsFillCalendar2DayFill, BsHo
 import { DiCss3, DiGithubBadge, DiHtml5, DiJavascript, DiMongodb, DiNodejsSmall, DiReact, DiSass } from "react-icons/di"
 import { FaCode, FaFacebook, FaGlobeAmericas, FaLinkedinIn, FaNodeJs, FaReact } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
-import timetableImg from '@/public/darkTimetable.png'
 import darkSaioren from '@/public/darkSaioren.png'
 import lightSaioren from '@/public/lightSaioren.png'
-import keenImage from '@/public/keen.png'
+import keenImage from '@/public/evan.png'
 import coursesImage from '@/public/courses.png'
 
 export const links = [
@@ -70,7 +69,7 @@ export const homepageLinks = [
       title: "Keen Studio",
       description:
         "I work as a programmer at Keen Studio. With experienced professionals around me, I challenge myself everyday.",
-      tags: ["React", "Next.js", "MongoDB", "Payload CMS", "Node.js"],
+      tags: ["React", "Next.js", "Wordpress", "Payload CMS"],
       darkImageUrl: keenImage,
       lightImageUrl: keenImage,
     },

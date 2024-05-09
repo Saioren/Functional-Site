@@ -29,7 +29,35 @@ export default function About() {
         <main className="mb-[3rem] pt-[3rem] leading-8 tracking-wide">
           <SectionHeading>About Me</SectionHeading>
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
-            <div>{paragraphContent}</div>
+            <div>
+              I'm a{" "}
+              <span className="text-blue-500 font-semibold dark:text-purple-500">
+                programmer🖥️
+              </span>
+              ! I'm currently working toward becoming a full-fledged developer,
+              and I get closer every day. People would call me{" "}
+              <span className="font-semibold text-orange-500 dark:text-red-400">
+                persistent
+              </span>{" "}
+              and{" "}
+              <span className="font-semibold text-green-500 dark:text-yellow-400">
+                curious
+              </span>
+              , which I think are two of my strongest qualities. I'm also a huge{" "}
+              <span className="dark:text-green-400 text-purple-800">
+                health💪
+              </span>{" "}
+              advocate, and care about my wellbeing{" "}
+              <span className="font-semibold">&#x28;a lot&#x29;</span>. I play{" "}
+              <span className="font-semibold">piano🎹</span> and speak{" "}
+              <span className="text-pink-600 dark:text-pink-300">
+                Japanese⛩️
+              </span>{" "}
+              among a multitude of other things I love to do.{" "}
+              <span className="font-bold underline underline-offset-2">
+                <a href="#contact">Let's talk!</a>
+              </span>
+            </div>
           </motion.div>
         </main>
       </motion.div>

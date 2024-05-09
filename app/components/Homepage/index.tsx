@@ -15,18 +15,20 @@ import BackToTop from "./BackToTop";
 
 export default function Homepage() {
   return (
-    <MaxWidth>
-      <div className="text-center flex flex-col w-full items-center justify-center pt-[2rem]">
-        <Hero />
-        <SpacerComponent />
-        <About />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Contact />
-        <BackToTop />
-        {/*<Footer />*/}
-      </div>
-    </MaxWidth>
+    <>
+      <MaxWidth>
+        <div className="text-center flex flex-col w-full items-center justify-center pt-[2rem] pb-[8rem]">
+          <Hero />
+          <SpacerComponent />
+          <About />
+          <Projects />
+          <Skills />
+          <Experience />
+          <Contact />
+          <BackToTop />
+        </div>
+      </MaxWidth>
+      <Footer />
+    </>
   );
 }

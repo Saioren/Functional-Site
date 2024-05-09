@@ -4,10 +4,6 @@ import { BsBook, BsClipboard2, BsClock, BsEnvelope, BsFillCalendar2DayFill, BsHo
 import { DiCss3, DiGithubBadge, DiHtml5, DiJavascript, DiMongodb, DiNodejsSmall, DiReact, DiSass } from "react-icons/di"
 import { FaCode, FaFacebook, FaGlobeAmericas, FaLinkedinIn, FaNodeJs, FaReact } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
-import darkSaioren from '@/public/darkSaioren.png'
-import lightSaioren from '@/public/lightSaioren.png'
-import keenImage from '@/public/evan.png'
-import coursesImage from '@/public/courses.png'
 
 export const links = [
     {
@@ -69,25 +65,33 @@ export const homepageLinks = [
       title: "Keen Studio",
       description:
         "I work as a programmer at Keen Studio. With experienced professionals around me, I challenge myself everyday.",
-      tags: ["React", "Next.js", "Wordpress", "Payload CMS"],
-      darkImageUrl: keenImage,
-      lightImageUrl: keenImage,
+      tags: ["React", "Next.js", "Wordpress", "Payload CMS", "HubSpot"],
+      name: 'keen',
+      projectHref: 'https://keen-studio.com/'
     },
     {
-      title: "Coding Courses",
+      title: "Biologos",
       description:
-        "I've taken multiple in-depth 10-20 hour courses for each language of interest. I am confident in my abilities to code in Javascript, and anything related.",
-      tags: ["React", "TypeScript", "Javascript", "CSS", "HTML"],
-      darkImageUrl: coursesImage,
-      lightImageUrl: coursesImage,
+        "I implemented a robust breadcrumbs feature for Biologos that will help users navigate the site with ease.",
+      tags: ["Next.js", "TypeScript", "Javascript", "Payload CMS"],
+      name: 'biologos',
+      projectHref: 'https://biologos.org/'
     },
     {
-      title: "Saioren.io",
+      title: "Mathison Architects",
       description:
-        "Welcome to my first live site. If you're curious about more of my projects, check out my GitHub.",
-      tags: ["React", "Next.js", "Framer", "Tailwind", "MongoDB"],
-      darkImageUrl: darkSaioren,
-      lightImageUrl: lightSaioren,
+        "I re-did the filtering, fetching, and loading logic for the Mathison Architect projects page, making it fast and efficient.",
+      tags: ["Next.js", "MongoDB", "React", "Typescript"],
+      name: 'mathison',
+      projectHref: 'https://www.mathisonarchitects.com/'
+    },
+    {
+      title: "Emerson HC",
+      description:
+        "I developed custom coded HTML email templates as well as HubSpot templates for Emerson Human Capital.",
+      tags: ["HTML", "HubSpot", "CSS"],
+      name: 'emerson',
+      projectHref: 'https://www.emersonhc.com/'
     },
   ] as const;
 
@@ -101,10 +105,10 @@ export const homepageLinks = [
       date: "Jun 2023",
     },
     {
-      title: "Leveling Up",
+      title: "The Next Step",
       location: "Grand Rapids, MI",
       description:
-        "I began learning Typescript, Next.js & Node.js. These bolstered my abilities greatly.",
+        "I dove into the world of Next.js, Payload, and Node.js.",
       icon: React.createElement(FaNodeJs),
       date: "Jan 2024",
     },
@@ -112,7 +116,7 @@ export const homepageLinks = [
       title: "Keen Studio Intern",
       location: "Grand Rapids, MI",
       description:
-        "I'm slowly becoming proficient at front & backend development in Javascript.  From Next.js to MongoDB.",
+        "My time at Keen has been extremely beneficial to me. Being exposed to real-world problems will set me apart from other young developers.",
       icon: React.createElement(FaCode),
       date: "Feb 2024 - present",
     },
@@ -248,6 +252,12 @@ export const linkSettings = [
             href: 'https://sass-lang.com/',
             color: 'red',
         },
+        {
+          name: 'HubSpot',
+          icon:  '/hubspot.png',
+          href: 'https://www.hubspot.com/',
+          color: 'orange',
+      },
         {
             name: 'Node.JS',
             icon:  React.createElement(DiNodejsSmall, {size: 20}),

@@ -59,7 +59,6 @@ export default function About() {
                 <a href="#contact">Let&apos;s talk!</a>
               </span>
             </div>
-            ;
           </motion.div>
         </main>
       </motion.div>

@@ -100,25 +100,25 @@ export const homepageLinks = [
       title: "Humble Beginnings",
       location: "Grand Rapids, MI",
       description:
-        "I started small, learning CSS & HTML first. Shortly after, I delved into Javascript and React.",
+        "I decided to code one day, learning HTML, CSS, Javascript & React fundamentals over the course of 2023.",
       icon: React.createElement(FaReact),
       date: "Jun 2023",
-    },
-    {
-      title: "The Next Step",
-      location: "Grand Rapids, MI",
-      description:
-        "I dove into the world of Next.js, Payload, and Node.js.",
-      icon: React.createElement(FaNodeJs),
-      date: "Jan 2024",
     },
     {
       title: "Keen Studio Intern",
       location: "Grand Rapids, MI",
       description:
         "My time at Keen has been extremely beneficial to me. Being exposed to real-world problems will set me apart from other young developers.",
+      icon: React.createElement(FaNodeJs),
+      date: "Feb 2024 - May 2024",
+    },
+    {
+      title: "Junior Developer",
+      location: "Grand Rapids, MI",
+      description:
+        "I've taken what I learned thus far and propelled my way into a full-time position at Keen, developing and coding anything and everything.",
       icon: React.createElement(FaCode),
-      date: "Feb 2024 - present",
+      date: "May 2024 - present",
     },
   ] as const;
 

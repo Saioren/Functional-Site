@@ -36,7 +36,7 @@ export default function Hero() {
         <div className="md:hidden flex justify-center relative">
           <Image
             className="shadow-lg border-white rounded-md sm:w-300 sm:h-300 h-200px w-200px"
-            src="/NewPfp.png"
+            src="/NewPfp.jpg"
             alt="My profile image"
             width={200}
             height={200}
@@ -119,7 +119,7 @@ export default function Hero() {
           <div className="relative">
             <Image
               className="shadow-lg border-white rounded-md"
-              src="/NewPfp.png"
+              src="/NewPfp.jpg"
               alt="My profile image"
               width={300}
               height={300}

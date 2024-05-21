@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 //import MouseTrail from "./components/MouseTrail/MouseTrail";
 import { useRouter } from "next/navigation";
 import Header from "./components/Header/header";
+import { auth } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +21,12 @@ export const metadata: Metadata = {
   icons: "/sigh.png",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="en" className="!scroll-smooth">
       <body
@@ -36,7 +38,7 @@ export default function RootLayout({
           <ActiveSectionContextProvider>
             <TimetableProvider>
               <HeaderProvider>
-                <Header />
+                <Header session={session} />
                 {children}
                 <HandleTitle />
                 <MiniStopwatch />

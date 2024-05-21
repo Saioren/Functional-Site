@@ -3,6 +3,7 @@ import { linkSettings, links } from "@/lib/data";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useHeaderProviderContext } from "@/context/HeaderProvider";
+import { auth } from "@/lib/auth";
 
 export default function SettingsModal() {
   const { handleModal, activeSetting } = useHeaderProviderContext();

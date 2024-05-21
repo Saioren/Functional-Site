@@ -11,8 +11,9 @@ import Image from "next/image";
 import { useHeaderProviderContext } from "@/context/HeaderProvider";
 import SettingsModal from "./SettingsModal";
 import classes from "./index.module.scss";
+import { handleLogout } from "@/lib/actions";
 
-export default function Header() {
+export default function Header({ session }) {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
   const {
@@ -149,6 +150,13 @@ export default function Header() {
                     </div>
                   </motion.div>
                 ))}
+                {session?.user ? (
+                  <form action={handleLogout}>
+                    <button className={classes.logout}>Logout</button>
+                  </form>
+                ) : (
+                  <Link href="/login">Login</Link>
+                )}
               </div>
             </motion.div>
           )}

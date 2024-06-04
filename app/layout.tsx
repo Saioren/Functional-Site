@@ -8,11 +8,11 @@ import HeaderProvider from "@/context/HeaderProvider";
 import TimetableProvider from "@/context/TimetableProvider";
 import MiniStopwatch from "./components/Timetable/MiniStopwatch";
 import HandleTitle from "./components/HandleTitle";
-import Footer from "./components/Footer";
 //import MouseTrail from "./components/MouseTrail/MouseTrail";
-import { useRouter } from "next/navigation";
 import Header from "./components/Header/header";
 import { auth } from "@/lib/auth";
+import SessionProvider, { SessionType } from "@/context/SessionProvider";
+import { Session } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
+  const session: SessionType | null = await auth();
   return (
     <html lang="en" className="!scroll-smooth">
       <body
@@ -34,19 +34,21 @@ export default async function RootLayout({
       >
         <div className="bg-[#ffd6d8] absolute top-[-6rem] -z-10 right-[2rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263] dark:bg-opacity-10" />
         <div className="bg-[#d7d3fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#676394] dark:bg-opacity-20" />
-        <ThemeContextProvider>
-          <ActiveSectionContextProvider>
-            <TimetableProvider>
-              <HeaderProvider>
-                <Header session={session} />
-                {children}
-                <HandleTitle />
-                <MiniStopwatch />
-                <ThemeSwitch />
-              </HeaderProvider>
-            </TimetableProvider>
-          </ActiveSectionContextProvider>
-        </ThemeContextProvider>
+        <SessionProvider session={session}>
+          <ThemeContextProvider>
+            <ActiveSectionContextProvider>
+              <TimetableProvider>
+                <HeaderProvider>
+                  <Header />
+                  {children}
+                  <HandleTitle />
+                  <MiniStopwatch />
+                  <ThemeSwitch />
+                </HeaderProvider>
+              </TimetableProvider>
+            </ActiveSectionContextProvider>
+          </ThemeContextProvider>
+        </SessionProvider>
       </body>
     </html>
   );

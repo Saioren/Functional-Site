@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import IndividualNote from "./IndividualNote";
 import { Note, useNotepadProviderContext } from "@/context/NotepadProvider";
 import { useTheme } from "@/context/ThemeContext";
+import { useSessionContext } from "@/context/SessionProvider";
+import Link from "next/link";
 
 export default function NotepadMenu({}) {
   const { theme } = useTheme();
@@ -32,6 +34,8 @@ export default function NotepadMenu({}) {
     handleNoteSwap,
     handleSearchNotes,
   } = useNotepadProviderContext();
+
+  const { session } = useSessionContext();
 
   useEffect(() => {
     setFilteredNotes(notes);
@@ -86,8 +90,23 @@ export default function NotepadMenu({}) {
                     <IndividualNote note={note} index={index} />
                   </div>
                 ))}
-              {loading && <h2>Loading notes...</h2>}
-              {!loading && notes.length === 0 && (
+              {!session && (
+                <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full">
+                  <motion.div className="flex items-center justify-center h-full w-full">
+                    <div className="flex flex-col gap-2 text-center bg-white/80 shadow-md dark:bg-gray-700/60 px-[1rem] py-[2rem] rounded-md">
+                      <h2 className="text-xl">
+                        Login{" "}
+                        <Link href="/login" className="font-semibold">
+                          here
+                        </Link>{" "}
+                        to see & create notes!
+                      </h2>
+                    </div>
+                  </motion.div>
+                </div>
+              )}
+              {session && loading && <h2>Loading notes...</h2>}
+              {session && !loading && notes.length === 0 && (
                 <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full">
                   <motion.div className="flex items-center justify-center h-full w-full">
                     <div className="flex flex-col gap-2 text-center bg-white/80 shadow-md dark:bg-gray-700/60 px-[1rem] py-[2rem] rounded-md">

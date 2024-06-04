@@ -26,6 +26,12 @@ type HeaderContextType = {
   setSettingClicked: React.Dispatch<React.SetStateAction<boolean>>;
   handleModal: () => void;
   handleSettings: (e: string) => void;
+  loggingIn: boolean;
+  setLoggingIn: React.Dispatch<React.SetStateAction<boolean>>;
+  loggingSuccess: boolean;
+  setLoggingSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  loggingError: boolean;
+  setLoggingError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const HeaderContext = createContext<HeaderContextType | null>(null);
@@ -37,6 +43,9 @@ export default function HeaderProvider({
   const [settings, setSettings] = useState(false);
   const [settingClicked, setSettingClicked] = useState(false);
   const [activeSetting, setActiveSetting] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
+  const [loggingSuccess, setLoggingSuccess] = useState(false);
+  const [loggingError, setLoggingError] = useState(false);
 
   const elementRef = useRef(null);
   const [dropdownMenu, setDropdownMenu] = useState(false);
@@ -99,6 +108,12 @@ export default function HeaderProvider({
         settingClicked,
         handleSettings,
         handleModal,
+        loggingIn,
+        setLoggingIn,
+        loggingSuccess,
+        setLoggingSuccess,
+        loggingError,
+        setLoggingError,
       }}
     >
       {children}

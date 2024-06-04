@@ -34,11 +34,11 @@ const NotesComponent = () => {
         <div
           className={`${classes.notePadInner} ${
             openNotes ? classes.isFlipped : ""
-          }  items-center flex w-full justify-center max-h-[50rem]  pt-[3rem]`}
+          }  items-center flex w-full justify-center max-h-[50rem] pt-[3rem]`}
         >
           {!noteSwap && (
             <section
-              className={`${classes.cardFaceFront} ${classes.cardFace} flex w-full max-w-[50rem] h-full sm:mb-[3rem] mb-[1rem] min-h-[7rem]`}
+              className={`${classes.cardFaceFront} ${classes.cardFace} flex w-full max-w-[50rem] h-full sm:mb-[3rem] mb-[1rem] min-h-[15rem]`}
             >
               <Notepad />
             </section>
@@ -46,7 +46,7 @@ const NotesComponent = () => {
 
           {noteSwap && (
             <section
-              className={`${classes.cardFaceBack} ${classes.cardFace} flex w-full max-w-[50rem] h-full sm:mb-[3rem] mb-[1rem] min-h-[7rem]`}
+              className={`${classes.cardFaceBack} ${classes.cardFace} flex w-full max-w-[50rem] h-full sm:mb-[3rem] mb-[1rem] min-h-[15rem]`}
             >
               <NotepadMenu />
             </section>

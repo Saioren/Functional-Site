@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "./ThemeContext";
 import toast from "react-hot-toast";
+import { useSessionContext } from "./SessionProvider";
 
 export type Note = {
   _id: string;
@@ -152,6 +153,8 @@ export default function NotepadProvider({
 
   const apiUrl = "/api/notes";
 
+  const { session } = useSessionContext();
+
   const router = useRouter();
 
   const { theme } = useTheme();
@@ -258,10 +261,17 @@ export default function NotepadProvider({
   ) => {
     e.preventDefault();
 
+    if (!session?.user) {
+      toast.error("Must be logged in to make notes!");
+      return;
+    }
+
     if (!title || !body) {
       toast.error("Give your note a title!");
       return;
     }
+
+    const userId = session?.user?.id;
 
     try {
       toast.loading("Saving note...");
@@ -270,7 +280,7 @@ export default function NotepadProvider({
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ title, body }),
+        body: JSON.stringify({ title, body, userId }),
       });
       if (res.ok) {
         toast.dismiss();
@@ -321,8 +331,15 @@ export default function NotepadProvider({
   useEffect(() => {
     const fetchNotes = async () => {
       try {
+        if (!session?.user) {
+          throw new Error("Must be logged in to fetch notes!");
+        }
+
         const res = await fetch(apiUrl, {
           cache: "no-store",
+          headers: {
+            Authorization: `Bearer ${session?.user?.email}`,
+          },
         });
         if (!res.ok) {
           throw new Error("Failed to fetch notes");
@@ -337,7 +354,7 @@ export default function NotepadProvider({
     };
 
     fetchNotes();
-  }, []);
+  }, [session]); // Include session as a dependency to refetch notes when session changes
 
   return (
     <NotepadContext.Provider

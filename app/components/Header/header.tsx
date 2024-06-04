@@ -12,10 +12,13 @@ import { useHeaderProviderContext } from "@/context/HeaderProvider";
 import SettingsModal from "./SettingsModal";
 import classes from "./index.module.scss";
 import { handleLogout } from "@/lib/actions";
+import { useSessionContext } from "@/context/SessionProvider";
+import { BsBoxArrowRight, BsBoxArrowLeft } from "react-icons/bs";
 
-export default function Header({ session }) {
+export default function Header() {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
+  const { session } = useSessionContext();
   const {
     menu,
     setMenu,
@@ -150,13 +153,34 @@ export default function Header({ session }) {
                     </div>
                   </motion.div>
                 ))}
-                {session?.user ? (
-                  <form action={handleLogout}>
-                    <button className={classes.logout}>Logout</button>
-                  </form>
-                ) : (
-                  <Link href="/login">Login</Link>
-                )}
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    y: -15,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{ delay: 0.09 * 6 }}
+                >
+                  {session?.user ? (
+                    <form
+                      action={handleLogout}
+                      className={`${classes.red} flex items-center gap-1 cursor-pointer w-100% transition hover:scale-110 active:scale-105`}
+                    >
+                      <BsBoxArrowLeft />
+                      <button className={classes.red}>Logout</button>
+                    </form>
+                  ) : (
+                    <div
+                      className={`${classes.blue} flex items-center gap-1 cursor-pointer w-100% transition hover:scale-110 active:scale-105`}
+                    >
+                      <BsBoxArrowRight />
+                      <Link href="/login">Login</Link>
+                    </div>
+                  )}
+                </motion.div>
               </div>
             </motion.div>
           )}

@@ -4,6 +4,7 @@ const NotepadSchema = new mongoose.Schema(
     {
         title: String,
         body: String,
+        userId: String,
     },
     {
         timestamps: true,
@@ -18,7 +19,7 @@ NotepadSchema.add({
     updatedAt: {
         type: Date,
         default: null // Initialize to null since the note hasn't been updated yet
-    }
+    },
 });
 
 const Note = mongoose.models.Note || mongoose.model('Note', NotepadSchema);

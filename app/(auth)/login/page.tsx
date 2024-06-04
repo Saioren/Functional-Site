@@ -6,11 +6,13 @@ import classes from "./index.module.scss";
 import { login } from "@/lib/actions";
 import { useFormState } from "react-dom";
 import Link from "next/link";
+import { Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
   const [state, formAction] = useFormState(login, undefined);
   return (
     <div className={classes.container}>
+      <Toaster position="top-center" />
       <div className={classes.wrapper}>
         <form action={handleGithubLogin}>
           <button className={classes.github}>Login with Github</button>
